@@ -1,141 +1,97 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowUp } from 'lucide-react';
 
 export function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const navLinks = [
-    { label: 'Services', href: '#services' },
-    { label: 'Products', href: '#products' },
-    { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <footer className="relative border-t border-white/10 backdrop-blur-md">
-      {/* Animated gradient line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        transition={{ duration: 0.8 }}
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"
-        style={{ opacity: 0.4 }}
-      />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-          className="grid md:grid-cols-4 gap-12 mb-12"
-        >
+    <footer className="relative border-t border-white/[0.06] px-6 md:px-10 py-14">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
           {/* Brand */}
-          <motion.div variants={itemVariants}>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="relative w-3 h-3">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-md"></div>
-                <div className="relative w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-400"></div>
-              </div>
-              <span className="text-xl font-bold font-display bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">ZLab</span>
-            </div>
-            <p className="text-white/50 text-sm leading-relaxed">
+          <div>
+            <span className="font-mono text-white text-sm tracking-widest">ZLAB_</span>
+            <p className="text-xs text-white/25 font-light leading-relaxed mt-3 max-w-[200px]">
               Building AI products that ship. Fast, focused, and built to scale.
             </p>
-          </motion.div>
+          </div>
 
-          {/* Quick Links */}
-          <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-white mb-4">QUICK LINKS</h4>
-            <div className="space-y-3">
-              {navLinks.map((link) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  whileHover={{ x: 4 }}
-                  className="block text-white/60 hover:text-white transition-colors text-sm"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+          {/* Link columns */}
+          <div className="flex gap-14 flex-wrap">
+            <div>
+              <div className="font-mono text-[9px] text-white/20 tracking-widest mb-5">NAVIGATE</div>
+              <div className="space-y-3">
+                {[
+                  { l: 'SERVICES', h: '#services' },
+                  { l: 'PRODUCTS', h: '#products' },
+                  { l: 'ABOUT', h: '#about' },
+                  { l: 'CONTACT', h: '#contact' },
+                ].map((item) => (
+                  <a
+                    key={item.h}
+                    href={item.h}
+                    className="block font-mono text-[10px] text-white/30
+                      hover:text-white/60 tracking-wider transition-colors"
+                  >
+                    {item.l}
+                  </a>
+                ))}
+              </div>
             </div>
-          </motion.div>
 
-          {/* Services */}
-          <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-white mb-4">SERVICES</h4>
-            <div className="space-y-3">
-              {['AI SaaS', 'Mobile Apps', 'Dev Tools'].map((service) => (
-                <motion.a
-                  key={service}
-                  whileHover={{ x: 4 }}
-                  className="block text-white/60 hover:text-white transition-colors text-sm cursor-pointer"
-                >
-                  {service}
-                </motion.a>
-              ))}
+            <div>
+              <div className="font-mono text-[9px] text-white/20 tracking-widest mb-5">SERVICES</div>
+              <div className="space-y-3">
+                {['AI SAAS', 'MOBILE APPS', 'DEV TOOLS'].map((s) => (
+                  <div key={s} className="font-mono text-[10px] text-white/25 tracking-wider">{s}</div>
+                ))}
+              </div>
             </div>
-          </motion.div>
 
-          {/* Connect */}
-          <motion.div variants={itemVariants}>
-            <h4 className="font-semibold text-white mb-4">CONNECT</h4>
-            <div className="space-y-3">
-              {['GitHub', 'LinkedIn', 'Twitter'].map((social) => (
-                <motion.a
-                  key={social}
-                  whileHover={{ x: 4 }}
-                  className="block text-white/60 hover:text-purple-400 transition-colors text-sm cursor-pointer"
-                >
-                  {social}
-                </motion.a>
-              ))}
+            <div>
+              <div className="font-mono text-[9px] text-white/20 tracking-widest mb-5">CONNECT</div>
+              <div className="space-y-3">
+                {[
+                  { l: 'GITHUB', h: 'https://github.com/devpost-ai' },
+                  { l: 'LINKEDIN', h: 'https://www.linkedin.com/company/devpost-ai/?viewAsMember=true' },
+                  { l: 'TWITTER', h: 'https://twitter.com' },
+                ].map((s) => (
+                  <a
+                    key={s.l}
+                    href={s.h}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block font-mono text-[10px] text-white/30
+                      hover:text-white/60 tracking-wider transition-colors"
+                  >
+                    {s.l}
+                  </a>
+                ))}
+              </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        {/* Bottom section */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row justify-between items-center gap-6 pt-8 border-t border-white/10"
-        >
-          <p className="text-white/40 text-xs">
-            © 2025 ZLab Services · Islamabad, Pakistan · All rights reserved
-          </p>
-
-          <motion.button
-            whileHover={{ scale: 1.1, y: -4 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={scrollToTop}
-            className="group p-3 rounded-full bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 hover:border-purple-500/60 transition-all"
-            title="Back to top"
-          >
-            <ArrowUp size={18} className="text-white/60 group-hover:text-white transition-colors" />
-          </motion.button>
-        </motion.div>
+        {/* Bottom bar */}
+        <div className="border-t border-white/[0.06] pt-6 flex justify-between items-center">
+          <span className="font-mono text-[9px] text-white/20 tracking-widest">
+            © 2024 ZLAB SERVICES
+          </span>
+          <div className="flex items-center gap-6">
+            <span className="font-mono text-[9px] text-white/20 tracking-widest hidden md:block">
+              ISLAMABAD, PK · EST. 2024
+            </span>
+            <motion.button
+              whileHover={{ y: -2 }}
+              onClick={scrollToTop}
+              className="font-mono text-[9px] text-white/25 hover:text-white/50
+                tracking-widest transition-colors"
+            >
+              ↑ TOP
+            </motion.button>
+          </div>
+        </div>
       </div>
     </footer>
   );

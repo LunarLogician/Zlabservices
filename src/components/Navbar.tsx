@@ -1,19 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const navLinks = ['Services', 'Products', 'Build', 'Stats', 'Testimonials', 'Contact'];
+  const navLinks = ['Services', 'Products', 'Build', 'Stats', 'About', 'Contact'];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -22,27 +19,17 @@ export function Navbar() {
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         scrolled
-          ? 'backdrop-blur-xl bg-black/20 border-b border-white/10 shadow-2xl'
-          : 'bg-transparent border-b border-white/5'
+          ? 'bg-[#0a0a08]/95 backdrop-blur-sm border-white/[0.08]'
+          : 'bg-transparent border-white/[0.04]'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-6xl mx-auto px-6 md:px-10">
+        <div className="flex justify-between items-center h-14">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
-            className="flex items-center gap-2 flex-shrink-0 group cursor-pointer"
-          >
-            <div className="relative w-2.5 h-2.5">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-md group-hover:blur-lg transition-blur"></div>
-              <div className="relative w-2.5 h-2.5 rounded-full bg-gradient-to-r from-purple-400 to-pink-400"></div>
-            </div>
-            <span className="text-xl font-bold font-display bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">ZLab</span>
-          </motion.div>
+          <span className="font-mono text-white text-sm tracking-widest">ZLAB_</span>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -52,71 +39,61 @@ export function Navbar() {
                 href={`#${link.toLowerCase()}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 * i }}
-                whileHover={{ y: -2 }}
-                className="text-sm font-medium text-white/60 hover:text-white relative group transition-colors"
+                transition={{ delay: 0.05 * i }}
+                className="font-mono text-[11px] text-white/40 hover:text-white tracking-wider transition-colors"
               >
-                {link}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+                {link.toUpperCase()}
               </motion.a>
             ))}
           </div>
 
-          {/* CTA Button - Desktop */}
+          {/* CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)' }}
-              whileTap={{ scale: 0.95 }}
-              className="relative px-6 py-2 rounded-lg font-medium text-sm text-white overflow-hidden group"
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
+              <span className="font-mono text-[10px] text-white/30 tracking-wider">AVAILABLE</span>
+            </div>
+            <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="font-mono text-[11px] text-white/70 border border-white/15 px-4 py-2 hover:bg-white/[0.06] hover:text-white transition-all tracking-wider"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 transition-all"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <span className="relative flex items-center gap-2">
-                <Sparkles size={16} />
-                Hire Us
-              </span>
-            </motion.button>
+              HIRE US →
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white hover:text-primary transition-colors"
+            className="md:hidden font-mono text-xs text-white/40 tracking-widest"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? 'CLOSE' : 'MENU'}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile menu */}
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden pb-4 space-y-3"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden pb-6 border-t border-white/[0.06] mt-2 space-y-4 pt-4"
           >
             {navLinks.map((link) => (
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
-                className="block px-4 py-2 text-white/70 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                 onClick={() => setIsOpen(false)}
+                className="block font-mono text-[11px] text-white/40 hover:text-white tracking-wider transition-colors"
               >
-                {link}
+                {link.toUpperCase()}
               </a>
             ))}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="gradient-btn w-full text-sm mt-4"
-              onClick={() => {
-                setIsOpen(false);
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+            <a
+              href="#contact"
+              onClick={() => setIsOpen(false)}
+              className="inline-block mt-2 font-mono text-[11px] text-white/70 border border-white/15 px-4 py-2 hover:bg-white/[0.06] hover:text-white transition-all tracking-wider"
             >
-              Hire Us
-            </motion.button>
+              HIRE US →
+            </a>
           </motion.div>
         )}
       </div>

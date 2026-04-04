@@ -1,7 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Zap } from 'lucide-react';
+
+const GRID_BG = {
+  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
+  backgroundSize: '48px 48px',
+};
 
 interface Product {
   name: string;
@@ -9,195 +14,153 @@ interface Product {
   description: string;
   link: string;
   tags: string[];
-  isComingSoon?: boolean;
 }
 
 export function Products() {
   const products: Product[] = [
     {
       name: 'DevPost AI',
-      badge: 'Live - SaaS',
+      badge: 'LIVE · SAAS',
       description:
-        'AI-powered platform that automatically generates high-quality LinkedIn posts for developers, founders, and professionals. Integrates with LinkedIn API for direct publishing.',
+        'AI-powered platform that auto-generates LinkedIn posts for developers and founders. Direct publishing via LinkedIn API.',
       link: 'https://devpostfe.vercel.app',
       tags: ['Node.js', 'Express.js', 'OpenAI API', 'MongoDB', 'Next.js'],
     },
     {
       name: 'AI Proposal Maker',
-      badge: 'Live - Web',
+      badge: 'LIVE · WEB',
       description:
-        'Intelligent proposal generator for freelancers and agencies. Automatically generates personalized proposals from resumes and job descriptions, cutting proposal time by 90%.',
+        'Intelligent proposal generator for freelancers. Generates personalized proposals from resumes, cutting turnaround by 90%.',
       link: 'https://aiproposalmaker.vercel.app/',
       tags: ['Next.js', 'OpenAI API', 'Tailwind CSS', 'Vercel'],
     },
     {
       name: 'EverlearnAI Mobile',
-      badge: 'Play Store - Active',
+      badge: 'PLAY STORE · ACTIVE',
       description:
-        'AI-powered mobile learning platform on Play Store. Features MCQ generation, smart flashcards, quizzes, and gamified progress tracking for student success.',
+        'AI-powered mobile learning platform. MCQ generation, smart flashcards, quizzes, and gamified progress tracking.',
       link: 'https://everlearnai.live',
       tags: ['Flutter', 'Dart', 'Claude API', 'Firebase', 'Node.js'],
     },
     {
       name: 'Bahria University Hub',
-      badge: 'Student App',
+      badge: 'STUDENT APP',
       description:
-        'Smart scraper app for Bahria University students. Tracks assignments, classes, deadlines with real-time alarms and push notifications to stay on top of coursework.',
+        'Smart scraper for Bahria University students. Tracks assignments, classes, and deadlines with push notifications.',
       link: '#',
-      tags: ['Flutter', 'Web Scraping', 'Firebase FCM', 'Node.js', 'Notifications'],
+      tags: ['Flutter', 'Web Scraping', 'Firebase FCM', 'Node.js'],
     },
     {
       name: 'MicroLearning Platform',
-      badge: 'Full-Stack AI',
+      badge: 'FULL-STACK AI',
       description:
-        'AI-powered platform converting documents (PDF, DOCX, TXT) into 60-second interactive learning modules with AI-generated flashcards, quizzes, and gamified tracking.',
+        'Converts PDFs and docs into 60-second interactive learning modules with AI-generated flashcards and quizzes.',
       link: '#',
       tags: ['Flutter', 'Node.js', 'Spring Boot 3', 'OpenAI', 'Supabase'],
     },
     {
       name: 'SigCoin Mining',
-      badge: 'Production Ready',
+      badge: 'PRODUCTION READY',
       description:
-        'Cryptocurrency mining application allowing users to earn virtual coins through engagement. Features real-time tracking, JWT authentication, and Docker deployment.',
+        'Crypto mining app for virtual coin earning. Real-time tracking, JWT auth, Docker deployment.',
       link: '#',
       tags: ['React', 'Node.js', 'MongoDB', 'Docker', 'GitHub Actions'],
     },
     {
       name: 'VS Code Extensions',
-      badge: '3K+ Users',
+      badge: '3K+ USERS',
       description:
-        'Multiple developer productivity extensions for VS Code with 3,000+ users each. Built with JavaScript and VS Code API for seamless integration.',
+        'Multiple developer productivity extensions with 3,000+ active users each. Built with VS Code API.',
       link: '#',
       tags: ['JavaScript', 'Node.js', 'VS Code API'],
-      isComingSoon: false,
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8 },
-    },
-  };
-
   return (
-    <section id="products" className="relative py-24 px-4 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute bottom-1/3 -right-64 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"></div>
-      </div>
+    <section id="products" className="relative py-24 px-6 md:px-10 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
+        {/* Header */}
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={containerVariants}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-16"
         >
-          {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center mb-20">
-            <h2 className="font-display text-5xl md:text-6xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">What We&apos;ve</span>
-              {' '}
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Shipped</span>
-            </h2>
-            <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              <span className="text-white font-medium">Real products.</span> Real users. No vaporware.
-            </p>
-          </motion.div>
+          <span className="font-mono text-[10px] text-white/30 tracking-widest">PRODUCTS_</span>
+          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
+            What we&apos;ve
+            <span className="text-white/30 not-italic"> shipped</span>
+          </h2>
+          <p className="text-sm text-white/40 leading-relaxed mt-4 font-light max-w-lg">
+            Real products. Real users. No vaporware.
+          </p>
+        </motion.div>
 
-          {/* Products Grid */}
-          <motion.div
-            variants={containerVariants}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-          >
-            {products.map((product, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={!product.isComingSoon ? { y: -12, boxShadow: '0 40px 80px rgba(124, 58, 237, 0.15)' } : {}}
-                className={`group relative overflow-hidden rounded-2xl p-8 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-purple-500/30 backdrop-blur-md transition-all duration-500 flex flex-col ${
-                  product.isComingSoon ? 'opacity-60' : ''
-                }`}
-              >
-                {/* Animated gradient overlay on hover */}
-                {!product.isComingSoon && (
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500"></div>
-                )}
+        {/* Products — card grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]">
+          {products.map((p, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: i * 0.07 }}
+              className="group bg-[#0a0a08] hover:bg-white/[0.03] p-8
+                transition-all duration-300 flex flex-col"
+            >
+              {/* Top row — index + badge */}
+              <div className="flex justify-between items-start mb-6">
+                <span className="font-mono text-[10px] text-white/20 tracking-widest">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="font-mono text-[9px] text-white/50 border border-white/[0.12]
+                  px-2.5 py-1 tracking-widest">
+                  {p.badge}
+                </span>
+              </div>
 
-                {/* Header with title and link */}
-                <div className="flex justify-between items-start mb-4 relative z-10">
-                  <h3 className="font-display text-2xl font-bold group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-300 group-hover:to-pink-300 group-hover:bg-clip-text transition-all">
-                    {product.name}
-                  </h3>
-                  {!product.isComingSoon && (
-                    <motion.a
-                      href={product.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.25, rotate: 45 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="text-purple-400/50 hover:text-purple-300 transition-colors"
+              {/* Product name */}
+              <h3 className="font-serif italic text-3xl text-white leading-tight mb-4">
+                {p.name}
+              </h3>
+
+              {/* Description */}
+              <p className="text-sm text-white/60 leading-relaxed mb-6 flex-1">
+                {p.description}
+              </p>
+
+              {/* Footer — tags + link */}
+              <div className="border-t border-white/[0.06] pt-5 flex justify-between
+                items-end gap-4">
+                <div className="flex flex-wrap gap-1.5">
+                  {p.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="font-mono text-[9px] text-white/25 border border-white/[0.08]
+                        px-2 py-0.5 tracking-wider"
                     >
-                      <ExternalLink size={20} />
-                    </motion.a>
-                  )}
-                </div>
-
-                {/* Badge */}
-                <div className="mb-4 relative z-10">
-                  <motion.span
-                    whileHover={{ scale: 1.05 }}
-                    className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-white border border-purple-500/30 hover:border-purple-500/50 transition-all"
-                  >
-                    <Zap size={12} />
-                    {product.badge}
-                  </motion.span>
-                </div>
-
-                {/* Description */}
-                <p className="text-white/70 mb-6 text-base leading-relaxed relative z-10 group-hover:text-white/90 transition-colors flex-grow">
-                  {product.description}
-                </p>
-
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10 relative z-10">
-                  {product.tags.map((tag, i) => (
-                    <motion.span
-                      key={i}
-                      whileHover={{ scale: 1.1 }}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-all cursor-default"
-                    >
-                      {tag}
-                    </motion.span>
+                      {t}
+                    </span>
                   ))}
                 </div>
-
-                {/* Coming soon overlay */}
-                {product.isComingSoon && (
-                  <div className="absolute inset-0 flex items-center justify-center backdrop-blur-sm z-20">
-                    <div className="px-4 py-2 rounded-lg bg-purple-600/80 text-white font-semibold text-sm">
-                      Coming Soon
-                    </div>
-                  </div>
+                {p.link !== '#' && (
+                  <a
+                    href={p.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-[10px] text-white/30 hover:text-white
+                      transition-colors tracking-wider shrink-0"
+                  >
+                    VIEW →
+                  </a>
                 )}
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

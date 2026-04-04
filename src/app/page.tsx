@@ -1,6 +1,5 @@
 'use client';
 
-import { AuroraBackground } from '@/components/AuroraBackground';
 import { Navbar } from '@/components/Navbar';
 import { AIHero } from '@/components/AIHero';
 import { Services } from '@/components/Services';
@@ -15,8 +14,6 @@ import { Footer } from '@/components/Footer';
 export default function Home() {
   return (
     <main className="min-h-screen w-full overflow-hidden bg-dark-bg text-white">
-      <AuroraBackground />
-
       <Navbar />
 
       <AIHero />

@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'dark-bg': '#06060f',
+        'dark-bg': '#0a0a08',
         'primary': '#7c3aed',
         'secondary': '#0d9488',
         'accent': '#ec4899',
@@ -17,6 +17,8 @@ const config: Config = {
       fontFamily: {
         'display': ['"Clash Display"', 'Syne', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI'],
         'body': ['Inter', 'Outfit', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI'],
+        'serif': ['Instrument Serif', 'serif'],
+        'mono': ['DM Mono', 'monospace'],
       },
       backdropBlur: {
         'xs': '2px',

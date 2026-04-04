@@ -1,232 +1,192 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Loader } from 'lucide-react';
-import { useState, useRef, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
 
 export function AIHero() {
   const [input, setInput] = useState('');
-  const [response, setResponse] = useState('');
+  const [answer, setAnswer] = useState('Ready. What are you building?');
   const [loading, setLoading] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false);
-  const responseRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (responseRef.current) {
-      responseRef.current.scrollTop = responseRef.current.scrollHeight;
-    }
-  }, [response]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
+  const ask = async () => {
+    if (!input.trim() || loading) return;
     setLoading(true);
-    setHasInteracted(true);
-    setResponse('');
+    setAnswer('');
 
-    try {
-      const res = await fetch('/api/claude', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input }),
-      });
+    const res = await fetch('/api/claude', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: input }),
+    });
 
-      if (!res.ok) throw new Error('API Error');
+    setInput('');
+    const reader = res.body?.getReader();
+    if (!reader) return;
 
-      const reader = res.body?.getReader();
-      if (!reader) throw new Error('No reader');
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        const text = new TextDecoder().decode(value);
-        setResponse((prev) => prev + text);
-      }
-    } catch (error) {
-      setResponse('Sorry, something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const text = new TextDecoder().decode(value);
+      setAnswer(prev => prev + text);
     }
+    setLoading(false);
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-24 pb-12 px-4 overflow-hidden">
-      {/* Animated gradient orbs */}
-      <motion.div
-        animate={{ y: [0, -20, 0], transition: { duration: 6, repeat: Infinity } }}
-        className="absolute top-20 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{ y: [0, 30, 0], transition: { duration: 8, repeat: Infinity } }}
-        className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl"
-      />
+    <section className="relative min-h-screen bg-[#0a0a08]
+      flex flex-col px-6 md:px-10 pt-12 pb-10 overflow-hidden">
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto z-10 w-full"
-      >
-        {/* Badge */}
-        <motion.div className="text-center mb-12">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 hover:border-purple-500/40 transition-colors mb-8 cursor-pointer"
-          >
-            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 animate-pulse"></div>
-            <span className="text-sm font-medium bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">
-              AI-Powered Studio
-            </span>
-          </motion.div>
+      {/* Grid texture */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px,
+            transparent 1px),
+            linear-gradient(90deg,rgba(255,255,255,0.03) 1px,
+            transparent 1px)`,
+          backgroundSize: '48px 48px'
+        }} />
 
-          {/* Headline */}
-          <h1 className="font-display text-6xl md:text-7xl font-bold leading-tight mb-6">
-            <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-              Ask me anything.
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
-              I'll build it.
-            </span>
-          </h1>
+      {/* Top bar */}
+      <div className="relative z-10 flex justify-between
+        items-center mb-16">
+        <span className="font-mono text-white text-sm
+          tracking-widest">ZLAB_</span>
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-400
+            shadow-[0_0_8px_#4ade80] animate-pulse" />
+          <span className="font-mono text-xs
+            text-white/40">Available for select projects</span>
+        </div>
+      </div>
 
-          <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed mb-12">
-            Experience AI-powered development in real-time. Ask questions about any project, technology, or idea. No constraints.
-          </p>
-        </motion.div>
+      {/* Main grid */}
+      <div className="relative z-10 grid md:grid-cols-2
+        gap-10 items-start flex-1">
 
-        {/* AI Chat Interface */}
+        {/* Left — copy */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="relative group"
+          transition={{ duration: 0.7 }}
         >
-          {/* Container with glass effect */}
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-purple-500/30 backdrop-blur-md transition-all duration-500 p-8 md:p-10">
-            {/* Hover gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/5 group-hover:to-pink-500/5 transition-all duration-500 pointer-events-none"></div>
-
-            <div className="relative z-10">
-              {/* Response Display */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                <div
-                  ref={responseRef}
-                  className={`min-h-32 max-h-64 overflow-y-auto mb-6 p-6 rounded-2xl bg-black/40 border border-white/10 transition-all ${
-                    hasInteracted ? 'block' : 'hidden'
-                  }`}
-                >
-                  {response ? (
-                    <div className="text-white/90 text-sm leading-relaxed prose prose-invert max-w-none">
-                      <ReactMarkdown
-                        components={{
-                          p: ({...props}) => <p className="mb-3" {...props} />,
-                          ul: ({...props}) => <ul className="list-disc list-inside mb-3 space-y-1" {...props} />,
-                          ol: ({...props}) => <ol className="list-decimal list-inside mb-3 space-y-1" {...props} />,
-                          li: ({...props}) => <li className="text-white/80" {...props} />,
-                          code: ({inline, ...props}: any) => 
-                            inline ? (
-                              <code className="bg-white/10 px-2 py-1 rounded text-purple-300 font-mono text-xs" {...props} />
-                            ) : (
-                              <code className="bg-black/60 px-3 py-2 rounded block my-2 text-pink-300 font-mono text-xs overflow-x-auto" {...props} />
-                            ),
-                          pre: ({...props}) => <pre className="bg-black/60 p-3 rounded-lg my-2 overflow-x-auto" {...props} />,
-                          blockquote: ({...props}) => <blockquote className="border-l-4 border-purple-500 pl-3 italic text-white/60 my-3" {...props} />,
-                          h1: ({...props}) => <h1 className="text-xl font-bold mt-4 mb-2 text-pink-300" {...props} />,
-                          h2: ({...props}) => <h2 className="text-lg font-bold mt-3 mb-2 text-purple-300" {...props} />,
-                          h3: ({...props}) => <h3 className="text-base font-semibold mt-2 mb-1 text-purple-200" {...props} />,
-                          strong: ({...props}) => <strong className="font-bold text-white" {...props} />,
-                          em: ({...props}) => <em className="italic text-white/80" {...props} />,
-                        }}
-                      >
-                        {response}
-                      </ReactMarkdown>
-                      {loading && <span className="animate-pulse">▌</span>}
-                    </div>
-                  ) : (
-                    <div className="text-white/40 text-sm">
-                      {loading ? 'Thinking...' : 'Your response will appear here'}
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-
-              {/* Input Form */}
-              <form onSubmit={handleSubmit} className="flex gap-3">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask me about building SaaS, AI, mobile apps, scalable systems..."
-                  disabled={loading}
-                  className="flex-1 px-6 py-4 rounded-xl bg-white/5 border border-white/10 focus:border-purple-500/50 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all disabled:opacity-50"
-                />
-                <motion.button
-                  type="submit"
-                  disabled={loading}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="relative px-6 py-4 rounded-xl font-bold text-white overflow-hidden group/btn disabled:opacity-50 transition-all"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover/btn:opacity-100 transition-opacity"></div>
-                  <span className="relative flex items-center gap-2">
-                    {loading ? (
-                      <Loader size={20} className="animate-spin" />
-                    ) : (
-                      <Send size={20} />
-                    )}
-                  </span>
-                </motion.button>
-              </form>
-
-              {/* Helper text */}
-              <p className="text-white/40 text-xs mt-4 text-center">
-                Powered by Claude AI • Built with Next.js & TypeScript
-              </p>
-            </div>
+          <h1 className="font-serif italic text-5xl md:text-6xl
+            text-white leading-tight mb-5">
+            We build AI products
+            <span className="text-white/30 not-italic">
+              {' '}that{' '}
+            </span>
+            ship.
+          </h1>
+          <p className="text-sm text-white/40 leading-relaxed
+            max-w-sm mb-8 font-light">
+            A one-person product lab out of Islamabad.
+            Full-stack AI SaaS, mobile apps, and dev tools
+            — from zero to production, fast.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {['AI SAAS', 'FLUTTER',
+              'DEV TOOLS', 'CLAUDE API'].map(t => (
+              <span key={t} className="font-mono text-[10px]
+                text-white/30 border border-white/10
+                px-2.5 py-1 tracking-wider">
+                {t}
+              </span>
+            ))}
           </div>
         </motion.div>
 
-        {/* Info cards below */}
+        {/* Right — terminal widget */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="grid md:grid-cols-3 gap-6 mt-16"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="bg-white/[0.03] border border-white/[0.08]
+            rounded-sm p-6"
         >
-          {[
-            {
-              title: 'Instant Responses',
-              desc: 'Get real-time AI-powered answers to your technical questions',
-            },
-            {
-              title: 'Production Ready',
-              desc: 'All solutions tested, documented, and battle-tested in production',
-            },
-            {
-              title: 'Full Stack Expertise',
-              desc: 'Frontend, backend, databases, DevOps, and everything in between',
-            },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ y: -4 }}
-              className="p-6 rounded-xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-purple-500/30 backdrop-blur-sm transition-all"
+          {/* Terminal chrome */}
+          <div className="flex items-center gap-1.5 mb-5
+            pb-4 border-b border-white/[0.06]">
+            <span className="w-2 h-2 rounded-full
+              bg-[#ff5f57]" />
+            <span className="w-2 h-2 rounded-full
+              bg-[#febc2e]" />
+            <span className="w-2 h-2 rounded-full
+              bg-[#28c840]" />
+            <span className="ml-auto font-mono text-[10px]
+              text-white/20 tracking-widest">
+              zlab — claude-sonnet
+            </span>
+          </div>
+
+          {/* Response */}
+          <div className="min-h-[120px] mb-4 font-mono
+            text-xs leading-relaxed">
+            <p className="text-white/20 mb-2">
+              $ ask anything about your project
+            </p>
+            <p className="text-white/70">
+              {answer}
+              <span className="inline-block w-1.5 h-3
+                bg-white/60 ml-0.5 animate-pulse
+                align-middle" />
+            </p>
+          </div>
+
+          {/* Input */}
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && ask()}
+              placeholder="e.g. I need a SaaS with auth..."
+              disabled={loading}
+              className="flex-1 bg-white/[0.04] border
+                border-white/10 px-3 py-2.5 font-mono
+                text-xs text-white placeholder:text-white/20
+                outline-none focus:border-white/25
+                transition-colors disabled:opacity-40"
+            />
+            <button
+              onClick={ask}
+              disabled={loading}
+              className="bg-white/[0.08] border
+                border-white/15 px-4 py-2.5 font-mono
+                text-xs text-white/70 hover:bg-white/15
+                hover:text-white transition-all
+                disabled:opacity-40"
             >
-              <h3 className="font-bold text-white mb-2">{card.title}</h3>
-              <p className="text-white/60 text-sm">{card.desc}</p>
-            </motion.div>
-          ))}
+              {loading ? '...' : 'run →'}
+            </button>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
+
+      {/* Bottom metrics */}
+      <div className="relative z-10 mt-12 pt-5
+        border-t border-white/[0.06] flex
+        justify-between items-center">
+        <div className="flex gap-8">
+          {[
+            { num: '15+', lbl: 'LIVE PRODUCTS' },
+            { num: '100k+', lbl: 'DOWNLOADS' },
+            { num: '3k+', lbl: 'ACTIVE USERS' },
+          ].map(m => (
+            <div key={m.lbl}>
+              <div className="font-serif italic text-2xl
+                text-white">{m.num}</div>
+              <div className="font-mono text-[9px]
+                text-white/25 tracking-widest mt-0.5">
+                {m.lbl}
+              </div>
+            </div>
+          ))}
+        </div>
+        <span className="font-mono text-[10px]
+          text-white/20 tracking-wider hidden md:block">
+          ISLAMABAD, PK · EST. 2024
+        </span>
+      </div>
     </section>
   );
 }

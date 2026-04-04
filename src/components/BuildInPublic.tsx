@@ -1,170 +1,139 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, GitCommit, Users, MessageCircle, TrendingUp } from 'lucide-react';
+
+const GRID_BG = {
+  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
+  backgroundSize: '48px 48px',
+};
 
 export function BuildInPublic() {
   const activities = [
     {
-      type: 'commit',
+      type: 'RELEASE',
       title: 'Released AI Proposal Maker v2.1',
       description: 'Added Claude API integration for smarter proposal generation',
-      time: '2 hours ago',
-      icon: GitCommit,
-      color: 'from-gray-500 to-gray-600',
+      time: '2 HRS AGO',
     },
     {
-      type: 'feature',
+      type: 'MILESTONE',
       title: '15+ Projects Now Live',
       description: 'Crossed 15 production applications milestone',
-      time: '1 day ago',
-      icon: TrendingUp,
-      color: 'from-green-500 to-emerald-600',
+      time: '1 DAY AGO',
     },
     {
-      type: 'users',
+      type: 'USERS',
       title: '3K+ Active Users Reached',
       description: 'VS Code extensions hitting new user engagement records',
-      time: '3 days ago',
-      icon: Users,
-      color: 'from-blue-500 to-cyan-600',
+      time: '3 DAYS AGO',
     },
     {
-      type: 'update',
+      type: 'UPDATE',
       title: 'EverlearnAI Mobile v3.0 Released',
       description: 'New AI-powered quiz generation and flashcard system',
-      time: '1 week ago',
-      icon: Code2,
-      color: 'from-purple-500 to-pink-600',
+      time: '1 WEEK AGO',
     },
     {
-      type: 'milestone',
+      type: 'MILESTONE',
       title: '100K+ Downloads Achieved',
       description: 'All products combined now surpassing 100K total downloads',
-      time: '2 weeks ago',
-      icon: MessageCircle,
-      color: 'from-orange-500 to-red-600',
+      time: '2 WEEKS AGO',
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -40 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
-  };
-
   return (
-    <section id="build" className="relative py-24 px-4 overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"></div>
-      </div>
+    <section id="build" className="relative py-24 px-6 md:px-10 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
 
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={containerVariants}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-16"
         >
-          {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center mb-20">
-            <h2 className="font-display text-5xl md:text-6xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                Building
-              </span>
-              {' '}
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                in Public
-              </span>
-            </h2>
-            <p className="text-lg text-white/60 max-w-2xl mx-auto">
-              Real-time updates on what we're shipping. No BS, no vanity metrics — just progress.
-            </p>
-          </motion.div>
+          <span className="font-mono text-[10px] text-white/30 tracking-widest">BUILD IN PUBLIC_</span>
+          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
+            Shipping
+            <span className="text-white/30 not-italic"> in real-time</span>
+          </h2>
+          <p className="text-sm text-white/40 leading-relaxed mt-4 font-light max-w-lg">
+            No smoke, no mirrors. Here&apos;s what&apos;s actually happening.
+          </p>
+        </motion.div>
 
-          {/* Timeline */}
-          <div className="space-y-6">
-            {activities.map((activity, index) => {
-              const Icon = activity.icon;
-              return (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  whileHover={{ x: 8 }}
-                  className="group relative"
-                >
-                  <div className="relative overflow-hidden rounded-2xl p-6 md:p-8 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-purple-500/30 backdrop-blur-md transition-all duration-500">
-                    {/* Animated gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500"></div>
-
-                    <div className="relative z-10 flex gap-6">
-                      {/* Icon */}
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 12 }}
-                        className={`hidden md:flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${activity.color} flex-shrink-0`}
-                      >
-                        <Icon size={28} className="text-white" />
-                      </motion.div>
-
-                      {/* Content */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-4 mb-2">
-                          <div className="flex-1">
-                            <h3 className="font-bold text-lg md:text-xl text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-300 group-hover:to-pink-300 group-hover:bg-clip-text transition-all">
-                              {activity.title}
-                            </h3>
-                            <p className="text-white/60 text-sm mt-1">{activity.description}</p>
-                          </div>
-                          <motion.div
-                            whileHover={{ scale: 1.1, rotate: 12 }}
-                            className={`md:hidden flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br ${activity.color} flex-shrink-0`}
-                          >
-                            <Icon size={20} className="text-white" />
-                          </motion.div>
-                        </div>
-                        <div className="flex items-center gap-2 mt-4">
-                          <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 animate-pulse"></div>
-                          <span className="text-xs text-white/50">{activity.time}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Accent line */}
-                    <motion.div
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
-                      viewport={{ once: true }}
-                      className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${activity.color} origin-left`}
-                    ></motion.div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* CTA */}
-          <motion.div variants={itemVariants} className="mt-16 text-center">
-            <motion.a
-              href="https://github.com/devpost-ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold hover:shadow-xl hover:shadow-gray-500/50 transition-all"
+        {/* Live stats bar */}
+        <div className="grid grid-cols-3 border border-white/[0.08] mb-12">
+          {[
+            { num: '15+', lbl: 'LIVE PRODUCTS' },
+            { num: '100K+', lbl: 'TOTAL DOWNLOADS' },
+            { num: '3K+', lbl: 'ACTIVE USERS' },
+          ].map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="bg-white/[0.02] px-8 py-6 border-r border-white/[0.06] last:border-r-0"
             >
-              <GitCommit size={20} />
-              Follow on GitHub
-            </motion.a>
-          </motion.div>
+              <div className="font-serif italic text-4xl text-white mb-1">{s.num}</div>
+              <div className="font-mono text-[9px] text-white/25 tracking-widest">{s.lbl}</div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Activity log */}
+        <div className="border-t border-white/[0.08]">
+          {activities.map((a, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: i * 0.08 }}
+              className="group border-b border-white/[0.05] hover:bg-white/[0.025]
+                transition-all duration-200"
+            >
+              <div className="grid grid-cols-[80px_1fr_100px] gap-4 items-center py-6 px-2">
+                <span className="font-mono text-[9px] font-medium text-white/80
+                  tracking-widest border border-white/[0.08] px-2 py-1 text-center">
+                  {a.type}
+                </span>
+                <div>
+                  <div className="text-white text-base font-medium leading-snug">
+                    {a.title}
+                  </div>
+                  <div className="text-xs text-white/55 mt-1">{a.description}</div>
+                </div>
+                <span className="font-mono text-[9px] text-white/20 tracking-widest text-right">
+                  {a.time}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* GitHub CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="mt-10"
+        >
+          <a
+            href="https://github.com/devpost-ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-[11px] text-white/40 border border-white/[0.08]
+              px-5 py-2.5 hover:border-white/20 hover:text-white/60
+              transition-all tracking-wider inline-block"
+          >
+            FOLLOW ON GITHUB →
+          </a>
         </motion.div>
       </div>
     </section>
