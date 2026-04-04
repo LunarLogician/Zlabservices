@@ -2,9 +2,10 @@
 
 import { AuroraBackground } from '@/components/AuroraBackground';
 import { Navbar } from '@/components/Navbar';
-import { Hero } from '@/components/Hero';
+import { AIHero } from '@/components/AIHero';
 import { Services } from '@/components/Services';
 import { Products } from '@/components/Products';
+import { BuildInPublic } from '@/components/BuildInPublic';
 import { Stats } from '@/components/Stats';
 import { About } from '@/components/About';
 import { Testimonials } from '@/components/Testimonials';
@@ -18,11 +19,13 @@ export default function Home() {
 
       <Navbar />
 
-      <Hero />
+      <AIHero />
 
       <Services />
 
       <Products />
+
+      <BuildInPublic />
 
       <Stats />
 

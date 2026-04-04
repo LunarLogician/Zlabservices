@@ -8,7 +8,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const navLinks = ['Services', 'Products', 'Stats', 'Testimonials', 'Contact'];
+  const navLinks = ['Services', 'Products', 'Build', 'Stats', 'Testimonials', 'Contact'];
 
   useEffect(() => {
     const handleScroll = () => {
