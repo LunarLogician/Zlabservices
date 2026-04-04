@@ -172,8 +172,8 @@ export function AIHero() {
               <div key={m.lbl}>
                 <div className="font-serif italic text-2xl
                   text-white">{m.num}</div>
-                <div className="font-mono text-[9px]
-                  text-white/25 tracking-widest mt-0.5">
+                <div className="font-mono text-[18px]
+                  text-white/75 tracking-widest mt-0.5">
                   {m.lbl}
                 </div>
               </div>
