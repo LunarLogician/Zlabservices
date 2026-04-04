@@ -63,10 +63,9 @@ export function Contact() {
           </div>
 
           {/* Social links */}
-          <div className="flex gap-8 pt-6 border-t border-white/76">
+          <div className="flex gap-8 pt-6 border-t border-white/[0.06]">
             {[
               { label: 'LINKEDIN', href: 'https://www.linkedin.com/company/devpost-ai/?viewAsMember=true' },
-              { label: 'TWITTER', href: 'https://twitter.com' },
             ].map((s) => (
               <a
                 key={s.label}

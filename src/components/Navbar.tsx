@@ -7,7 +7,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const navLinks = ['Services', 'Products', 'Build', 'Stats', 'About', 'Contact'];
+  const navLinks = ['Services', 'Products', 'Build', 'Stats', 'About', 'Testimonials', 'Contact'];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
