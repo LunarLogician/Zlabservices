@@ -66,7 +66,7 @@ export function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden font-mono text-xs text-white/75 tracking-widest"
           >
-            {isOpen ? 'CLOSE' : 'MENU'}
+            {isOpen ? 'CLOSE_' : 'MENU_'}
           </button>
         </div>
 

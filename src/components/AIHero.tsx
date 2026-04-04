@@ -49,8 +49,7 @@ export function AIHero() {
       {/* Top bar */}
       <div className="relative z-10 flex justify-between
         items-center mb-16">
-        <span className="font-mono text-white text-sm
-          tracking-widest">ZLAB_</span>
+      
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-green-400
             shadow-[0_0_8px_#4ade80] animate-pulse" />
@@ -170,7 +169,7 @@ export function AIHero() {
           {[
             { num: '15+', lbl: 'LIVE PRODUCTS' },
             { num: '100k+', lbl: 'DOWNLOADS' },
-            { num: '3k+', lbl: 'ACTIVE USERS' },
+            { num: '3K+', lbl: 'ACTIVE USERS' },
           ].map(m => (
             <div key={m.lbl}>
               <div className="font-serif italic text-2xl

@@ -11,6 +11,7 @@ const GRID_BG = {
 interface Product {
   name: string;
   badge: string;
+  live?: boolean;
   description: string;
   link: string;
   tags: string[];
@@ -21,6 +22,7 @@ export function Products() {
     {
       name: 'DevPost AI',
       badge: 'LIVE · SAAS',
+      live: true,
       description:
         'AI-powered platform that auto-generates LinkedIn posts for developers and founders. Direct publishing via LinkedIn API.',
       link: 'https://devpostfe.vercel.app',
@@ -29,14 +31,25 @@ export function Products() {
     {
       name: 'AI Proposal Maker',
       badge: 'LIVE · WEB',
+      live: true,
       description:
         'Intelligent proposal generator for freelancers. Generates personalized proposals from resumes, cutting turnaround by 90%.',
       link: 'https://aiproposalmaker.vercel.app/',
       tags: ['Next.js', 'OpenAI API', 'Tailwind CSS', 'Vercel'],
     },
+     {
+      name: 'EverlearnAI Web',
+      badge: 'PLAY STORE · ACTIVE',
+      live: true,
+      description:
+        'AI-powered mobile learning platform. MCQ generation, smart flashcards, quizzes, and gamified progress tracking.',
+      link: 'https://everlearnai.live',
+      tags: ['Flutter', 'Dart', 'Claude API', 'Firebase', 'Node.js'],
+    },
     {
       name: 'EverlearnAI Mobile',
       badge: 'PLAY STORE · ACTIVE',
+      live: true,
       description:
         'AI-powered mobile learning platform. MCQ generation, smart flashcards, quizzes, and gamified progress tracking.',
       link: 'https://everlearnai.live',
@@ -50,14 +63,7 @@ export function Products() {
       link: '#',
       tags: ['Flutter', 'Web Scraping', 'Firebase FCM', 'Node.js'],
     },
-    {
-      name: 'MicroLearning Platform',
-      badge: 'FULL-STACK AI',
-      description:
-        'Converts PDFs and docs into 60-second interactive learning modules with AI-generated flashcards and quizzes.',
-      link: '#',
-      tags: ['Flutter', 'Node.js', 'Spring Boot 3', 'OpenAI', 'Supabase'],
-    },
+   
     {
       name: 'SigCoin Mining',
       badge: 'PRODUCTION READY',
@@ -69,6 +75,7 @@ export function Products() {
     {
       name: 'VS Code Extensions',
       badge: '3K+ USERS',
+      live: true,
       description:
         'Multiple developer productivity extensions with 3,000+ active users each. Built with VS Code API.',
       link: '#',
@@ -107,10 +114,9 @@ export function Products() {
             return (
             <motion.div
               key={i}
-              
               className={`group bg-[#0a0a08] hover:bg-white/[0.03] p-8
                 transition-all duration-300 flex flex-col
-                ${aloneInRow ? 'col-span-full' : ''}`}
+                ${aloneInRow ? 'lg:col-span-full' : ''}`}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -121,8 +127,10 @@ export function Products() {
                 <span className="font-mono text-[10px] text-white/20 tracking-widest">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <span className="font-mono text-[9px] text-white/50 border border-white/[0.12]
-                  px-2.5 py-1 tracking-widest">
+                <span className={`font-mono text-[9px] px-2.5 py-1 tracking-widest border
+                  ${p.live
+                    ? 'text-emerald-400/80 border-emerald-400/20'
+                    : 'text-white/50 border-white/[0.12]'}`}>
                   {p.badge}
                 </span>
               </div>
@@ -144,7 +152,7 @@ export function Products() {
                   {p.tags.map((t) => (
                     <span
                       key={t}
-                      className="font-mono text-[9px] text-white/25 border border-white/[0.08]
+                      className="font-mono text-[9px] text-white/50 border border-white/20
                         px-2 py-0.5 tracking-wider"
                     >
                       {t}
@@ -157,9 +165,10 @@ export function Products() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-mono text-[10px] text-white/75 hover:text-white
-                      transition-colors tracking-wider shrink-0"
+                      transition-all tracking-wider shrink-0 group-hover:translate-x-0.5
+                      inline-flex items-center gap-1"
                   >
-                    VIEW →
+                    VIEW <span className="transition-transform group-hover:translate-x-1">→</span>
                   </a>
                 )}
               </div>
