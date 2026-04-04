@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Send, Loader } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 export function AIHero() {
   const [input, setInput] = useState('');
@@ -123,8 +124,30 @@ export function AIHero() {
                   }`}
                 >
                   {response ? (
-                    <div className="text-white/90 text-base leading-relaxed whitespace-pre-wrap">
-                      {response}
+                    <div className="text-white/90 text-sm leading-relaxed prose prose-invert max-w-none">
+                      <ReactMarkdown
+                        components={{
+                          p: ({node, ...props}) => <p className="mb-3" {...props} />,
+                          ul: ({node, ...props}) => <ul className="list-disc list-inside mb-3 space-y-1" {...props} />,
+                          ol: ({node, ...props}) => <ol className="list-decimal list-inside mb-3 space-y-1" {...props} />,
+                          li: ({node, ...props}) => <li className="text-white/80" {...props} />,
+                          code: ({node, inline, ...props}) => 
+                            inline ? (
+                              <code className="bg-white/10 px-2 py-1 rounded text-purple-300 font-mono text-xs" {...props} />
+                            ) : (
+                              <code className="bg-black/60 px-3 py-2 rounded block my-2 text-pink-300 font-mono text-xs overflow-x-auto" {...props} />
+                            ),
+                          pre: ({node, ...props}) => <pre className="bg-black/60 p-3 rounded-lg my-2 overflow-x-auto" {...props} />,
+                          blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-purple-500 pl-3 italic text-white/60 my-3" {...props} />,
+                          h1: ({node, ...props}) => <h1 className="text-xl font-bold mt-4 mb-2 text-pink-300" {...props} />,
+                          h2: ({node, ...props}) => <h2 className="text-lg font-bold mt-3 mb-2 text-purple-300" {...props} />,
+                          h3: ({node, ...props}) => <h3 className="text-base font-semibold mt-2 mb-1 text-purple-200" {...props} />,
+                          strong: ({node, ...props}) => <strong className="font-bold text-white" {...props} />,
+                          em: ({node, ...props}) => <em className="italic text-white/80" {...props} />,
+                        }}
+                      >
+                        {response}
+                      </ReactMarkdown>
                       {loading && <span className="animate-pulse">▌</span>}
                     </div>
                   ) : (
