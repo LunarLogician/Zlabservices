@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 export function AIHero() {
   const [input, setInput] = useState('');
@@ -116,17 +117,33 @@ export function AIHero() {
             </div>
 
             {/* Response */}
-            <div className="min-h-[120px] mb-4 font-mono
-              text-xs leading-relaxed">
-              <p className="text-white/20 mb-2">
+            <div className="min-h-[120px] mb-4 text-xs leading-relaxed overflow-y-auto max-h-48">
+              <p className="text-white/20 mb-2 font-mono">
                 $ ask anything about your project
               </p>
-              <p className="text-white/70">
-                {answer}
-                <span className="inline-block w-1.5 h-3
-                  bg-white/60 ml-0.5 animate-pulse
-                  align-middle" />
-              </p>
+              <div className="text-white/70 prose prose-invert prose-sm">
+                <ReactMarkdown
+                  components={{
+                    p: ({...props}) => <p className="mb-2" {...props} />,
+                    ul: ({...props}) => <ul className="list-disc list-inside mb-2 space-y-1" {...props} />,
+                    ol: ({...props}) => <ol className="list-decimal list-inside mb-2 space-y-1" {...props} />,
+                    li: ({...props}) => <li className="text-white/70 ml-2" {...props} />,
+                    strong: ({...props}) => <strong className="font-bold text-white" {...props} />,
+                    em: ({...props}) => <em className="italic text-white/80" {...props} />,
+                    code: ({inline, ...props}: any) => 
+                      inline ? (
+                        <code className="bg-white/10 px-1 rounded text-pink-300 font-mono text-[10px]" {...props} />
+                      ) : (
+                        <code className="bg-black/40 px-2 py-1 rounded block my-1 text-pink-300 font-mono text-[10px] overflow-x-auto" {...props} />
+                      ),
+                    h1: ({...props}) => <h1 className="text-sm font-bold mt-2 mb-1 text-pink-300" {...props} />,
+                    h2: ({...props}) => <h2 className="text-xs font-bold mt-2 mb-1 text-purple-300" {...props} />,
+                  }}
+                >
+                  {answer}
+                </ReactMarkdown>
+                {loading && <span className="inline-block w-1.5 h-3 bg-white/60 ml-0.5 animate-pulse align-middle" />}
+              </div>
             </div>
 
             {/* Input */}
