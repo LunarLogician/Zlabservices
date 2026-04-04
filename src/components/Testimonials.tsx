@@ -47,12 +47,12 @@ export function Testimonials() {
           transition={{ duration: 0.7 }}
           className="mb-16"
         >
-          <span className="font-mono text-[10px] text-white/30 tracking-widest">TESTIMONIALS_</span>
+          <span className="font-mono text-[10px] text-white/75 tracking-widest">TESTIMONIALS_</span>
           <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
             Loved by
-            <span className="text-white/30 not-italic"> clients</span>
+            <span className="text-white/75 not-italic"> clients</span>
           </h2>
-          <p className="text-sm text-white/40 leading-relaxed mt-4 font-light max-w-lg">
+          <p className="text-sm text-white/75 leading-relaxed mt-4 font-light max-w-lg">
             Real feedback from real projects.
           </p>
         </motion.div>
@@ -85,11 +85,11 @@ export function Testimonials() {
               <div className="border-t border-white/[0.06] pt-5 flex justify-between items-end">
                 <div>
                   <div className="text-white/70 text-sm font-light">{t.name}</div>
-                  <div className="font-mono text-[10px] text-white/30 tracking-wider mt-0.5">
+                  <div className="font-mono text-[10px] text-white/75 tracking-wider mt-0.5">
                     {t.role}
                   </div>
                 </div>
-                <span className="font-mono text-[9px] text-white/20 tracking-widest">
+                <span className="font-mono text-[9px] text-white/70 tracking-widest">
                   {t.company}
                 </span>
               </div>

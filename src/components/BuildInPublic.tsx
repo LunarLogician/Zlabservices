@@ -54,12 +54,12 @@ export function BuildInPublic() {
           transition={{ duration: 0.7 }}
           className="mb-16"
         >
-          <span className="font-mono text-[10px] text-white/30 tracking-widest">BUILD IN PUBLIC_</span>
+          <span className="font-mono text-[10px] text-white/75 tracking-widest">BUILD IN PUBLIC_</span>
           <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
             Shipping
-            <span className="text-white/30 not-italic"> in real-time</span>
+            <span className="text-white/75 not-italic"> in real-time</span>
           </h2>
-          <p className="text-sm text-white/40 leading-relaxed mt-4 font-light max-w-lg">
+          <p className="text-sm text-white/75 leading-relaxed mt-4 font-light max-w-lg">
             No smoke, no mirrors. Here&apos;s what&apos;s actually happening.
           </p>
         </motion.div>
@@ -116,25 +116,7 @@ export function BuildInPublic() {
           ))}
         </div>
 
-        {/* GitHub CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-10"
-        >
-          <a
-            href="https://github.com/devpost-ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-[11px] text-white/40 border border-white/[0.08]
-              px-5 py-2.5 hover:border-white/20 hover:text-white/60
-              transition-all tracking-wider inline-block"
-          >
-            FOLLOW ON GITHUB →
-          </a>
-        </motion.div>
+
       </div>
     </section>
   );

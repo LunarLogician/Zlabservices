@@ -46,12 +46,12 @@ export function Services() {
           transition={{ duration: 0.7 }}
           className="mb-16"
         >
-          <span className="font-mono text-[10px] text-white/30 tracking-widest">SERVICES_</span>
+          <span className="font-mono text-[10px] text-white/75 tracking-widest">SERVICES_</span>
           <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
             What we
-            <span className="text-white/30 not-italic"> build</span>
+            <span className="text-white/75 not-italic"> build</span>
           </h2>
-          <p className="text-sm text-white/40 leading-relaxed mt-4 font-light max-w-lg">
+          <p className="text-sm text-white/75 leading-relaxed mt-4 font-light max-w-lg">
             Three core competencies. One mission: ship amazing products.
           </p>
         </motion.div>
@@ -70,12 +70,12 @@ export function Services() {
             >
               <div className="font-mono text-[10px] text-white/20 tracking-widest mb-6">{s.index}</div>
               <h3 className="font-serif italic text-2xl text-white mb-4 leading-snug">{s.title}</h3>
-              <p className="text-sm text-white/40 leading-relaxed font-light mb-6">{s.description}</p>
+              <p className="text-sm text-white/75 leading-relaxed font-light mb-6">{s.description}</p>
               <div className="flex flex-wrap gap-1.5">
                 {s.techs.map((t) => (
                   <span
                     key={t}
-                    className="font-mono text-[10px] text-white/30 border border-white/10
+                    className="font-mono text-[10px] text-white/75 border border-white/10
                       px-2 py-0.5 tracking-wider"
                   >
                     {t}

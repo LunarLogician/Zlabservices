@@ -31,7 +31,7 @@ export function Footer() {
                   <a
                     key={item.h}
                     href={item.h}
-                    className="block font-mono text-[10px] text-white/30
+                    className="block font-mono text-[10px] text-white/75
                       hover:text-white/60 tracking-wider transition-colors"
                   >
                     {item.l}
@@ -53,7 +53,6 @@ export function Footer() {
               <div className="font-mono text-[9px] text-white/20 tracking-widest mb-5">CONNECT</div>
               <div className="space-y-3">
                 {[
-                  { l: 'GITHUB', h: 'https://github.com/devpost-ai' },
                   { l: 'LINKEDIN', h: 'https://www.linkedin.com/company/devpost-ai/?viewAsMember=true' },
                   { l: 'TWITTER', h: 'https://twitter.com' },
                 ].map((s) => (
@@ -62,7 +61,7 @@ export function Footer() {
                     href={s.h}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block font-mono text-[10px] text-white/30
+                    className="block font-mono text-[10px] text-white/75
                       hover:text-white/60 tracking-wider transition-colors"
                   >
                     {s.l}

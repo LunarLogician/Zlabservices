@@ -55,7 +55,7 @@ export function AIHero() {
           <span className="w-1.5 h-1.5 rounded-full bg-green-400
             shadow-[0_0_8px_#4ade80] animate-pulse" />
           <span className="font-mono text-xs
-            text-white/40">Available for select projects</span>
+            text-white/75">Available for select projects</span>
         </div>
       </div>
 
@@ -72,12 +72,12 @@ export function AIHero() {
           <h1 className="font-serif italic text-5xl md:text-6xl
             text-white leading-tight mb-5">
             We build AI products
-            <span className="text-white/30 not-italic">
+            <span className="text-white/75 not-italic">
               {' '}that{' '}
             </span>
             ship.
           </h1>
-          <p className="text-sm text-white/40 leading-relaxed
+          <p className="text-sm text-white/75 leading-relaxed
             max-w-sm mb-8 font-light">
             A one-person product lab out of Islamabad.
             Full-stack AI SaaS, mobile apps, and dev tools
@@ -87,7 +87,7 @@ export function AIHero() {
             {['AI SAAS', 'FLUTTER',
               'DEV TOOLS', 'CLAUDE API'].map(t => (
               <span key={t} className="font-mono text-[10px]
-                text-white/30 border border-white/10
+                text-white/75 border border-white/10
                 px-2.5 py-1 tracking-wider">
                 {t}
               </span>

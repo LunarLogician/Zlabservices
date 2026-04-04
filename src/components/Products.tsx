@@ -89,27 +89,32 @@ export function Products() {
           transition={{ duration: 0.7 }}
           className="mb-16"
         >
-          <span className="font-mono text-[10px] text-white/30 tracking-widest">PRODUCTS_</span>
+          <span className="font-mono text-[10px] text-white/75 tracking-widest">PRODUCTS_</span>
           <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
             What we&apos;ve
-            <span className="text-white/30 not-italic"> shipped</span>
+            <span className="text-white/75 not-italic"> shipped</span>
           </h2>
-          <p className="text-sm text-white/40 leading-relaxed mt-4 font-light max-w-lg">
+          <p className="text-sm text-white/75 leading-relaxed mt-4 font-light max-w-lg">
             Real products. Real users. No vaporware.
           </p>
         </motion.div>
 
         {/* Products — card grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06]">
-          {products.map((p, i) => (
+          {products.map((p, i) => {
+            const isLast = i === products.length - 1;
+            const aloneInRow = isLast && products.length % 3 === 1;
+            return (
             <motion.div
               key={i}
+              
+              className={`group bg-[#0a0a08] hover:bg-white/[0.03] p-8
+                transition-all duration-300 flex flex-col
+                ${aloneInRow ? 'col-span-full' : ''}`}
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: i * 0.07 }}
-              className="group bg-[#0a0a08] hover:bg-white/[0.03] p-8
-                transition-all duration-300 flex flex-col"
             >
               {/* Top row — index + badge */}
               <div className="flex justify-between items-start mb-6">
@@ -151,7 +156,7 @@ export function Products() {
                     href={p.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-[10px] text-white/30 hover:text-white
+                    className="font-mono text-[10px] text-white/75 hover:text-white
                       transition-colors tracking-wider shrink-0"
                   >
                     VIEW →
@@ -159,7 +164,8 @@ export function Products() {
                 )}
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

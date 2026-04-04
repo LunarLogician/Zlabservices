@@ -22,13 +22,13 @@ export function Contact() {
           transition={{ duration: 0.7 }}
           className="max-w-3xl"
         >
-          <span className="font-mono text-[10px] text-white/30 tracking-widest">CONTACT_</span>
+          <span className="font-mono text-[10px] text-white/75 tracking-widest">CONTACT_</span>
           <h2 className="font-serif italic text-6xl md:text-7xl text-white leading-tight mt-3 mb-6">
             Let&apos;s build
             <br />
-            <span className="text-white/30 not-italic">something.</span>
+            <span className="text-white/75 not-italic">something.</span>
           </h2>
-          <p className="text-sm text-white/40 leading-relaxed font-light mb-12 max-w-md">
+          <p className="text-sm text-white/75 leading-relaxed font-light mb-12 max-w-md">
             Open to select client work, collaborations, and interesting problems.
           </p>
 
@@ -54,7 +54,7 @@ export function Contact() {
             </a>
             <a
               href="tel:+923123232695"
-              className="font-mono text-[11px] text-white/40 border border-white/[0.08]
+              className="font-mono text-[11px] text-white/75 border border-white/[0.08]
                 px-6 py-3 hover:border-white/15 hover:text-white/60
                 transition-all tracking-wider"
             >
@@ -63,9 +63,8 @@ export function Contact() {
           </div>
 
           {/* Social links */}
-          <div className="flex gap-8 pt-6 border-t border-white/[0.06]">
+          <div className="flex gap-8 pt-6 border-t border-white/76">
             {[
-              { label: 'GITHUB', href: 'https://github.com/devpost-ai' },
               { label: 'LINKEDIN', href: 'https://www.linkedin.com/company/devpost-ai/?viewAsMember=true' },
               { label: 'TWITTER', href: 'https://twitter.com' },
             ].map((s) => (
@@ -74,7 +73,7 @@ export function Contact() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[10px] text-white/25 hover:text-white/60
+                className="font-mono text-[10px] text-white/75 hover:text-white/60
                   tracking-widest transition-colors"
               >
                 {s.label} →

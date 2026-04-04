@@ -166,7 +166,7 @@ export function Hero() {
       <motion.div
         animate={{ y: [0, 12, 0] }}
         transition={{ duration: 2.5, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 hover:text-white/70 cursor-pointer transition-colors group"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/75 hover:text-white/70 cursor-pointer transition-colors group"
         onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
       >
         <ChevronDown size={28} className="group-hover:scale-110 transition-transform" />

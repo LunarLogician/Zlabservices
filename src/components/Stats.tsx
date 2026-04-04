@@ -29,12 +29,12 @@ export function Stats() {
           transition={{ duration: 0.7 }}
           className="mb-16"
         >
-          <span className="font-mono text-[10px] text-white/30 tracking-widest">NUMBERS_</span>
+          <span className="font-mono text-[10px] text-white/75 tracking-widest">NUMBERS_</span>
           <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
             By the
-            <span className="text-white/30 not-italic"> numbers</span>
+            <span className="text-white/75 not-italic"> numbers</span>
           </h2>
-          <p className="text-sm text-white/40 leading-relaxed mt-4 font-light max-w-lg">
+          <p className="text-sm text-white/75 leading-relaxed mt-4 font-light max-w-lg">
             Real metrics from a real builder. No paid followers, no fake reviews.
           </p>
         </motion.div>

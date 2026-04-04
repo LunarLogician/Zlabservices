@@ -40,7 +40,7 @@ export function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.05 * i }}
-                className="font-mono text-[11px] text-white/40 hover:text-white tracking-wider transition-colors"
+                className="font-mono text-[11px] text-white/75 hover:text-white tracking-wider transition-colors"
               >
                 {link.toUpperCase()}
               </motion.a>
@@ -51,7 +51,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <div className="flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80] animate-pulse" />
-              <span className="font-mono text-[10px] text-white/30 tracking-wider">AVAILABLE</span>
+              <span className="font-mono text-[10px] text-white/75 tracking-wider">AVAILABLE</span>
             </div>
             <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
@@ -64,7 +64,7 @@ export function Navbar() {
           {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden font-mono text-xs text-white/40 tracking-widest"
+            className="md:hidden font-mono text-xs text-white/75 tracking-widest"
           >
             {isOpen ? 'CLOSE' : 'MENU'}
           </button>
@@ -82,7 +82,7 @@ export function Navbar() {
                 key={link}
                 href={`#${link.toLowerCase()}`}
                 onClick={() => setIsOpen(false)}
-                className="block font-mono text-[11px] text-white/40 hover:text-white tracking-wider transition-colors"
+                className="block font-mono text-[11px] text-white/75 hover:text-white tracking-wider transition-colors"
               >
                 {link.toUpperCase()}
               </a>

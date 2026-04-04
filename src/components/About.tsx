@@ -28,13 +28,13 @@ export function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <span className="font-mono text-[10px] text-white/30 tracking-widest">THE STUDIO_</span>
+          <span className="font-mono text-[10px] text-white/75 tracking-widest">THE STUDIO_</span>
           <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3 mb-8">
             Small team.
             <br />
-            <span className="text-white/30 not-italic">Big output.</span>
+            <span className="text-white/75 not-italic">Big output.</span>
           </h2>
-          <div className="space-y-5 text-sm text-white/40 leading-relaxed font-light">
+          <div className="space-y-5 text-sm text-white/75 leading-relaxed font-light">
             <p>
               ZLab is a product-first AI lab. We don&apos;t consult —{' '}
               <span className="text-white/70">we build.</span> Every product starts
@@ -63,14 +63,14 @@ export function About() {
               </div>
               <div>
                 <div className="text-white font-light text-lg">Muhammad Zubair</div>
-                <div className="font-mono text-[10px] text-white/30 tracking-widest mt-0.5">
+                <div className="font-mono text-[10px] text-white/75 tracking-widest mt-0.5">
                   FOUNDER · FULL-STACK DEV
                 </div>
               </div>
             </div>
 
             {/* Bio */}
-            <p className="text-sm text-white/40 leading-relaxed font-light mb-8">
+            <p className="text-sm text-white/75 leading-relaxed font-light mb-8">
               Full-Stack Developer with 4+ years building AI-powered SaaS products,
               RESTful APIs, and scalable web applications. Node.js Team Lead.
               Always learning, always shipping.
@@ -84,10 +84,10 @@ export function About() {
                   className="flex justify-between items-center py-2.5
                     border-b border-white/[0.04] last:border-b-0"
                 >
-                  <span className="font-mono text-[10px] text-white/30 tracking-wider">
+                  <span className="font-mono text-[10px] text-white/75 tracking-wider">
                     {c.label}
                   </span>
-                  <span className="text-xs text-white/20 font-light">{c.detail}</span>
+                  <span className="text-xs text-white/70 font-light">{c.detail}</span>
                 </div>
               ))}
             </div>
@@ -95,20 +95,10 @@ export function About() {
             {/* Links */}
             <div className="flex gap-3">
               <a
-                href="https://github.com/devpost-ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-mono text-[10px] text-white/30 border border-white/10
-                  px-4 py-2 hover:text-white/60 hover:border-white/25
-                  transition-all tracking-wider"
-              >
-                GITHUB →
-              </a>
-              <a
                 href="https://www.linkedin.com/company/devpost-ai/?viewAsMember=true"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[10px] text-white/30 border border-white/10
+                className="font-mono text-[10px] text-white/75 border border-white/10
                   px-4 py-2 hover:text-white/60 hover:border-white/25
                   transition-all tracking-wider"
               >
