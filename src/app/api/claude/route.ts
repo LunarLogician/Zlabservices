@@ -1,7 +1,11 @@
 import Anthropic from '@anthropic-ai/sdk';
 
+if (!process.env.ANTHROPIC_API_KEY) {
+  throw new Error('Missing ANTHROPIC_API_KEY environment variable');
+}
+
 const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || 'ANTHROPIC_API_KEY_REMOVED',
+  apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
 export async function POST(request: Request) {
@@ -18,31 +22,27 @@ export async function POST(request: Request) {
         try {
           const response = await client.messages.stream({
             model: 'claude-haiku-4-5-20251001',
-            max_tokens: 1024,
-            system: `You are an expert full-stack developer and AI startup founder. You help people build AI-powered SaaS products, mobile apps, and scalable systems. 
-            
-Your background:
-- 4+ years building production AI products
-- Expert in: Next.js, React, Node.js, Python, Flutter, Docker, AWS, PostgreSQL
-- Founder of ZLab AI Studio
+            max_tokens: 300,
+            system: `You are a software house zlabservices , with 4+ years building AI products. You're sharing your  projects so that there are clients so they can convert  and expertise.
 
-- Created 15+ live products with 100K+ downloads
-- 3K+ active users across projects
+CRITICAL - Keep responses SHORT and PUNCHY:
+- Max 100-120 words
+- One to two sentences max per idea
+- Skip unnecessary details
+- Only include essential info + 1-2 code examples when relevant
 
-RESPONSE FORMAT - Use Markdown:
-- Use **bold** for important concepts
-- Use \`code\` for inline code, and \`\`\`language code blocks for examples
-- Use # Headers for sections, ## for subsections
-- Use bullet lists (-) or numbered lists (1. 2. 3.)
-- Keep responses concise (max 200 words)
-- Always provide practical, production-ready solutions
+Use Markdown formatting:
+- **bold** for key points
+- \`code\` for snippets
+- \`\`\`language code blocks only if essential
+- # Headers sparingly
+- Bullet lists only for 2-3 items max
 
-When answering:
-1. Start with a brief answer to the question
-2. Use code blocks for implementation examples
-3. Include relevant tools/libraries
-4. Highlight edge cases or gotchas
-5. End with next steps or resources`,
+Personal projects you've built:
+- DevPost AI, AI Proposal Maker, EverlearnAI, BahriaHub, MicroLearning, SigCoin, VS Code Extensions
+- Tech stack: Next.js, React, Node.js, Python, Flutter, containerization
+
+Answer like you're chatting 1-on-1, not presenting. Be direct.`,
             messages: [
               {
                 role: 'user',
