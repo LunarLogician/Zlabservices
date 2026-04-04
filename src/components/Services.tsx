@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Brain, Smartphone, Terminal } from 'lucide-react';
+import { Brain, Smartphone, Terminal, ArrowRight } from 'lucide-react';
 
 export function Services() {
   const services = [
@@ -33,13 +33,14 @@ export function Services() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
@@ -48,26 +49,35 @@ export function Services() {
   };
 
   return (
-    <section id="services" className="relative py-20 px-4">
-      <div className="max-w-7xl mx-auto">
+    <section id="services" className="relative py-24 px-4 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-1/3 -left-64 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           variants={containerVariants}
         >
           {/* Section Header */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <h2 className="font-display mb-4">What We Build</h2>
-            <p className="text-white/60 max-w-2xl mx-auto">
-              Three core competencies. One mission: ship amazing products.
+          <motion.div variants={itemVariants} className="text-center mb-20">
+            <h2 className="font-display text-5xl md:text-6xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">What We</span>
+              {' '}
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Build</span>
+            </h2>
+            <p className="text-lg text-white/60 max-w-2xl mx-auto">
+              Three core competencies. One mission: <span className="text-white">ship amazing products.</span>
             </p>
           </motion.div>
 
           {/* Services Grid */}
           <motion.div
             variants={containerVariants}
-            className="grid md:grid-cols-3 gap-6"
+            className="grid md:grid-cols-3 gap-6 lg:gap-8"
           >
             {services.map((service, index) => {
               const Icon = service.icon;
@@ -75,28 +85,54 @@ export function Services() {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  whileHover={{ y: -8 }}
-                  className="glass glass-hover group overflow-hidden p-6 md:p-8"
+                  whileHover={{ y: -12, boxShadow: '0 40px 80px rgba(124, 58, 237, 0.15)' }}
+                  className="group relative overflow-hidden rounded-2xl p-8 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 hover:border-purple-500/30 backdrop-blur-md transition-all duration-500"
                 >
+                  {/* Animated gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-pink-500/0 group-hover:from-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500"></div>
+
+                  {/* Icon */}
                   <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="mb-4 w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white group-hover:shadow-glow transition-shadow"
+                    whileHover={{ scale: 1.2, rotate: 8 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                    className="mb-6 relative z-10"
                   >
-                    <Icon size={24} />
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white shadow-lg group-hover:shadow-2xl transition-shadow">
+                      <Icon size={28} />
+                    </div>
                   </motion.div>
 
-                  <h3 className="font-display text-xl mb-3">{service.title}</h3>
-                  <p className="text-white/70 mb-6 text-sm leading-relaxed">
+                  {/* Title */}
+                  <h3 className="font-display text-2xl font-bold mb-3 relative z-10 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-300 group-hover:to-pink-300 group-hover:bg-clip-text transition-all">
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-white/70 mb-6 text-base leading-relaxed relative z-10 group-hover:text-white/90 transition-colors">
                     {service.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
+                  {/* Tech stack */}
+                  <div className="flex flex-wrap gap-2 relative z-10">
                     {service.techs.map((tech, i) => (
-                      <span key={i} className="tech-pill">
+                      <motion.span
+                        key={i}
+                        whileHover={{ scale: 1.1 }}
+                        className="px-3 py-1 text-xs font-medium rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-white hover:border-white/30 transition-all cursor-default"
+                      >
                         {tech}
-                      </span>
+                      </motion.span>
                     ))}
                   </div>
+
+                  {/* Arrow indicator */}
+                  <motion.div
+                    className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                    animate={{ x: [0, 8, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <ArrowRight className="w-5 h-5 text-purple-400" />
+                  </motion.div>
                 </motion.div>
               );
             })}
