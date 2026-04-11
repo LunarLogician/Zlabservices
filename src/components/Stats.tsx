@@ -12,8 +12,19 @@ const GRID_BG = {
 // Animated counter with easing
 const AnimatedCounter = ({ value, isInView }: { value: string; isInView: boolean }) => {
   const [count, setCount] = useState(0);
-  const numericValue = parseInt(value.replace('+', ''));
+  
+  // Parse value with K notation (e.g., "10K+" -> 10000)
+  const parseValue = (val: string): number => {
+    const clean = val.replace('+', '');
+    if (clean.includes('K')) {
+      return parseFloat(clean.replace('K', '')) * 1000;
+    }
+    return parseInt(clean);
+  };
+  
+  const numericValue = parseValue(value);
   const hasPlus = value.includes('+');
+  const displayValue = value.replace('+', '');
   
   useEffect(() => {
     if (!isInView) return;
@@ -37,7 +48,7 @@ const AnimatedCounter = ({ value, isInView }: { value: string; isInView: boolean
   
   return (
     <span className="relative inline-block">
-      {count}
+      {count.toLocaleString()}
       {hasPlus && <span className="text-emerald-400/60">+</span>}
     </span>
   );
@@ -348,8 +359,8 @@ export function Stats() {
   const stats = [
     { value: '4+', label: 'YEARS EXPERIENCE', sub: 'Building products & leading teams' },
     { value: '4', label: 'AI PRODUCTS', sub: 'Production-ready SaaS & apps' },
-    { value: '10000+', label: 'VS CODE INSTALLS', sub: 'Claude AI extension' },
-    { value: '10000+', label: 'ACTIVE USERS', sub: 'Global community' },
+    { value: '10K+', label: 'VS CODE INSTALLS', sub: 'Claude AI extension' },
+    { value: '10K+', label: 'ACTIVE USERS', sub: 'Global community' },
   ];
 
   return (

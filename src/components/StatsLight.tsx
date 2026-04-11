@@ -12,7 +12,17 @@ const GRID_BG = {
 // Simple counter without heavy animations
 const SimpleCounter = ({ value, isInView }: { value: string; isInView: boolean }) => {
   const [count, setCount] = useState(0);
-  const numericValue = parseInt(value.replace('+', ''));
+  
+  // Parse value with K notation (e.g., "10K+" -> 10000)
+  const parseValue = (val: string): number => {
+    const clean = val.replace('+', '');
+    if (clean.includes('K')) {
+      return parseFloat(clean.replace('K', '')) * 1000;
+    }
+    return parseInt(clean);
+  };
+  
+  const numericValue = parseValue(value);
   const hasPlus = value.includes('+');
   
   useEffect(() => {
@@ -37,7 +47,7 @@ const SimpleCounter = ({ value, isInView }: { value: string; isInView: boolean }
   
   return (
     <span className="relative inline-block">
-      {count}
+      {count.toLocaleString()}
       {hasPlus && <span className="text-emerald-400/60">+</span>}
     </span>
   );
