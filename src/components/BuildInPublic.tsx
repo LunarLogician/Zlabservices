@@ -43,7 +43,7 @@ export function BuildInPublic() {
   ];
 
   return (
-    <section id="build" className="relative py-24 px-6 md:px-10 overflow-hidden">
+    <section id="build" className="relative py-24 px-6 md:px-10 overflow-hidden border-t border-white/8">
       <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -52,20 +52,26 @@ export function BuildInPublic() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-16"
+          className="mb-20"
         >
-          <span className="font-mono text-[10px] text-white/75 tracking-widest">BUILD IN PUBLIC_</span>
-          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
+          <span className="font-mono text-[9px] text-white/60 tracking-widest uppercase">BUILD IN PUBLIC_</span>
+          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-4 mb-6">
             Shipping
-            <span className="text-white/75 not-italic"> in real-time</span>
+            <span className="text-emerald-400/80 not-italic"> in real-time</span>
           </h2>
-          <p className="text-sm text-white/75 leading-relaxed mt-4 font-light max-w-lg">
-            No smoke, no mirrors. Here&apos;s what&apos;s actually happening.
+          <p className="text-base text-white/70 leading-relaxed font-light max-w-xl">
+            No smoke, no mirrors. Here's what's actually happening. Every milestone, release, and achievement tracked transparently.
           </p>
         </motion.div>
 
-        {/* Live stats bar */}
-        <div className="grid grid-cols-3 border border-white/[0.08] mb-12">
+        {/* Stats Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-3 gap-6 mb-16"
+        >
           {[
             { num: '15+', lbl: 'LIVE PRODUCTS' },
             { num: '100K+', lbl: 'TOTAL DOWNLOADS' },
@@ -77,16 +83,22 @@ export function BuildInPublic() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-white/[0.02] px-8 py-6 border-r border-white/[0.06] last:border-r-0"
+              className="group border border-white/6 bg-gradient-to-br from-white/2 to-white/1 hover:border-emerald-400/30 hover:bg-emerald-400/5 px-8 py-8 transition-all duration-300"
             >
-              <div className="font-serif italic text-4xl text-white mb-1">{s.num}</div>
-              <div className="font-mono text-[9px] text-white/25 tracking-widest">{s.lbl}</div>
+              <div className="font-serif italic text-4xl text-white mb-2 group-hover:text-emerald-300 transition-colors">{s.num}</div>
+              <div className="font-mono text-[9px] text-white/50 group-hover:text-white/70 tracking-widest transition-colors">{s.lbl}</div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Activity log */}
-        <div className="border-t border-white/[0.08]">
+        {/* Activity Cards */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-3"
+        >
           {activities.map((a, i) => (
             <motion.div
               key={i}
@@ -94,29 +106,32 @@ export function BuildInPublic() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: i * 0.08 }}
-              className="group border-b border-white/[0.05] hover:bg-white/[0.025]
-                transition-all duration-200"
+              className="group border border-white/6 bg-gradient-to-r from-white/2 to-white/1 hover:border-emerald-400/30 hover:bg-emerald-400/5 px-8 py-6 transition-all duration-300"
             >
-              <div className="grid grid-cols-[80px_1fr_100px] gap-4 items-center py-6 px-2">
-                <span className="font-mono text-[9px] font-medium text-white/80
-                  tracking-widest border border-white/[0.08] px-2 py-1 text-center">
+              <div className="grid grid-cols-[auto_1fr_auto] gap-6 items-start">
+                {/* Badge */}
+                <span className="font-mono text-[8px] font-bold text-emerald-400/80 group-hover:text-emerald-400 border border-emerald-400/25 bg-emerald-400/5 px-2.5 py-1.5 tracking-widest transition-all min-w-max">
                   {a.type}
                 </span>
-                <div>
-                  <div className="text-white text-base font-medium leading-snug">
+
+                {/* Content */}
+                <div className="min-w-0">
+                  <div className="text-white font-medium text-base leading-snug mb-1 group-hover:text-emerald-300 transition-colors">
                     {a.title}
                   </div>
-                  <div className="text-xs text-white/55 mt-1">{a.description}</div>
+                  <div className="text-xs text-white/60 group-hover:text-white/75 transition-colors font-light leading-relaxed">
+                    {a.description}
+                  </div>
                 </div>
-                <span className="font-mono text-[9px] text-white/20 tracking-widest text-right">
+
+                {/* Time */}
+                <span className="font-mono text-[9px] text-white/40 group-hover:text-white/60 tracking-widest transition-colors text-right min-w-max">
                   {a.time}
                 </span>
               </div>
             </motion.div>
           ))}
-        </div>
-
-
+        </motion.div>
       </div>
     </section>
   );

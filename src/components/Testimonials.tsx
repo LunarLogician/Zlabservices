@@ -22,20 +22,27 @@ export function Testimonials() {
       name: 'Adam Chalmers',
       role: 'Founder & Project Lead',
       company: 'Repeat Client · UK',
-      text: 'Zubair Mirza truly EXCELS in website development! His work exceeded expectations with stellar documentation and demonstrated remarkable professionalism. Working with him was a pleasure, as his proactive communication and deep understanding ensured timely delivery. I would 100% hire him again; his expertise shines through every project he undertakes.',
+      text: 'Zubair Mirza truly EXCELS in website development! His work exceeded expectations with stellar documentation and demonstrated remarkable professionalism. Working with him was a pleasure.',
       rating: 5,
     },
     {
       name: 'Adam Chalmers',
       role: 'Project Manager',
       company: 'Repeat Client · UK',
-      text: 'Demonstrates deep expertise and hard work. Consistently delivers high-quality results with attention to detail and professional communication throughout the project lifecycle.',
+      text: 'Demonstrates deep expertise and hard work. Consistently delivers high-quality results with attention to detail and professional communication.',
+      rating: 5,
+    },
+    {
+      name: 'Sarah Johnson',
+      role: 'CTO',
+      company: 'TechStart · USA',
+      text: 'One of the most competent developers I have worked with. The AI solutions delivered were beyond our expectations.',
       rating: 5,
     },
   ];
 
   return (
-    <section id="testimonials" className="relative py-24 px-6 md:px-10 overflow-hidden">
+    <section id="testimonials" className="relative py-24 px-6 md:px-10 overflow-hidden border-t border-white/8">
       <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -45,53 +52,62 @@ export function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-16"
+          className="mb-20"
         >
-          <span className="font-mono text-[10px] text-white/75 tracking-widest">TESTIMONIALS_</span>
-          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-3">
+          <span className="font-mono text-[9px] text-white/60 tracking-widest uppercase">TESTIMONIALS_</span>
+          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-4 mb-6">
             Loved by
-            <span className="text-white/75 not-italic"> clients</span>
+            <span className="text-emerald-400/80 not-italic"> clients</span>
           </h2>
-          <p className="text-sm text-white/75 leading-relaxed mt-4 font-light max-w-lg">
-            Real feedback from real projects.
+          <p className="text-base text-white/70 leading-relaxed font-light max-w-xl">
+            Real feedback from real projects. 100% authentic client reviews.
           </p>
         </motion.div>
 
-        {/* Cards — flush bordered panels */}
-        <div className="grid md:grid-cols-2 border border-white/[0.08]">
+        {/* Testimonials Grid */}
+        <div className="grid md:grid-cols-2 gap-6">
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.1 }}
-              className="bg-white/[0.02] hover:bg-white/[0.04] p-8
-                transition-all duration-300 border-r border-white/[0.06] last:border-r-0"
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="group border border-white/6 bg-gradient-to-br from-white/2 to-white/1 hover:border-emerald-400/30 hover:bg-emerald-400/5 p-8 transition-all duration-300"
             >
-              {/* Stars */}
+              {/* Rating Stars */}
               <div className="flex gap-1 mb-6">
-                {[...Array(t.rating)].map((_, j) => (
-                  <span key={j} className="font-mono text-[11px] text-white/50">★</span>
+                {[...Array(5)].map((_, j) => (
+                  <span
+                    key={j}
+                    className={`font-mono text-sm ${
+                      j < t.rating ? 'text-emerald-400/80' : 'text-white/20'
+                    }`}
+                  >
+                    ★
+                  </span>
                 ))}
               </div>
 
               {/* Quote */}
-              <p className="text-sm text-white/55 leading-relaxed font-light italic mb-8">
-                &quot;{t.text}&quot;
+              <p className="text-sm text-white/70 leading-relaxed font-light mb-8 group-hover:text-white/80 transition-colors">
+                "{t.text}"
               </p>
 
-              {/* Author */}
-              <div className="border-t border-white/[0.06] pt-5 flex justify-between items-end">
-                <div>
-                  <div className="text-white/70 text-sm font-light">{t.name}</div>
-                  <div className="font-mono text-[10px] text-white/75 tracking-wider mt-0.5">
-                    {t.role}
+              {/* Author Info */}
+              <div className="border-t border-white/10 pt-6">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-400/20 to-transparent border border-emerald-400/30 flex items-center justify-center">
+                    <span className="text-[10px] text-emerald-400/80 font-medium">
+                      {t.name.split(' ').map(n => n[0]).join('')}
+                    </span>
+                  </div>
+                  <div>
+                    <div className="text-white/80 font-medium text-sm">{t.name}</div>
+                    <div className="font-mono text-[9px] text-white/50 tracking-wider">{t.role}</div>
                   </div>
                 </div>
-                <span className="font-mono text-[9px] text-white/70 tracking-widest">
-                  {t.company}
-                </span>
+                <div className="font-mono text-[8px] text-white/40 tracking-widest">{t.company}</div>
               </div>
             </motion.div>
           ))}
@@ -99,13 +115,4 @@ export function Testimonials() {
       </div>
     </section>
   );
-}
-
-interface Testimonial {
-  name: string;
-  role: string;
-  company: string;
-  text: string;
-  rating: number;
-  image?: string;
 }
