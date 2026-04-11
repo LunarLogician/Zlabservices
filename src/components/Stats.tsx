@@ -348,8 +348,8 @@ export function Stats() {
   const stats = [
     { value: '4+', label: 'YEARS EXPERIENCE', sub: 'Building products & leading teams' },
     { value: '4', label: 'AI PRODUCTS', sub: 'Production-ready SaaS & apps' },
-    { value: '10K+', label: 'VS CODE INSTALLS', sub: 'Claude AI extension' },
-    { value: '10K+', label: 'ACTIVE USERS', sub: 'Global community' },
+    { value: '10000+', label: 'VS CODE INSTALLS', sub: 'Claude AI extension' },
+    { value: '10000+', label: 'ACTIVE USERS', sub: 'Global community' },
   ];
 
   return (
