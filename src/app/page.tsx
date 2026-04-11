@@ -46,8 +46,8 @@ const AnimatedBackground = () => {
       <motion.div
         className="fixed w-96 h-96 bg-emerald-400/5 rounded-full blur-3xl pointer-events-none"
         animate={{
-          x: mousePosition.x * (window.innerWidth / 100) - 192,
-          y: mousePosition.y * (window.innerHeight / 100) - 192,
+          x: typeof window !== 'undefined' ? mousePosition.x * (window.innerWidth / 100) - 192 : 0,
+          y: typeof window !== 'undefined' ? mousePosition.y * (window.innerHeight / 100) - 192 : 0,
         }}
         transition={{ type: 'spring', damping: 30, stiffness: 200 }}
         style={{ opacity }}
@@ -56,8 +56,8 @@ const AnimatedBackground = () => {
       <motion.div
         className="fixed w-64 h-64 bg-purple-400/5 rounded-full blur-3xl pointer-events-none"
         animate={{
-          x: (100 - mousePosition.x) * (window.innerWidth / 100) - 128,
-          y: (100 - mousePosition.y) * (window.innerHeight / 100) - 128,
+          x: typeof window !== 'undefined' ? (100 - mousePosition.x) * (window.innerWidth / 100) - 128 : 0,
+          y: typeof window !== 'undefined' ? (100 - mousePosition.y) * (window.innerHeight / 100) - 128 : 0,
         }}
         transition={{ type: 'spring', damping: 30, stiffness: 150 }}
         style={{ opacity }}

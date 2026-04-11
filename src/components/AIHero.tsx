@@ -278,9 +278,9 @@ export function AIHero() {
         >
           <div className="flex gap-8">
             {[
-              { num: '15+', lbl: 'LIVE PRODUCTS' },
-              { num: '100K+', lbl: 'DOWNLOADS' },
-              { num: '3K+', lbl: 'ACTIVE USERS' },
+            { num: '4', lbl: 'AI PRODUCTS' },
+            { num: '10K+', lbl: 'VS CODE INSTALLS' },
+            { num: '10K+', lbl: 'ACTIVE USERS' },
               { num: '99.9%', lbl: 'UPTIME' },
             ].map((m, i) => (
               <div key={m.lbl} className="group">

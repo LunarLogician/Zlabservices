@@ -145,7 +145,7 @@ const PhoneCard = () => {
               href="tel:+923123232695"
               className="font-mono text-xl md:text-2xl text-white/60 hover:text-white transition-colors inline-block"
             >
-              +92 312 323 2695
+
             </a>
           </div>
           

@@ -304,7 +304,7 @@ export function Services() {
       description:
         'VS Code extensions, CLI packages, and npm libraries used by thousands of developers globally.',
       techs: ['Node.js', 'TypeScript', 'VS Code API', 'npm'],
-      metrics: { downloads: '100K+', packages: '15+' },
+      metrics: { downloads: '10K+', packages: '4' },
     },
   ];
 

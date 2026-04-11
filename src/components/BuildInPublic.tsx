@@ -18,14 +18,14 @@ export function BuildInPublic() {
     },
     {
       type: 'MILESTONE',
-      title: '15+ Projects Now Live',
-      description: 'Crossed 15 production applications milestone',
+      title: '4 AI Products Now Live',
+      description: 'Launched 4 production-ready AI SaaS products',
       time: '1 DAY AGO',
     },
     {
       type: 'USERS',
-      title: '3K+ Active Users Reached',
-      description: 'VS Code extensions hitting new user engagement records',
+      title: '10K+ VS Code Extension Installs',
+      description: 'Claude AI extension crossed 10K installations milestone',
       time: '3 DAYS AGO',
     },
     {
@@ -36,8 +36,8 @@ export function BuildInPublic() {
     },
     {
       type: 'MILESTONE',
-      title: '100K+ Downloads Achieved',
-      description: 'All products combined now surpassing 100K total downloads',
+      title: '10K+ Active Users & Growing',
+      description: 'Global community of product builders and AI enthusiasts',
       time: '2 WEEKS AGO',
     },
   ];
@@ -73,9 +73,9 @@ export function BuildInPublic() {
           className="grid grid-cols-3 gap-6 mb-16"
         >
           {[
-            { num: '15+', lbl: 'LIVE PRODUCTS' },
-            { num: '100K+', lbl: 'TOTAL DOWNLOADS' },
-            { num: '3K+', lbl: 'ACTIVE USERS' },
+            { num: '4', lbl: 'AI PRODUCTS' },
+            { num: '10K+', lbl: 'VS CODE INSTALLS' },
+            { num: '10K+', lbl: 'ACTIVE USERS' },
           ].map((s, i) => (
             <motion.div
               key={i}

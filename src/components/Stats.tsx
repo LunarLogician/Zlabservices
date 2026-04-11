@@ -347,9 +347,9 @@ export function Stats() {
   
   const stats = [
     { value: '4+', label: 'YEARS EXPERIENCE', sub: 'Building products & leading teams' },
-    { value: '15+', label: 'LIVE PROJECTS', sub: 'Production-ready applications' },
-    { value: '100K+', label: 'DOWNLOADS', sub: 'Across all platforms & extensions' },
-    { value: '3K+', label: 'ACTIVE USERS', sub: 'Daily active community' },
+    { value: '4', label: 'AI PRODUCTS', sub: 'Production-ready SaaS & apps' },
+    { value: '10K+', label: 'VS CODE INSTALLS', sub: 'Claude AI extension' },
+    { value: '10K+', label: 'ACTIVE USERS', sub: 'Global community' },
   ];
 
   return (

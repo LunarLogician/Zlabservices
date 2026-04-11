@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 
 const GRID_BG = {
@@ -78,6 +79,7 @@ const PRODUCTS_DATA: Product[] = [
 ];
 
 export function Products() {
+  const router = useRouter();
   const [modalOpen, setModalOpen] = useState<number | null>(null);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -111,7 +113,11 @@ export function Products() {
         {/* Products — card grid */}
         <div className="grid md:grid-cols-2 gap-6 border border-white/6">
           {PRODUCTS_DATA.map((p, i) => (
-            <Link key={i} href={`/products/${p.id}`} className="group">
+            <div
+              key={i}
+              className="group cursor-pointer"
+              onClick={() => router.push(`/products/${p.id}`)}
+            >
               <motion.div
                 className="bg-[#0a0a08] hover:bg-white/5 transition-all duration-300 flex flex-col border border-white/6 overflow-hidden h-full cursor-pointer"
                 initial={{ opacity: 0, y: 28 }}
@@ -215,7 +221,9 @@ export function Products() {
                       href={p.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                      }}
                       className="font-mono text-[10px] text-white/75 hover:text-white transition-all tracking-wider shrink-0 group-hover:translate-x-0.5 inline-flex items-center gap-2 whitespace-nowrap"
                     >
                       LIVE{' '}
@@ -226,7 +234,7 @@ export function Products() {
                   </div>
                 </div>
               </motion.div>
-            </Link>
+            </div>
           ))}
         </div>
 

@@ -133,9 +133,9 @@ export function Hero() {
         >
           {[
             { number: '4+', label: 'Years Experience', icon: Rocket },
-            { number: '15+', label: 'Live Projects', icon: Zap },
-            { number: '100K+', label: 'File Downloads', icon: Code2 },
-            { number: '3K+', label: 'Users Reached', icon: Zap },
+            { number: '4', label: 'AI Products', icon: Zap },
+            { number: '10K+', label: 'VS Code Installs', icon: Code2 },
+            { number: '10K+', label: 'Active Users', icon: Zap },
           ].map((stat, index) => {
             const Icon = stat.icon;
             return (
