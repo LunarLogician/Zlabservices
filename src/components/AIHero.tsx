@@ -154,15 +154,15 @@ export function AIHero() {
             </div>
             
             <h1 className="font-serif italic text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
-              <TypewriterEffect text="We build AI products" delay={0} />
+              <TypewriterEffect text="Production-ready AI SaaS" delay={0} />
               <br />
               <span className="text-emerald-400/80 not-italic">
-                <TypewriterEffect text="that ship." delay={1.5} />
+                <TypewriterEffect text="in 3-4 weeks." delay={1.5} />
               </span>
             </h1>
             
             <p className="text-base text-white/70 leading-relaxed max-w-lg mb-10 font-light">
-              A one-person product lab out of Islamabad. Full-stack AI SaaS, mobile apps, and dev tools — from zero to production, fast.
+              We build full-stack AI products with payments, Redis caching, and deployment — not prototypes. See our live products below.
             </p>
             
             <div className="flex flex-wrap gap-2">

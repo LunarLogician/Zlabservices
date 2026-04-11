@@ -365,8 +365,8 @@ export function Stats() {
       <motion.div
         className="fixed w-64 h-64 bg-emerald-400/5 rounded-full blur-3xl pointer-events-none z-0"
         animate={{
-          x: mousePosition.x * (window.innerWidth / 100) - 128,
-          y: mousePosition.y * (window.innerHeight / 100) - 128,
+          x: typeof window !== 'undefined' ? mousePosition.x * (window.innerWidth / 100) - 128 : 0,
+          y: typeof window !== 'undefined' ? mousePosition.y * (window.innerHeight / 100) - 128 : 0,
         }}
         transition={{ type: 'spring', damping: 30, stiffness: 200 }}
       />

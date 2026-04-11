@@ -7,7 +7,8 @@ import { AIHero } from '@/components/AIHero';
 import { Services } from '@/components/Services';
 import { Products } from '@/components/Products';
 import { BuildInPublic } from '@/components/BuildInPublic';
-import { Stats } from '@/components/Stats';
+import { StatsLight } from '@/components/StatsLight';
+import { HowWeWork } from '@/components/HowWeWork';
 import { About } from '@/components/About';
 import { Testimonials } from '@/components/Testimonials';
 import { Contact } from '@/components/Contact';
@@ -20,67 +21,16 @@ const GRID_BG = {
   backgroundSize: '48px 48px',
 };
 
-// Animated background that follows mouse
-const AnimatedBackground = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0.2]);
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-  
+// Lightweight static background
+const StaticBackground = () => {
   return (
     <>
       {/* Base grid */}
       <div className="fixed inset-0 pointer-events-none" style={GRID_BG} />
       
-      {/* Animated gradient orbs that follow mouse */}
-      <motion.div
-        className="fixed w-96 h-96 bg-emerald-400/5 rounded-full blur-3xl pointer-events-none"
-        animate={{
-          x: typeof window !== 'undefined' ? mousePosition.x * (window.innerWidth / 100) - 192 : 0,
-          y: typeof window !== 'undefined' ? mousePosition.y * (window.innerHeight / 100) - 192 : 0,
-        }}
-        transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-        style={{ opacity }}
-      />
-      
-      <motion.div
-        className="fixed w-64 h-64 bg-purple-400/5 rounded-full blur-3xl pointer-events-none"
-        animate={{
-          x: typeof window !== 'undefined' ? (100 - mousePosition.x) * (window.innerWidth / 100) - 128 : 0,
-          y: typeof window !== 'undefined' ? (100 - mousePosition.y) * (window.innerHeight / 100) - 128 : 0,
-        }}
-        transition={{ type: 'spring', damping: 30, stiffness: 150 }}
-        style={{ opacity }}
-      />
-      
-      {/* Static gradient orbs for depth */}
-      <motion.div
-        className="fixed top-1/4 -left-48 w-96 h-96 bg-emerald-400/3 rounded-full blur-3xl pointer-events-none"
-        animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="fixed bottom-1/4 -right-48 w-96 h-96 bg-purple-400/3 rounded-full blur-3xl pointer-events-none"
-        animate={{ x: [0, -100, 0], y: [0, 50, 0] }}
-        transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      
-      {/* Scan line effect */}
-      <motion.div
-        className="fixed inset-0 pointer-events-none bg-gradient-to-b from-transparent via-emerald-400/5 to-transparent opacity-0"
-        animate={{ y: ['-100%', '100%'], opacity: [0, 0.3, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-      />
+      {/* Simple static gradient orbs */}
+      <div className="fixed top-1/4 -left-48 w-96 h-96 bg-emerald-400/3 rounded-full blur-3xl pointer-events-none opacity-30" />
+      <div className="fixed bottom-1/4 -right-48 w-96 h-96 bg-purple-400/3 rounded-full blur-3xl pointer-events-none opacity-30" />
     </>
   );
 };
@@ -110,152 +60,6 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Global cursor follower
-const CursorFollower = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest('a, button, [role="button"], input, textarea')) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseover', handleMouseOver);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseover', handleMouseOver);
-    };
-  }, []);
-  
-  return (
-    <motion.div
-      className="fixed pointer-events-none z-50 hidden lg:block"
-      animate={{
-        x: mousePosition.x - 12,
-        y: mousePosition.y - 12,
-        scale: isHovering ? 1.5 : 1,
-      }}
-      transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-    >
-      <div className="w-6 h-6 border border-emerald-400/40 rounded-full" />
-      <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-emerald-400 rounded-full"
-        animate={{ scale: isHovering ? 2 : 1 }}
-      />
-    </motion.div>
-  );
-};
-
-// Particle network overlay
-const ParticleNetworkOverlay = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    
-    resize();
-    window.addEventListener('resize', resize);
-    
-    const particles: Array<{ x: number; y: number; vx: number; vy: number }> = [];
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-      });
-    }
-    
-    const animate = () => {
-      if (!ctx || !canvas) return;
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach(p => {
-        p.x += p.vx;
-        p.y += p.vy;
-        
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-        
-        // Attract to mouse
-        const dx = mouseRef.current.x - p.x;
-        const dy = mouseRef.current.y - p.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const angle = Math.atan2(dy, dx);
-          const force = (150 - dist) / 2000;
-          p.vx += Math.cos(angle) * force;
-          p.vy += Math.sin(angle) * force;
-          // Limit speed
-          const speed = Math.hypot(p.vx, p.vy);
-          if (speed > 1.5) {
-            p.vx = (p.vx / speed) * 1.5;
-            p.vy = (p.vy / speed) * 1.5;
-          }
-        }
-        
-        ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
-        ctx.fillRect(p.x, p.y, 1.5, 1.5);
-      });
-      
-      // Draw connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const p1 = particles[i];
-          const p2 = particles[j];
-          const dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-          if (dist < 100) {
-            ctx.strokeStyle = `rgba(16, 185, 129, ${0.05 * (1 - dist / 100)})`;
-            ctx.lineWidth = 0.3;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.stroke();
-          }
-        }
-      }
-      
-      requestAnimationFrame(animate);
-    };
-    
-    animate();
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-  
-  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />;
-};
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -267,10 +71,8 @@ export default function Home() {
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden bg-[#0a0a08] text-white">
       {/* Global theme backgrounds */}
-      <AnimatedBackground />
-      <ParticleNetworkOverlay />
+      <StaticBackground />
       <ScrollProgress />
-      <CursorFollower />
       
       {/* Loading indicator */}
       <motion.div
@@ -322,7 +124,7 @@ export default function Home() {
         </div>
         
         <div className="relative">
-          <Stats />
+          <StatsLight />
           <motion.div
             className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
             initial={{ scaleX: 0 }}
@@ -333,9 +135,20 @@ export default function Home() {
         </div>
         
         <div className="relative">
-          <About />
+          <HowWeWork />
           <motion.div
             className="h-px bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          />
+        </div>
+        
+        <div className="relative">
+          <About />
+          <motion.div
+            className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -439,5 +252,3 @@ export default function Home() {
   );
 }
 
-// Add missing useRef import
-import { useRef } from 'react';

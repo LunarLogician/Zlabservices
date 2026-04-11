@@ -101,9 +101,9 @@ export function Products() {
             PRODUCTS_
           </span>
           <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-4 mb-6">
-            Prodcucts already <span className="text-emerald-400/80">delivered</span>
+            Products already <span className="text-emerald-400/80">delivered</span>
             <br></br>
-            <span className="text-white/40 not-italic"> Earning Revenue</span>
+            <span className="text-white/40 not-italic">Live & production-ready</span>
           </h2>
           <p className="text-base text-white/70 leading-relaxed font-light max-w-lg">
             Live products you can use right now. Full-stack, deployed, production-grade.
