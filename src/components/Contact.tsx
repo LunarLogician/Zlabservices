@@ -115,28 +115,7 @@ export function Contact() {
               </motion.div>
 
               {/* WhatsApp */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="group"
-              >
-                <div className="font-mono text-[8px] text-emerald-400/80 tracking-widest mb-2">
-                  WHATSAPP
-                </div>
-                <a
-                  href="https://wa.me/923123232695"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-xl text-white/60 hover:text-white transition-colors inline-block"
-                >
-                  +92 312 3232695
-                </a>
-                <div className="font-mono text-[8px] text-white/40 mt-1">
-                  Fastest response · Free consultation
-                </div>
-              </motion.div>
-
+             
               {/* Location */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
