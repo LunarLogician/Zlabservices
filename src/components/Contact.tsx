@@ -18,14 +18,32 @@ export function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', message: '' });
-    
-    setTimeout(() => setSubmitted(false), 3000);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message');
+      }
+      
+      setIsSubmitting(false);
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setIsSubmitting(false);
+      // You could add error state handling here
+      alert(error instanceof Error ? error.message : 'Failed to send message. Please try again.');
+    }
   };
 
   return (
@@ -89,10 +107,10 @@ export function Contact() {
                   EMAIL
                 </div>
                 <a
-                  href="mailto:zubair@zlabservices.com"
+                  href="mailto:zlabservices@gmail.com"
                   className="font-serif italic text-xl text-white/60 hover:text-white transition-colors inline-block"
                 >
-                  zubair@zlabservices.com
+                  zlabservices@gmail.com
                 </a>
               </motion.div>
 
@@ -318,7 +336,7 @@ export function Contact() {
               OR
             </div>
             <motion.a
-              href="mailto:zubair@zlabservices.com"
+              href="mailto:zlabservices@gmail.com"
               className="px-8 py-4 border border-white/10 hover:border-emerald-400/30 transition-all font-mono text-[10px] tracking-widest"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
