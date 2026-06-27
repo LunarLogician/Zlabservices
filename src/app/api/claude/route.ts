@@ -1,15 +1,23 @@
 import Anthropic from '@anthropic-ai/sdk';
 
-if (!process.env.ANTHROPIC_API_KEY) {
-  throw new Error('Missing ANTHROPIC_API_KEY environment variable');
-}
+const getClient = () => {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
 
-const client = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+  if (!apiKey) {
+    return null;
+  }
+
+  return new Anthropic({ apiKey });
+};
 
 export async function POST(request: Request) {
   try {
+    const client = getClient();
+
+    if (!client) {
+      return new Response('Anthropic API is not configured', { status: 503 });
+    }
+
     const { message } = await request.json();
 
     if (!message || typeof message !== 'string') {
