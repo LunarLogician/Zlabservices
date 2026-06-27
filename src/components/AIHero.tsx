@@ -6,9 +6,9 @@ import ReactMarkdown from 'react-markdown';
 
 // Static grid only (no canvas animations)
 const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
+  backgroundImage: `linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)`,
+  backgroundSize: '72px 72px',
 };
 
 // Optimized: Single static gradient orb (no animation)
@@ -161,15 +161,38 @@ export function AIHero() {
               </span>
             </h1>
             
-            <p className="text-base text-white/70 leading-relaxed max-w-lg mb-10 font-light">
+            <p className="text-base text-white/70 leading-relaxed max-w-lg mb-8 font-light">
               We build full-stack AI products with payments, Redis caching, and deployment — not prototypes. See our live products below.
             </p>
+
+            <div className="flex flex-wrap items-center gap-3 mb-8">
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-5 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-[#07110d] shadow-[0_0_25px_rgba(16,185,129,0.2)] transition-all hover:-translate-y-0.5 hover:bg-emerald-300"
+              >
+                Start your MVP →
+              </a>
+              <a
+                href="#products"
+                className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.24em] text-white/80 transition-all hover:border-emerald-400/40 hover:text-emerald-400"
+              >
+                See live work
+              </a>
+            </div>
+
+            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3 max-w-md shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
+              <img src="/founder-avatar.svg" alt="Founder portrait" className="h-12 w-12 rounded-full border border-emerald-400/30 object-cover" />
+              <div>
+                <p className="font-mono text-[9px] uppercase tracking-[0.24em] text-emerald-400/80">Founder-led delivery</p>
+                <p className="text-sm text-white/70">Zubair works directly with clients from discovery to launch.</p>
+              </div>
+            </div>
             
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mt-8">
               {['AI SAAS', 'FLUTTER', 'DEV TOOLS', 'CLAUDE API', 'NEXT.JS', 'TYPESCRIPT'].map((t, i) => (
                 <span
                   key={t}
-                  className="font-mono text-[8px] text-white/60 border border-white/10 px-2.5 py-1.5 tracking-widest hover:border-emerald-400/30 hover:text-emerald-400 transition-colors cursor-pointer"
+                  className="font-mono text-[8px] text-white/85 border border-white/15 bg-white/[0.04] px-2.5 py-1.5 tracking-widest hover:border-emerald-400/40 hover:text-emerald-400 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] transition-all duration-200 cursor-pointer"
                   style={{ animationDelay: `${2 + i * 0.05}s` }}
                 >
                   {t}
@@ -192,7 +215,7 @@ export function AIHero() {
                 <div className="w-2 h-2 rounded-full bg-amber-400/60" />
                 <div className="w-2 h-2 rounded-full bg-emerald-400/60" />
                 <span className="ml-auto font-mono text-[8px] text-white/40 tracking-widest">
-                  zlab — claude-sonnet
+                  zlab — product strategist
                 </span>
               </div>
 
@@ -253,16 +276,16 @@ export function AIHero() {
                   value={input}
                   onChange={e => setInput(e.target.value)}
                   onKeyDown={e => e.key === 'Enter' && ask()}
-                  placeholder="Ask me anything..."
+                  placeholder="Describe your idea..."
                   disabled={loading}
-                  className="flex-1 bg-white/[0.02] border border-white/8 px-3 py-2 font-mono text-xs text-white placeholder:text-white/40 outline-none focus:border-emerald-400/30 transition-all disabled:opacity-40"
+                  className="flex-1 bg-white/[0.03] border border-white/12 px-3 py-2 font-mono text-xs text-white placeholder:text-white/40 outline-none focus:border-emerald-400/40 transition-all disabled:opacity-40"
                 />
                 <button
                   onClick={ask}
                   disabled={loading}
-                  className="bg-white/[0.02] border border-white/8 px-4 py-2 font-mono text-xs text-white/70 hover:border-emerald-400/30 hover:text-emerald-400 transition-all disabled:opacity-40"
+                  className="rounded-md bg-emerald-400 px-4 py-2 font-mono text-xs font-semibold text-[#07110d] shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  {loading ? '...' : 'RUN →'}
+                  {loading ? '...' : 'Launch →'}
                 </button>
               </div>
             </div>
