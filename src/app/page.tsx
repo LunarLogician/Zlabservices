@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { AIHero } from '@/components/AIHero';
 import { Services } from '@/components/Services';
+import { CaseStudies } from '@/components/CaseStudies';
 import { Products } from '@/components/Products';
 import { BuildInPublic } from '@/components/BuildInPublic';
 import { StatsLight } from '@/components/StatsLight';
@@ -94,6 +95,17 @@ export default function Home() {
           <Services />
           <motion.div
             className="h-px bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          />
+        </div>
+        
+        <div className="relative">
+          <CaseStudies />
+          <motion.div
+            className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}

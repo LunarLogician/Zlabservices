@@ -61,20 +61,6 @@ const PRODUCTS_DATA: Product[] = [
     tags: ['Next.js', 'OpenAI API', 'Stripe', 'Rate Limiting', 'Tailwind CSS'],
     image: '/projects/aiproposalmaker.png',
     video : '/projects/aiprop.mp4',
-
-  },
-  {
-    id: 'bubuddy',
-    name: 'BU Buddy',
-    badge: 'LIVE · PRODUCTION',
-    live: true,
-    description:
-      'Bahria University Attendance & Portal App. Student assistant with faster attendance tracking, quiz marks, smart notifications, offline mode, and bunk calculator.',
-    link: 'https://bubuddy.site',
-    tags: ['Flutter', 'Node.js', 'Web Scraping', 'Firebase', 'Push Notifications'],
-    image: '/projects/bubuddy.png',
-    video : '/projects/bubuddy.mp4',
-
   },
 ];
 
