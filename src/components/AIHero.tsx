@@ -173,10 +173,12 @@ export function AIHero() {
                 Start your MVP →
               </a>
               <a
-                href="#products"
+                href="https://cal.com/code-zubair-3fs0gu/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.24em] text-white/80 transition-all hover:border-emerald-400/40 hover:text-emerald-400"
               >
-                See live work
+                Book a 30-Min Strategy Call
               </a>
             </div>
 
