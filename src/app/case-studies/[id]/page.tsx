@@ -1,11 +1,77 @@
-'use client';
-
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import Image from 'next/image';
-import { useParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Code2, Server, Smartphone, Clock, FileText } from 'lucide-react';
+import { notFound } from 'next/navigation';
+import { CASE_STUDIES, getCaseStudy } from '@/data/caseStudies';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
+
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  const params: { id: string }[] = [];
+  CASE_STUDIES.forEach((cs) => {
+    params.push({ id: cs.slug });
+    if (cs.id !== cs.slug) {
+      params.push({ id: cs.id });
+    }
+  });
+  // Also add legacy IDs for backwards compatibility
+  params.push({ id: 'everlearnai' });
+  params.push({ id: 'devpostai' });
+  params.push({ id: 'aiproposalmaker' });
+  return params;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  // Map legacy ids if needed
+  let lookupId = id;
+  if (id === 'everlearnai') lookupId = 'clinical-document-ai';
+  if (id === 'devpostai') lookupId = 'healthtech-content-engine';
+  if (id === 'aiproposalmaker') lookupId = 'healthtech-rfp-proposal-ai';
+
+  const study = getCaseStudy(lookupId);
+  if (!study) {
+    return {
+      title: 'Case Study Not Found | ZLab Services',
+    };
+  }
+
+  const title = `${study.title} | Healthcare AI Case Study`;
+  const description = `${study.overview.slice(0, 155)}...`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://zlabservices.site/case-studies/${study.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      url: `https://zlabservices.site/case-studies/${study.slug}`,
+      publishedTime: study.publishedAt,
+      authors: [study.author.name],
+      images: [
+        {
+          url: '/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: study.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.png'],
+    },
+  };
+}
 
 const GRID_BG = {
   backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -13,269 +79,316 @@ const GRID_BG = {
   backgroundSize: '48px 48px',
 };
 
-const CASE_STUDIES: Record<string, any> = {
-  everlearnai: {
-    id: 'everlearnai',
-    name: 'EverlearnAI',
-    header: 'AI study tools that turn notes into scores.',
-    overview:
-      'Built a student-first study platform with quizzes, MCQs, flashcards, document Q&A, AI chat, and assignment help.',
-    problem:
-      'Students were wasting time switching between notes, quizzes, and document search during exam prep.',
-    solution:
-      'Delivered an all-in-one learning workflow that generates MCQs, flashcards, and answers from notes or uploaded files instantly.',
-    architecture:
-      'Next.js frontend, Claude AI engine, file upload processing, student dashboard, and Android study companion.',
-    timeline: '5 weeks from concept to launch-ready student product.',
-    techStack: ['Next.js', 'Claude API', 'Android', 'Tailwind CSS', 'Document Q&A'],
-    challenges: [
-      'Making generated quizzes accurate and syllabus-aligned.',
-      'Supporting fast file-based study tools without slow uploads.',
-      'Keeping the experience intuitive for exam-focused students.',
-    ],
-    result: [
-      'Released a study assistant that generates quizzes, flashcards, and exam prep content in seconds.',
-      'Reduced friction with AI-powered explanations and study workflows.',
-      'Created a mobile-friendly platform so students can learn anywhere.',
-    ],
-    screenshots: [
-      { label: 'Quiz Generator', src: '/quiz.png' },
-      { label: 'Student Dashboard', src: '/Dashboard.png' },
-    ],
-  },
-  devpostai: {
-    id: 'devpostai',
-    name: 'DevPost AI',
-    header: 'AI-Powered LinkedIn Content Platform',
-    overview:
-      'Built a production-ready SaaS platform that combines AI content generation with LinkedIn automation.',
-    problem:
-      'Professionals and founders know they should post consistently on LinkedIn, but creating engaging content every day is time-consuming. Existing AI writers generate generic text, while publishing still requires manual copy-pasting into LinkedIn.',
-    solution:
-      'Users connect their LinkedIn account once, generate posts using Claude AI, customize the tone and style, review the content, and publish directly to LinkedIn from a single dashboard.',
-    architecture:
-      'Next.js frontend, Claude AI generation pipeline, LinkedIn OAuth, secure publishing flow, and SaaS dashboard architecture.',
-    timeline: '4 weeks to a scalable creator SaaS product.',
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Claude API', 'LinkedIn OAuth'],
-    challenges: [
-      'Integrating Claude AI with structured LinkedIn copy generation.',
-      'Securing LinkedIn OAuth authentication and publish permissions.',
-      'Designing a seamless generation → edit → publish workflow without copy-paste.',
-    ],
-    result: [
-      'Production-ready SaaS platform with direct LinkedIn publishing.',
-      'AI-generated posts in seconds with manual review and tone control.',
-      'Extensible architecture for analytics, scheduling, and future AI features.',
-    ],
-    screenshots: [
-      { label: 'LinkedIn Draft Editor', src: '/devposthome.png' },
-    ],
-  },
-};
+export default async function CaseStudyDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  let lookupId = id;
+  if (id === 'everlearnai') lookupId = 'clinical-document-ai';
+  if (id === 'devpostai') lookupId = 'healthtech-content-engine';
+  if (id === 'aiproposalmaker') lookupId = 'healthtech-rfp-proposal-ai';
 
-export default function CaseStudyDetailPage() {
-  const params = useParams();
-  const router = useRouter();
-  const [caseStudy, setCaseStudy] = useState<any | null>(null);
-  const [loading, setLoading] = useState(true);
+  const study = getCaseStudy(lookupId);
 
-  useEffect(() => {
-    if (params.id) {
-      const id = Array.isArray(params.id) ? params.id[0] : params.id;
-      const study = CASE_STUDIES[id];
-      if (study) {
-        setCaseStudy(study);
-      } else {
-        router.push('/#case-studies');
-      }
-      setLoading(false);
-    }
-  }, [params.id, router]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0a0a08] flex items-center justify-center text-white">
-        Loading case study...
-      </div>
-    );
+  if (!study) {
+    notFound();
   }
 
-  if (!caseStudy) {
-    return (
-      <div className="min-h-screen bg-[#0a0a08] flex items-center justify-center text-white">
-        Case study not found.
-      </div>
-    );
-  }
+  const breadcrumbsJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://zlabservices.site',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Case Studies',
+        item: 'https://zlabservices.site/case-studies',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: study.title,
+        item: `https://zlabservices.site/case-studies/${study.slug}`,
+      },
+    ],
+  };
+
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: study.title,
+    description: study.overview,
+    url: `https://zlabservices.site/case-studies/${study.slug}`,
+    datePublished: study.publishedAt,
+    dateModified: study.publishedAt,
+    author: {
+      '@type': 'Person',
+      name: study.author.name,
+      jobTitle: study.author.role,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ZLab Services',
+      url: 'https://zlabservices.site',
+      logo: 'https://zlabservices.site/og-image.png',
+    },
+    about: {
+      '@type': 'Thing',
+      name: study.clientIndustry,
+    },
+    keywords: [
+      'Healthcare AI',
+      'HIPAA Compliance',
+      'Clinical AI MVP',
+      'Next.js Healthcare Application',
+      study.clientIndustry,
+    ],
+  };
 
   return (
-    <main className="min-h-screen bg-[#0a0a08] text-white relative overflow-hidden">
+    <div className="relative min-h-screen bg-[#0a0a08] text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+
       <div className="fixed inset-0 pointer-events-none" style={GRID_BG} />
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="fixed top-6 left-6 z-50"
-      >
-        <Link
-          href="/#case-studies"
-          className="flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 hover:bg-white/10 transition-colors rounded-lg"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span className="text-sm">Back to case studies</span>
-        </Link>
-      </motion.div>
+      <Navbar />
 
-      <section className="relative pt-32 pb-20 px-6 md:px-10">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-px bg-emerald-400/50" />
-              <span className="font-mono text-[9px] text-white/70 tracking-widest">CASE STUDY</span>
-            </div>
-            <h1 className="font-serif italic text-4xl md:text-5xl lg:text-6xl leading-tight mb-4">
-              {caseStudy.name}
-            </h1>
-            <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-3xl">
-              {caseStudy.header}
+      <main className="relative z-10 max-w-4xl mx-auto px-6 md:px-10 pt-32 pb-24">
+        {/* Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex flex-wrap items-center gap-2 font-mono text-[10px] text-white/50 tracking-widest uppercase">
+            <li>
+              <Link href="/" className="hover:text-emerald-400 transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/case-studies" className="hover:text-emerald-400 transition-colors">
+                Case Studies
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-emerald-400 truncate max-w-xs" aria-current="page">
+              {study.title}
+            </li>
+          </ol>
+        </nav>
+
+        {/* Header Block */}
+        <header className="mb-14">
+          <div className="flex flex-wrap items-center gap-3 mb-6">
+            <span className="font-mono text-[9px] uppercase tracking-widest px-2.5 py-1 bg-emerald-400/10 border border-emerald-400/30 text-emerald-400">
+              {study.clientIndustry}
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-widest text-white/50">
+              Timeline: {study.timeline}
+            </span>
+            {study.liveUrl && (
+              <a
+                href={study.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[9px] uppercase tracking-widest text-emerald-400/80 hover:text-emerald-300 ml-auto flex items-center gap-1"
+              >
+                Live Product &rarr;
+              </a>
+            )}
+          </div>
+
+          <h1 className="font-serif italic text-3xl md:text-5xl text-white leading-tight mb-6">
+            {study.title}
+          </h1>
+
+          <p className="text-lg md:text-xl text-emerald-400/90 font-light leading-relaxed mb-6">
+            {study.header}
+          </p>
+
+          <p className="text-base text-white/70 font-light leading-relaxed">
+            {study.overview}
+          </p>
+        </header>
+
+        {/* Metrics Grid */}
+        <section aria-labelledby="results-heading" className="mb-14">
+          <h2 id="results-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-6">
+            Shipped Metrics &amp; Key Outcomes
+          </h2>
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {study.results.map((metric, i) => (
+              <div
+                key={i}
+                className="bg-white/[0.02] border border-white/10 p-5 rounded-none flex flex-col justify-between"
+              >
+                <div className="font-serif text-2xl text-emerald-400 mb-2 font-medium">
+                  {metric.value}
+                </div>
+                <div>
+                  <div className="font-mono text-[9px] uppercase tracking-wider text-white mb-1">
+                    {metric.label}
+                  </div>
+                  <div className="text-xs text-white/50 font-light leading-snug">
+                    {metric.detail}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Problem & Solution */}
+        <section className="grid md:grid-cols-2 gap-8 mb-14">
+          <div className="bg-white/[0.02] border border-white/10 p-6 md:p-8">
+            <h2 className="font-mono text-[10px] text-red-400/90 uppercase tracking-widest mb-4">
+              The Problem
+            </h2>
+            <p className="text-sm text-white/75 font-light leading-relaxed">
+              {study.problem}
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid gap-10 lg:grid-cols-[1.5fr_0.95fr] mb-16">
-            <div className="space-y-10">
-              <section className="space-y-4">
-                <h2 className="font-serif italic text-3xl sm:text-4xl text-white">Overview</h2>
-                <p className="text-white/70 leading-relaxed text-sm sm:text-base max-w-3xl">{caseStudy.overview}</p>
-              </section>
+          <div className="bg-white/[0.02] border border-emerald-400/30 p-6 md:p-8">
+            <h2 className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-4">
+              The Engineered Solution
+            </h2>
+            <p className="text-sm text-white/75 font-light leading-relaxed">
+              {study.solution}
+            </p>
+          </div>
+        </section>
 
-              <div className="grid gap-6 md:grid-cols-2">
-                <section className="space-y-4 bg-white/[0.025] border border-white/10 rounded-3xl p-6">
-                  <h3 className="font-serif italic text-2xl text-white">Problem</h3>
-                  <p className="text-white/70 leading-relaxed text-sm sm:text-base">{caseStudy.problem}</p>
-                </section>
-                <section className="space-y-4 bg-white/[0.025] border border-white/10 rounded-3xl p-6">
-                  <h3 className="font-serif italic text-2xl text-white">Solution</h3>
-                  <p className="text-white/70 leading-relaxed text-sm sm:text-base">{caseStudy.solution}</p>
-                </section>
-              </div>
-
-              <section className="space-y-4 bg-white/[0.025] border border-white/10 rounded-3xl p-6">
-                <h2 className="font-serif italic text-3xl sm:text-4xl text-white">Architecture</h2>
-                <p className="text-white/70 leading-relaxed text-sm sm:text-base">{caseStudy.architecture}</p>
-              </section>
-
-              <section className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-4 bg-white/[0.025] border border-white/10 rounded-3xl p-6">
-                  <h2 className="font-serif italic text-3xl text-white">Timeline</h2>
-                  <p className="text-white/70 leading-relaxed text-sm sm:text-base">{caseStudy.timeline}</p>
-                </div>
-                <div className="space-y-4 bg-white/[0.025] border border-white/10 rounded-3xl p-6">
-                  <h2 className="font-serif italic text-3xl text-white">Tech Stack</h2>
-                  <div className="flex flex-wrap gap-2">
-                    {caseStudy.techStack.map((tech: string, index: number) => (
-                      <span
-                        key={`${tech}-${index}`}
-                        className="font-mono text-[10px] sm:text-sm text-emerald-100 border border-emerald-400/15 bg-white/[0.03] px-3 py-2 rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </section>
+        {/* Healthcare Framing (HIPAA, Data Privacy, Integrations) */}
+        <section aria-labelledby="healthcare-framing-heading" className="mb-14 border border-white/10 bg-white/[0.02] p-8">
+          <h2 id="healthcare-framing-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-6">
+            Healthcare Architecture &amp; Data Governance
+          </h2>
+          <div className="space-y-6">
+            <div className="border-l-2 border-emerald-400 pl-4">
+              <h3 className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">
+                HIPAA Compliance Safeguards
+              </h3>
+              <p className="text-sm text-white/70 font-light leading-relaxed">
+                {study.healthcareFraming.hipaaCompliance}
+              </p>
             </div>
 
-            <aside className="space-y-8 lg:sticky lg:top-28">
-              <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-6 backdrop-blur-xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <Clock className="w-5 h-5 text-emerald-400" />
-                  <div>
-                    <div className="font-mono text-[8px] text-white/40 uppercase tracking-[0.3em]">Timeline</div>
-                    <div className="text-white/80 mt-1">{caseStudy.timeline}</div>
-                  </div>
-                </div>
-                <div className="grid gap-2">
-                  {caseStudy.techStack.slice(0, 3).map((tech: string, index: number) => (
-                    <span
-                      key={`${tech}-${index}`}
-                      className="font-mono text-[9px] text-white/60 border border-white/10 px-2 py-1 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            <div className="border-l-2 border-emerald-400/60 pl-4">
+              <h3 className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">
+                Data Privacy &amp; PHI Isolation
+              </h3>
+              <p className="text-sm text-white/70 font-light leading-relaxed">
+                {study.healthcareFraming.dataPrivacy}
+              </p>
+            </div>
 
-              <div className="space-y-4">
-                <div className="font-mono text-[8px] text-white/40 uppercase tracking-[0.3em]">Screenshots</div>
-                {caseStudy.screenshots.map((screenshot: { label: string; src: string }) => (
-                  <div key={screenshot.label} className="rounded-3xl border border-white/10 bg-white/[0.02] p-3 overflow-hidden">
-                    <div className="mb-3 text-[11px] uppercase tracking-[0.2em] text-white/40">
-                      {screenshot.label}
-                    </div>
-                    <div className="h-56 sm:h-64 rounded-3xl overflow-hidden border border-white/10 bg-slate-950/30">
-                      <Image
-                        src={screenshot.src}
-                        alt={`${screenshot.label} screenshot`}
-                        width={1200}
-                        height={750}
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </aside>
+            <div className="border-l-2 border-emerald-400/30 pl-4">
+              <h3 className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">
+                System Integrations &amp; Infrastructure
+              </h3>
+              <p className="text-sm text-white/70 font-light leading-relaxed">
+                {study.healthcareFraming.integrations}
+              </p>
+            </div>
           </div>
+        </section>
 
-          <div className="grid gap-8 md:grid-cols-2 mb-16">
-            <section className="bg-white/[0.03] border border-white/10 rounded-3xl p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                <h2 className="font-serif italic text-3xl text-white">Challenges</h2>
+        {/* Engineering Process */}
+        <section aria-labelledby="process-heading" className="mb-14">
+          <h2 id="process-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-6">
+            Engineering Process &amp; Milestones
+          </h2>
+          <div className="space-y-4">
+            {study.process.map((step) => (
+              <div
+                key={step.step}
+                className="bg-white/[0.02] border border-white/8 p-6 flex flex-col md:flex-row gap-4 md:items-center"
+              >
+                <div className="font-mono text-sm text-emerald-400/80 font-bold tracking-widest shrink-0">
+                  {step.step}
+                </div>
+                <div>
+                  <h3 className="font-serif italic text-lg text-white mb-1">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-white/60 font-light leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
               </div>
-              <ul className="space-y-4 pl-4">
-                {caseStudy.challenges.map((item: string, index: number) => (
-                  <li key={`challenge-${index}`} className="text-white/70 leading-relaxed">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
-            <section className="bg-white/[0.03] border border-white/10 rounded-3xl p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                <h2 className="font-serif italic text-3xl text-white">Result</h2>
-              </div>
-              <ul className="space-y-4 pl-4">
-                {caseStudy.result.map((item: string, index: number) => (
-                  <li key={`result-${index}`} className="text-white/70 leading-relaxed">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
+            ))}
           </div>
+        </section>
 
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <Link
-              href="/#case-studies"
-              className="font-mono text-[11px] text-white/70 hover:text-emerald-400 transition-colors"
-            >
-              ← Back to case studies
-            </Link>
+        {/* Technical Stack */}
+        <section aria-labelledby="stack-heading" className="mb-14">
+          <h2 id="stack-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-4">
+            Production Technology Stack
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {study.stack.map((item) => (
+              <span
+                key={item}
+                className="font-mono text-xs text-white/80 border border-white/10 bg-white/[0.03] px-3 py-1.5"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* Author Bio & CEH Credentials */}
+        <section className="mb-14 border-t border-white/10 pt-8 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full border border-emerald-400/40 bg-emerald-400/10 flex items-center justify-center font-mono text-xs text-emerald-400 shrink-0">
+            MZ
+          </div>
+          <div>
+            <div className="font-serif italic text-base text-white">
+              {study.author.name}
+            </div>
+            <div className="font-mono text-[9px] text-white/50 tracking-wider">
+              {study.author.role} · Bahria University (GPA 3.98)
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Block */}
+        <section className="p-8 md:p-10 border border-emerald-400/30 bg-emerald-400/[0.04] text-center">
+          <h2 className="font-serif italic text-2xl md:text-3xl text-white mb-3">
+            Build your healthcare AI product with production rigor.
+          </h2>
+          <p className="text-sm text-white/70 max-w-lg mx-auto font-light leading-relaxed mb-6">
+            We partner with US healthcare founders to deliver HIPAA-aligned AI applications in 3 to 4 weeks. Let&apos;s evaluate your technical architecture.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <a
-              href="#contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-emerald-400/15 border border-emerald-400/30 hover:bg-emerald-400/25 transition-all rounded-full text-white"
+              href="https://cal.com/code-zubair-3fs0gu/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#07110d] transition-all hover:bg-emerald-300"
             >
-              <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/90">Talk about your project</span>
+              Book a 30-Min Strategy Call
             </a>
+            <Link
+              href="/case-studies"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.03] px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-white/80 transition-all hover:border-emerald-400 hover:text-emerald-400"
+            >
+              &larr; View All Case Studies
+            </Link>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
