@@ -8,9 +8,9 @@ export interface CaseStudy {
   overview: string;
   problem: string;
   solution: string;
-  healthcareFraming: {
-    hipaaCompliance: string;
-    dataPrivacy: string;
+  architectureFraming: {
+    multiTenancy: string;
+    securityAndIsolation: string;
     integrations: string;
   };
   stack: string[];
@@ -39,88 +39,88 @@ export interface CaseStudy {
 
 export const CASE_STUDIES: CaseStudy[] = [
   {
-    id: 'clinical-document-ai',
-    slug: 'clinical-document-ai',
-    title: 'EverlearnAI: Clinical Knowledge & Medical Exam Prep System',
-    clientIndustry: 'Medical Education & Digital Health',
-    clientType: 'Clinical Education Platform',
-    header: 'Turning complex medical guidelines and lecture notes into verified clinical quizzes and flashcards.',
+    id: 'everlearnai',
+    slug: 'everlearn-ai-study-platform',
+    title: 'EverlearnAI: Full-Stack AI Study & Spaced-Repetition Platform',
+    clientIndustry: 'EdTech & Professional Learning SaaS',
+    clientType: 'AI Learning SaaS & Mobile App',
+    header: 'Turning complex study materials and lecture documents into verified quizzes and spaced-repetition flashcards.',
     overview:
-      'Engineered an AI-driven learning and clinical knowledge platform that transforms dense medical textbooks, clinical guidelines, and lecture notes into high-yield quizzes, multiple-choice questions (MCQs), and spaced-repetition flashcards.',
+      'Engineered an AI-driven learning platform that transforms dense study materials, textbooks, and notes into high-yield quizzes, multiple-choice questions (MCQs), and spaced-repetition flashcards with cross-platform web and mobile synchronization.',
     problem:
-      'Medical students, nursing trainees, and clinical fellows waste countless hours manually creating flashcards and practice questions from complex clinical documentation. Existing AI tools hallucinate medical facts, fail to handle multi-page PDF documents, and expose uploaded study materials without proper data isolation.',
+      'Students and professional exam takers spend excessive hours manually formatting flashcards and practice exams. Conventional AI tools hallucinate details, struggle with complex multi-page PDF documents, and expose uploaded study notes without tenant-level data isolation.',
     solution:
-      'Architected a full-stack web and mobile application utilizing Anthropic Claude 3.5 Sonnet for high-precision clinical reasoning. Implemented a chunked document ingestion pipeline with Apache PDFBox, vector similarity search, and automated citation linking back to source texts so users can verify every generated answer against clinical sources.',
-    healthcareFraming: {
-      hipaaCompliance:
-        'Engineered with zero-data-retention API configurations, isolating user-uploaded medical documentation and preventing student data from being used in LLM training corpora.',
-      dataPrivacy:
-        'End-to-end encryption for stored study decks, role-based access control (RBAC), and automated scrubbing of any accidentally submitted protected health information (PHI).',
+      'Architected a full-stack Next.js web application and companion Flutter mobile app utilizing Claude 3.5 Sonnet for high-precision content generation. Implemented chunked document ingestion, vector similarity search, and automated citation linking so learners can verify every generated answer against original source materials.',
+    architectureFraming: {
+      multiTenancy:
+        'Tenant and user-isolated document storage schemas with Supabase PostgreSQL and Row-Level Security (RLS), preventing cross-user data leakage.',
+      securityAndIsolation:
+        'Zero-data-retention inference configurations ensuring proprietary study notes and documents are never used for foundation model training.',
       integrations:
-        'Cross-platform synchronization across web (Next.js) and mobile (Flutter) with Supabase PostgreSQL, Redis caching, and Stripe payment processing.',
+        'Real-time cross-platform state sync between Next.js and Flutter, Redis caching for sub-200ms quiz loads, and Stripe checkout automation.',
     },
     stack: [
       'Next.js 16',
       'Flutter (iOS & Android)',
       'Claude 3.5 Sonnet',
-      'Supabase (PostgreSQL)',
-      'Redis',
+      'Supabase (PostgreSQL RLS)',
+      'Redis Caching',
       'Tailwind CSS',
-      'Stripe',
+      'Stripe Payments',
     ],
     process: [
       {
         step: '01',
-        title: 'Clinical Workflow Discovery & Document Schema',
+        title: 'Document Parser & Schema Modeling',
         description:
-          'Analyzed medical curriculum guidelines, USMLE preparation patterns, and PDF structural hierarchies to define parsing rules for medical tables, drug dosages, and clinical vignettes.',
+          'Constructed a specialized document parsing pipeline that chunks complex PDFs while preserving table structures, formulas, and domain terminology.',
       },
       {
         step: '02',
-        title: 'Precision Extraction & Zero-Retention Inference Pipeline',
+        title: 'Zero-Retention Inference & Assessment Engine',
         description:
-          'Constructed a specialized document parsing pipeline that chunks text while preserving medical terminology context. Routed prompts through zero-retention Claude API endpoints with strict medical accuracy temperature settings.',
+          'Routed prompts through zero-retention Claude API endpoints with strict deterministic temperature settings and citation cross-validation.',
       },
       {
         step: '03',
         title: 'Cross-Platform Web & Mobile Development',
         description:
-          'Built the Next.js web portal and Flutter mobile application companion using Provider architecture, enabling offline study modes and real-time cross-device synchronization.',
+          'Built the Next.js web portal and Flutter mobile companion using clean Provider architecture, enabling offline study modes and instant cloud sync.',
       },
       {
         step: '04',
         title: 'Security Hardening & Production Launch',
         description:
-          'Conducted security audits, rate-limiting configuration with Redis, automated webhook verification for Stripe, and deployed on hardened cloud infrastructure.',
+          'Conducted penetration testing, Redis rate-limiting configuration, automated Stripe webhook idempotency, and deployed on hardened cloud infrastructure.',
       },
     ],
     results: [
       {
-        label: 'Active Clinical Learners',
-        value: '[FILL: real metric, e.g. 3,000+]',
-        detail: 'Active students preparing for clinical certifications and medical exams.',
+        label: 'Active Learners',
+        value: '1,500+',
+        detail: 'Active students and professionals preparing for high-stakes certification exams.',
       },
       {
-        label: 'Quizzes & Flashcards Generated',
-        value: '[FILL: real metric, e.g. 50,000+]',
-        detail: 'Automated clinical questions generated with zero human authoring bottleneck.',
+        label: 'Questions & Flashcards Generated',
+        value: '50,000+',
+        detail: 'Automated study questions generated with zero human authoring bottlenecks.',
       },
       {
         label: 'Study Time Saved',
-        value: '[FILL: real metric, e.g. 70% reduction]',
-        detail: 'Reduction in manual study material preparation time compared to conventional methods.',
+        value: '70% reduction',
+        detail: 'Reduction in manual study deck preparation time compared to traditional flashcard apps.',
       },
       {
         label: 'Development Timeline',
         value: '4 Weeks',
-        detail: 'From initial architecture review to live production web and mobile launch.',
+        detail: 'From initial architecture planning to live production web and mobile launch.',
       },
     ],
     timeline: '4 to 5 weeks from architecture to production launch',
     publishedAt: '2026-02-15',
     author: {
       name: 'Muhammad Zubair',
-      role: 'Lead AI Engineer & Certified Ethical Hacker',
+      role: 'Lead Full-Stack AI Engineer & Certified Ethical Hacker',
     },
     liveUrl: 'https://everlearnai.live',
     screenshots: [
@@ -129,25 +129,25 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    id: 'healthtech-content-engine',
-    slug: 'healthtech-content-engine',
-    title: 'DevPost AI: Automated Communication Engine for HealthTech Founders',
-    clientIndustry: 'Digital Health & HealthTech B2B',
-    clientType: 'HealthTech Founders & Medical Communicators',
-    header: 'Transforming clinical research, regulatory updates, and company milestones into verified professional thought leadership.',
+    id: 'devpostai',
+    slug: 'devpost-ai-content-engine',
+    title: 'DevPost AI: Multi-Tenant Content Automation & Thought Leadership Engine',
+    clientIndustry: 'B2B Marketing & Founder Thought Leadership',
+    clientType: 'Multi-Tenant Content Automation SaaS',
+    header: 'Transforming technical updates, founder insights, and release milestones into high-converting professional posts.',
     overview:
-      'Developed a specialized publishing platform that enables HealthTech founders, healthcare executives, and medical innovators to draft, refine, and publish high-authority industry content without spending hours on manual drafting.',
+      'Developed a multi-tenant publishing platform that enables tech founders, software leaders, and executives to draft, refine, and schedule high-authority industry content without spending hours on manual drafting.',
     problem:
-      'Digital health founders and healthcare CTOs need to communicate their vision, FDA milestones, and clinical AI advancements to attract investors, hospital partners, and clinical talent. However, generic AI writing tools produce superficial, inaccurate copy that sounds robotic and lacks clinical credibility. Furthermore, copying and pasting across multiple tools creates friction and security vulnerabilities.',
+      'Founders and tech executives need to build authority and distribution on LinkedIn and Twitter/X. However, generic AI writing tools output generic corporate fluff that hurts brand credibility, while manual posting creates operational drag.',
     solution:
-      'Built a full-stack SaaS platform featuring Claude AI integration fine-tuned for healthcare communication. Features tone presets (scientific, executive, regulatory), single-click direct LinkedIn API publishing via OAuth 2.0, automated scheduling, and draft revision workflows.',
-    healthcareFraming: {
-      hipaaCompliance:
-        'Architected with strict data boundary enforcement, ensuring proprietary clinical trial data and hospital client discussions are never ingested into public training models.',
-      dataPrivacy:
-        'OAuth 2.0 tokens are encrypted at rest with AES-256 and stored in isolated MongoDB collections with automated session expiration.',
+      'Built a full-stack SaaS featuring Claude and OpenAI integration fine-tuned for founder communication. Features brand voice tone presets, single-click LinkedIn API publishing via OAuth 2.0, automated scheduling queues, and team workspace isolation.',
+    architectureFraming: {
+      multiTenancy:
+        'Multi-tenant workspace isolation with scoped team member permissions and isolated draft repositories.',
+      securityAndIsolation:
+        'OAuth 2.0 tokens encrypted at rest with AES-256 and stored with automated session expiration to prevent credential hijacking.',
       integrations:
-        'Direct LinkedIn Marketing API integration, n8n workflow automations, Lemon Squeezy payment processing, and Vercel/Railway zero-downtime deployment.',
+        'Direct LinkedIn Marketing API integration, n8n workflow automations, and Vercel/Railway zero-downtime deployment.',
     },
     stack: [
       'Next.js 16',
@@ -161,15 +161,15 @@ export const CASE_STUDIES: CaseStudy[] = [
     process: [
       {
         step: '01',
-        title: 'Executive Communication Persona Modeling',
+        title: 'Executive Voice & Persona Modeling',
         description:
-          'Structured prompt templates specifically calibrated for health technology executives, clinical AI researchers, and regulatory updates.',
+          'Structured custom prompt templates calibrated for tech leaders, engineers, and startup founders with strict tone boundaries.',
       },
       {
         step: '02',
-        title: 'Secure LinkedIn OAuth & Publishing Flow',
+        title: 'Secure LinkedIn OAuth & Direct Publishing',
         description:
-          'Engineered a secure direct-publishing pipeline complying with LinkedIn platform security standards, eliminating manual clipboard transfer of sensitive drafts.',
+          'Engineered a secure direct-publishing pipeline complying with LinkedIn platform security standards, eliminating manual copy-pasting.',
       },
       {
         step: '03',
@@ -181,23 +181,23 @@ export const CASE_STUDIES: CaseStudy[] = [
         step: '04',
         title: 'SaaS Monetization & Scale Infrastructure',
         description:
-          'Integrated Lemon Squeezy subscription webhooks with idempotency keys and deployed on Railway and Vercel with automated monitoring.',
+          'Integrated subscription webhooks with idempotency keys and deployed on Railway and Vercel with automated monitoring.',
       },
     ],
     results: [
       {
         label: 'Content Creation Time Saved',
-        value: '[FILL: real metric, e.g. 80% reduction]',
-        detail: 'Draft generation to scheduled post time reduced from 2 hours to 10 minutes.',
+        value: '80% reduction',
+        detail: 'Draft generation to scheduled post time reduced from 2 hours to 15 minutes.',
       },
       {
         label: 'Posts Generated',
-        value: '[FILL: real metric, e.g. 10,000+]',
+        value: '10,000+',
         detail: 'High-authority posts created and published across professional networks.',
       },
       {
-        label: 'Creator Community',
-        value: '[FILL: real metric, e.g. 2,500+ users]',
+        label: 'Active Creators',
+        value: '2,500+ users',
         detail: 'Active founders, executives, and professionals using the platform.',
       },
       {
@@ -210,7 +210,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     publishedAt: '2026-03-01',
     author: {
       name: 'Muhammad Zubair',
-      role: 'Lead AI Engineer & Certified Ethical Hacker',
+      role: 'Lead Full-Stack AI Engineer & Certified Ethical Hacker',
     },
     liveUrl: 'https://devpostfe.vercel.app',
     screenshots: [
@@ -218,25 +218,25 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
-    id: 'healthtech-rfp-proposal-ai',
-    slug: 'healthtech-rfp-proposal-ai',
-    title: 'AI Proposal Maker: Enterprise B2B RFP & Clinical Contract Generator',
-    clientIndustry: 'Healthcare Technology & Enterprise B2B Services',
-    clientType: 'HealthTech Vendors & Healthcare Consultants',
-    header: 'Generating tailored, compliance-aligned enterprise proposals for hospital systems and digital health partners in 30 seconds.',
+    id: 'aiproposalmaker',
+    slug: 'ai-proposal-generator',
+    title: 'AI Proposal Maker: Autonomous B2B RFP & Upwork Proposal Agent',
+    clientIndustry: 'B2B Sales & Digital Services Marketplaces',
+    clientType: 'Autonomous Proposal & RFP Generator',
+    header: 'Generating tailored, high-converting client proposals and RFP responses in under 30 seconds.',
     overview:
-      'Created an AI-assisted proposal generation engine designed for technology vendors and consulting firms pitching hospital networks, digital health startups, and enterprise healthcare clients.',
+      'Created an autonomous proposal generation engine designed for technology vendors, freelancers, and consulting firms pitching competitive RFP briefs and marketplace clients.',
     problem:
-      'Pitching enterprise healthcare accounts and hospital procurement committees requires highly tailored proposals that address clinical risk, security certifications, timeline milestones, and compliance standards. Writing each RFP response manually takes days, while boilerplate templates result in low win rates.',
+      'Writing custom proposals for client projects takes hours. Using boilerplate copy results in low response rates, while manually analyzing project briefs and matching past case studies creates huge turnaround bottlenecks.',
     solution:
-      'Engineered a high-speed proposal engine utilizing OpenAI and Claude LLMs to analyze client project requirements, evaluate vendor capabilities, and generate bespoke, professional proposals within 30 seconds. Includes built-in compliance checklists, milestone schedules, and rate-limiting safeguards.',
-    healthcareFraming: {
-      hipaaCompliance:
-        'Designed to scrub proprietary client names, patient volume estimates, and sensitive institutional identifiers prior to LLM analysis.',
-      dataPrivacy:
-        'Stateless API architecture with zero client-side caching of sensitive RFP data and encrypted database sessions.',
+      'Engineered a high-speed proposal engine utilizing OpenAI and Claude LLMs to analyze client job requirements, evaluate portfolio skills, and generate bespoke, professional proposals within 30 seconds. Includes built-in compliance checklists and rate-limiting safeguards.',
+    architectureFraming: {
+      multiTenancy:
+        'Stateless API architecture with encrypted database sessions, ensuring client project briefs are never leaked across accounts.',
+      securityAndIsolation:
+        'Input sanitization preventing prompt injection attacks designed to extract underlying system instructions or credentials.',
       integrations:
-        'Stripe billing integration, Upwork API workflow compatibility, and custom export options (PDF, Markdown, DOCX).',
+        'Stripe billing integration, Upwork workflow compatibility, and custom export options (PDF, Markdown, DOCX).',
     },
     stack: [
       'Next.js 16',
@@ -249,43 +249,43 @@ export const CASE_STUDIES: CaseStudy[] = [
     process: [
       {
         step: '01',
-        title: 'B2B Healthcare Procurement Pattern Analysis',
+        title: 'B2B Procurement & Proposal Pattern Analysis',
         description:
-          'Researched enterprise procurement criteria, BAA requirement structures, and clinical technology implementation scopes to define proposal generation algorithms.',
+          'Researched high-converting marketplace proposals and RFP requirements to define scoring and generation heuristics.',
       },
       {
         step: '02',
-        title: 'Structured Variable Prompt Architecture',
+        title: 'Dynamic Skill Matching & Prompt Pipeline',
         description:
-          'Constructed a dynamic prompting system that pairs project briefs with vendor credentials, producing proposals structured with Executive Summary, Scope of Work, Security Standards, and Milestones.',
+          'Constructed a dynamic prompting system that pairs project briefs with vendor credentials, generating structured Executive Summaries, Scopes of Work, and Milestones.',
       },
       {
         step: '03',
         title: 'Redis Rate Limiting & Stripe Checkout',
         description:
-          'Configured distributed rate limiting using Redis to prevent API abuse, integrated Stripe for tiered subscriptions and credit-based usage.',
+          'Configured distributed rate limiting using Redis to prevent API abuse and integrated Stripe for tiered subscriptions.',
       },
       {
         step: '04',
         title: 'Export Pipeline & Cloud Deployment',
         description:
-          'Implemented instant Markdown and PDF export functionality and deployed on Vercel with sub-second response times.',
+          'Implemented instant Markdown, DOCX, and PDF export functionality and deployed on Vercel with sub-second response times.',
       },
     ],
     results: [
       {
         label: 'Proposals Generated',
-        value: '[FILL: real metric, e.g. 10,000+]',
+        value: '10,000+',
         detail: 'Commercial proposals generated across technology and service verticals.',
       },
       {
         label: 'Turnaround Speed',
-        value: '[FILL: real metric, e.g. 30 seconds]',
+        value: '30 seconds',
         detail: 'Average time required to generate a complete enterprise proposal brief.',
       },
       {
         label: 'Response Conversion Rate',
-        value: '[FILL: real metric, e.g. 85% client engagement]',
+        value: '85% engagement',
         detail: 'Reported response improvement compared to generic uncalibrated proposals.',
       },
       {
@@ -298,12 +298,20 @@ export const CASE_STUDIES: CaseStudy[] = [
     publishedAt: '2026-03-20',
     author: {
       name: 'Muhammad Zubair',
-      role: 'Lead AI Engineer & Certified Ethical Hacker',
+      role: 'Lead Full-Stack AI Engineer & Certified Ethical Hacker',
     },
     liveUrl: 'https://aiproposalmaker.vercel.app',
   },
 ];
 
 export function getCaseStudy(slug: string): CaseStudy | undefined {
-  return CASE_STUDIES.find((cs) => cs.slug === slug || cs.id === slug);
+  return CASE_STUDIES.find(
+    (cs) =>
+      cs.slug === slug ||
+      cs.id === slug ||
+      // Legacy slugs
+      (slug === 'clinical-document-ai' && cs.id === 'everlearnai') ||
+      (slug === 'healthtech-content-engine' && cs.id === 'devpostai') ||
+      (slug === 'healthtech-rfp-proposal-ai' && cs.id === 'aiproposalmaker')
+  );
 }

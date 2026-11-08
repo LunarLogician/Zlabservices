@@ -1,0 +1,30 @@
+# ZLab Services
+
+> Specialized AI Product Studio engineering hardened multi-tenant AI systems, autonomous agent workflows, and production full-stack AI applications for tech founders and CTOs.
+
+ZLab Services is a production AI engineering studio led by Muhammad Zubair, an EC-Council Certified Ethical Hacker (CEH) with an academic record of 3.98 GPA in Computer Science. We partner with B2B founders, SaaS startups, and engineering teams to build production-grade web and mobile AI applications in 3 to 4 weeks.
+
+## Core Capabilities
+- Multi-Tenant AI Architecture: PostgreSQL Row-Level Security (RLS), isolated vector namespaces (pgvector, Qdrant, Pinecone), zero cross-tenant vector leakage, and per-tenant LLM token budgeting.
+- Autonomous AI Agents: ReAct reasoning loops, LangGraph stateful agent graphs, sandboxed tool execution, scoped OAuth 2.0 token vaults, and defensive guardrails against prompt injection and runaway execution loops.
+- Full-Stack Production Engineering: Next.js 16, React 19, TypeScript, Python/Node.js backend APIs, Supabase, Redis caching and rate limiting, Docker containerization, and hardened cloud deployment (Vercel, Railway, AWS).
+- Cross-Platform Mobile Applications: Native-performance iOS and Android mobile apps with Flutter, clean Provider/Riverpod architecture, offline-first local SQLite sync, and biometric authentication.
+- Offensive Security Rigor: Led by an EC-Council Certified Ethical Hacker. Every architecture is audited for authorization vulnerabilities, API key leaks, and prompt injection vectors prior to launch.
+
+## Shipped Case Studies & Systems
+- EverlearnAI: Full-Stack AI Study & Spaced-Repetition Platform transforming documents and textbooks into high-yield quizzes and flashcards with Next.js and Flutter. [Case Study](https://zlabservices.site/case-studies/everlearn-ai-study-platform)
+- DevPost AI: Multi-Tenant Content Automation & Thought Leadership Engine for tech founders with automated LinkedIn scheduling and isolated workspace memory. [Case Study](https://zlabservices.site/case-studies/devpost-ai-content-engine)
+- AI Proposal Maker: Autonomous B2B RFP & Marketplace Proposal Agent generating tailored bids in under 30 seconds with an 85% client engagement rate. [Case Study](https://zlabservices.site/case-studies/ai-proposal-generator)
+
+## Key Pages
+- [Homepage](https://zlabservices.site): Studio overview, capabilities, technical architecture, and booking.
+- [Case Studies](https://zlabservices.site/case-studies): Comprehensive breakdowns of shipped production architectures, tech stacks, and benchmarks.
+
+## Technical Contact & Booking
+- Location: Islamabad, PK (Operating remotely worldwide)
+- Founder & Lead AI Engineer: Muhammad Zubair (EC-Council CEH Certified)
+- Email: zlabservices@gmail.com
+- Strategy Booking: https://cal.com/code-zubair-3fs0gu/30min
+- GitHub: https://github.com/LunarLogician
+- LinkedIn: https://www.linkedin.com/company/devpost-ai/?viewAsMember=true
+

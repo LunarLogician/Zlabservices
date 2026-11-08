@@ -100,12 +100,11 @@ export function Products() {
         <div className="grid md:grid-cols-2 gap-6 border border-white/6">
           {PRODUCTS_DATA.map((p, i) => (
             <div
-              key={i}
-              className="group cursor-pointer"
-              onClick={() => router.push(`/products/${p.id}`)}
+              key={p.id}
+              className="group relative"
             >
               <motion.div
-                className="bg-[#0a0a08] hover:bg-white/5 transition-all duration-300 flex flex-col border border-white/6 overflow-hidden h-full cursor-pointer"
+                className="bg-[#0a0a08] hover:bg-white/5 transition-all duration-300 flex flex-col border border-white/6 overflow-hidden h-full"
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -123,7 +122,7 @@ export function Products() {
                   >
                     <video
                       src={p.video}
-                      autoPlay
+                      preload="none"
                       loop
                       muted
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -138,6 +137,8 @@ export function Products() {
                     </div>
                     {/* Mute button */}
                     <button
+                      type="button"
+                      aria-label={isMuted ? "Unmute video" : "Mute video"}
                       onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
@@ -181,9 +182,10 @@ export function Products() {
                   </div>
 
                   {/* Product name */}
-                  <h3 className="font-serif italic text-3xl md:text-4xl text-white leading-tight mb-4 group-hover:text-emerald-300/50 transition-colors">
-                  
-                    {p.name}
+                  <h3 className="font-serif italic text-3xl md:text-4xl text-white leading-tight mb-4 transition-colors">
+                    <Link href={`/products/${p.id}`} className="hover:text-emerald-300 transition-colors">
+                      {p.name}
+                    </Link>
                   </h3>
 
                   {/* Description */}
@@ -203,20 +205,22 @@ export function Products() {
                         </span>
                       ))}
                     </div>
-                    <a
-                      href={p.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                      className="font-mono text-[10px] text-white/75 hover:text-white transition-all tracking-wider shrink-0 group-hover:translate-x-0.5 inline-flex items-center gap-2 whitespace-nowrap"
-                    >
-                      LIVE{' '}
-                      <span className="transition-transform group-hover:translate-x-1">
-                        →
-                      </span>
-                    </a>
+                    <div className="flex items-center gap-3 shrink-0">
+                      <Link
+                        href={`/products/${p.id}`}
+                        className="font-mono text-[10px] text-emerald-400 hover:text-emerald-300 transition-colors tracking-wider whitespace-nowrap"
+                      >
+                        DEEP DIVE &rarr;
+                      </Link>
+                      <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-[10px] text-white/75 hover:text-white transition-all tracking-wider inline-flex items-center gap-1 whitespace-nowrap"
+                      >
+                        LIVE &rarr;
+                      </a>
+                    </div>
                   </div>
                 </div>
               </motion.div>

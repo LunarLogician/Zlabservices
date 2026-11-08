@@ -17,7 +17,10 @@ export async function generateStaticParams() {
       params.push({ id: cs.id });
     }
   });
-  // Also add legacy IDs for backwards compatibility
+  // Also add legacy slugs for full backwards compatibility
+  params.push({ id: 'clinical-document-ai' });
+  params.push({ id: 'healthtech-content-engine' });
+  params.push({ id: 'healthtech-rfp-proposal-ai' });
   params.push({ id: 'everlearnai' });
   params.push({ id: 'devpostai' });
   params.push({ id: 'aiproposalmaker' });
@@ -26,20 +29,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  // Map legacy ids if needed
-  let lookupId = id;
-  if (id === 'everlearnai') lookupId = 'clinical-document-ai';
-  if (id === 'devpostai') lookupId = 'healthtech-content-engine';
-  if (id === 'aiproposalmaker') lookupId = 'healthtech-rfp-proposal-ai';
-
-  const study = getCaseStudy(lookupId);
+  const study = getCaseStudy(id);
   if (!study) {
     return {
       title: 'Case Study Not Found | ZLab Services',
     };
   }
 
-  const title = `${study.title} | Healthcare AI Case Study`;
+  const title = `${study.title} | Full-Stack AI Case Study`;
   const description = `${study.overview.slice(0, 155)}...`;
 
   return {
@@ -141,10 +138,11 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       name: study.clientIndustry,
     },
     keywords: [
-      'Healthcare AI',
-      'HIPAA Compliance',
-      'Clinical AI MVP',
-      'Next.js Healthcare Application',
+      'Multi-Tenant AI',
+      'Autonomous Agents',
+      'Full-Stack AI SaaS',
+      'Next.js 16 AI Application',
+      'Postgres Row-Level Security',
       study.clientIndustry,
     ],
   };
@@ -267,27 +265,27 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* Healthcare Framing (HIPAA, Data Privacy, Integrations) */}
-        <section aria-labelledby="healthcare-framing-heading" className="mb-14 border border-white/10 bg-white/[0.02] p-8">
-          <h2 id="healthcare-framing-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-6">
-            Healthcare Architecture &amp; Data Governance
+        {/* Multi-Tenant Architecture & Data Governance */}
+        <section aria-labelledby="architecture-framing-heading" className="mb-14 border border-white/10 bg-white/[0.02] p-8">
+          <h2 id="architecture-framing-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-6">
+            Multi-Tenant Architecture &amp; Data Governance
           </h2>
           <div className="space-y-6">
             <div className="border-l-2 border-emerald-400 pl-4">
               <h3 className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">
-                HIPAA Compliance Safeguards
+                Multi-Tenant Isolation Safeguards
               </h3>
               <p className="text-sm text-white/70 font-light leading-relaxed">
-                {study.healthcareFraming.hipaaCompliance}
+                {study.architectureFraming.multiTenancy}
               </p>
             </div>
 
             <div className="border-l-2 border-emerald-400/60 pl-4">
               <h3 className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">
-                Data Privacy &amp; PHI Isolation
+                Data Privacy &amp; Zero Leakage
               </h3>
               <p className="text-sm text-white/70 font-light leading-relaxed">
-                {study.healthcareFraming.dataPrivacy}
+                {study.architectureFraming.securityAndIsolation}
               </p>
             </div>
 
@@ -296,7 +294,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
                 System Integrations &amp; Infrastructure
               </h3>
               <p className="text-sm text-white/70 font-light leading-relaxed">
-                {study.healthcareFraming.integrations}
+                {study.architectureFraming.integrations}
               </p>
             </div>
           </div>
@@ -364,10 +362,10 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         {/* CTA Block */}
         <section className="p-8 md:p-10 border border-emerald-400/30 bg-emerald-400/[0.04] text-center">
           <h2 className="font-serif italic text-2xl md:text-3xl text-white mb-3">
-            Build your healthcare AI product with production rigor.
+            Build your multi-tenant AI system with production rigor.
           </h2>
           <p className="text-sm text-white/70 max-w-lg mx-auto font-light leading-relaxed mb-6">
-            We partner with US healthcare founders to deliver HIPAA-aligned AI applications in 3 to 4 weeks. Let&apos;s evaluate your technical architecture.
+            We partner with tech founders and engineering leaders to deliver hardened multi-tenant AI applications in 3 to 4 weeks. Let&apos;s evaluate your technical architecture.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a

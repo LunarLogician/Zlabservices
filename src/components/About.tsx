@@ -72,25 +72,25 @@ export function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                ZLab is a product-first AI studio. We don't consult —{' '}
+                ZLab is a specialized AI product studio. We don't consult:{' '}
                 <span className="text-emerald-400/80">we build.</span> Every product starts
-                with a sharp insight and ships as a real, working application in the world.
+                with a sharp technical insight and ships as a hardened, multi-tenant application in production.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                Founded by a CS student who refused to wait until graduation to start
-                building. We move fast, ship real things, and keep the team lean on purpose.
+                Led by Muhammad Zubair, an EC-Council Certified Ethical Hacker (CEH) with a 3.98 GPA in CS. 
+                We combine offensive security rigor with full-stack velocity, engineering multi-tenant AI systems that protect your brand and customer data.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.7 }}
               >
-                Our focus: production-ready AI products with proper infrastructure — 
-                payments, authentication, Redis caching, rate limiting, and deployment.
+                Our focus: production-ready AI SaaS with hardened infrastructure: 
+                Postgres Row-Level Security (RLS), isolated vector namespaces, Redis rate limiting, and zero-leakage agent execution.
               </motion.p>
             </div>
 
@@ -142,7 +142,7 @@ export function About() {
                     Muhammad Zubair
                   </div>
                   <div className="font-mono text-[10px] text-white/75 tracking-widest mt-0.5 flex items-center gap-2">
-                    FOUNDER · FULL-STACK DEVELOPER
+                    FOUNDER · CEH AI SYSTEMS ENGINEER
                     <motion.span
                       className="w-1 h-1 bg-emerald-400 rounded-full"
                       animate={{ scale: [1, 1.5, 1] }}
@@ -154,9 +154,9 @@ export function About() {
 
               {/* Bio */}
               <p className="text-sm text-white/75 leading-relaxed font-light mb-8">
-                Full-Stack Developer with 4+ years building AI-powered SaaS products,
-                RESTful APIs, and scalable web applications. Specializes in turning ideas
-                into production-ready products with proper infrastructure.
+                Full-Stack AI Engineer and EC-Council Certified Ethical Hacker (CEH) with 4+ years 
+                engineering multi-tenant AI systems, autonomous agent workflows, and scalable web/mobile apps. 
+                Specializes in hardened architectures with strict tenant vector isolation and zero prompt leaks.
               </p>
 
               {/* Tech Stack */}

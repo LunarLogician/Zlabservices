@@ -5,13 +5,13 @@ import { useEffect, useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { AIHero } from '@/components/AIHero';
 import { Services } from '@/components/Services';
-import { CaseStudies } from '@/components/CaseStudies';
 import { Products } from '@/components/Products';
 import { BuildInPublic } from '@/components/BuildInPublic';
 import { StatsLight } from '@/components/StatsLight';
 import { HowWeWork } from '@/components/HowWeWork';
 import { About } from '@/components/About';
 import { Testimonials } from '@/components/Testimonials';
+import { FAQ } from '@/components/FAQ';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 
@@ -103,7 +103,6 @@ export default function Home() {
         </div>
         
         <div className="relative">
-          <CaseStudies />
           <motion.div
             className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
             initial={{ scaleX: 0 }}
@@ -179,6 +178,10 @@ export default function Home() {
           />
         </div>
         
+        <div className="relative">
+          <FAQ />
+        </div>
+
         <div className="relative">
           <Contact />
         </div>

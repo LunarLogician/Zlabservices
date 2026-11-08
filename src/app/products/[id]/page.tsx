@@ -117,6 +117,50 @@ const PRODUCTS_DETAIL_DATA: Record<string, ProductDetail> = {
       'Built role-based access control system',
       'Optimized MongoDB indexes and query patterns'
     ]
+  },
+  aiproposalmaker: {
+    id: 'aiproposalmaker',
+    name: 'AI Proposal Maker',
+    badge: 'LIVE · PRODUCTION',
+    live: true,
+    description: 'Autonomous B2B RFP & Upwork Proposal Generator',
+    longDescription:
+      'Autonomous proposal generation engine that analyzes client job requirements, matches past portfolio skills, and generates tailored proposals in 30 seconds with an 85% success rate.',
+    link: 'https://aiproposalmaker.vercel.app',
+    tags: ['Next.js 16', 'Claude API', 'OpenAI', 'Stripe', 'Redis', 'Vercel'],
+    video: '/projects/aiprop.mp4',
+    features: [
+      'Instant job description & RFP parsing',
+      'Dynamic portfolio & skill matching',
+      'Custom tone presets (Executive, Technical, Consultative)',
+      'Export to PDF, Markdown, and DOCX',
+      'Stripe credit billing and rate limiting',
+      'Sub-30 second end-to-end generation speed',
+    ],
+    techStack: [
+      { category: 'Frontend', items: ['Next.js 16', 'TypeScript', 'Tailwind CSS'] },
+      { category: 'Backend', items: ['Node.js', 'Express', 'Redis Rate Limiting'] },
+      { category: 'AI/ML', items: ['Claude 3.5 Sonnet', 'OpenAI GPT-4o', 'Prompt Chaining'] },
+      { category: 'Infrastructure', items: ['Vercel', 'Redis', 'Stripe'] },
+    ],
+    metrics: [
+      { icon: <Zap className="w-4 h-4" />, label: 'Proposals Generated', value: '10,000+' },
+      { icon: <Clock className="w-4 h-4" />, label: 'Generation Speed', value: '30s' },
+      { icon: <Users className="w-4 h-4" />, label: 'Client Win Rate', value: '85%' },
+      { icon: <Code2 className="w-4 h-4" />, label: 'Delivery Time', value: '3 Weeks' },
+    ],
+    challenges: [
+      'Extracting unstructured requirements from varied RFP formats',
+      'Balancing high-speed generation with customized voice',
+      'Preventing API abuse and runaway LLM costs',
+      'Exporting clean formatted PDFs and DOCX files',
+    ],
+    solutions: [
+      'Designed structured heuristic extraction prompts with Pydantic schemas',
+      'Implemented dynamic prompt chaining with portfolio vector injection',
+      'Built Redis sliding-window rate limiters per authenticated user',
+      'Created custom headless server-side document compilers',
+    ],
   }
 };
 

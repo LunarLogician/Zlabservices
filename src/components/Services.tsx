@@ -12,54 +12,54 @@ export function Services() {
   const services = [
     {
       index: '01',
-      title: 'Full-Stack AI SaaS Development',
+      title: 'Hardened Multi-Tenant AI SaaS',
       description:
-        'End-to-end AI-powered web applications built with production-grade infrastructure. We handle everything from AI integration to payment processing and deployment.',
+        'End-to-end full-stack AI applications with strict tenant isolation, PostgreSQL Row-Level Security (RLS), and zero cross-tenant vector leakage. Shipped ready for paying teams.',
       features: [
-        'Next.js/React frontend with TypeScript',
-        'Node.js/Python backend with REST/GraphQL APIs',
-        'Claude/OpenAI integration & fine-tuning',
-        'Stripe/Razorpay payment processing',
-        'Redis caching & rate limiting',
-        'Vercel/Railway/AWS deployment',
-        'CI/CD pipelines & monitoring'
+        'Next.js 16/React 19 with TypeScript',
+        'Postgres RLS & isolated vector namespaces',
+        'Claude 3.5 & OpenAI with zero data retention',
+        'Stripe subscription checkout & automated webhooks',
+        'Redis caching & per-tenant token rate limiting',
+        'Hardened cloud deployment (Vercel/Railway/AWS)',
+        'CI/CD pipelines, Sentry & uptime monitoring',
       ],
       timeframe: '3-4 weeks to MVP',
-      highlight: 'Production-ready from day one'
+      highlight: 'Secure, production-ready multi-tenancy',
     },
     {
       index: '02',
-      title: 'Mobile App Development (Flutter)',
+      title: 'Autonomous AI Agents & Workflows',
       description:
-        'Cross-platform iOS & Android apps with native performance. We build apps that users love and that scale with your business.',
+        'Production agentic workflows with ReAct reasoning loops, sandboxed tool execution, and prompt injection defense. Built for reliable, deterministic business automation.',
       features: [
-        'Flutter with clean architecture',
-        'Riverpod/Provider state management',
-        'Backend API integration',
-        'App Store & Play Store deployment',
-        'Push notifications & analytics',
-        'Offline-first capabilities',
-        'Performance optimization'
+        'ReAct agent loops & tool calling (LangGraph)',
+        'Sandboxed code execution & scoped OAuth tokens',
+        'Guardrails against prompt injection & data leaks',
+        'Background job queues (Temporal/Inngest)',
+        'Per-tenant LLM token budgets & spend caps',
+        'Structured outputs with Pydantic & Zod validation',
+        'Complete audit trails & observability tracing',
       ],
-      timeframe: '4-5 weeks to launch',
-      highlight: 'Native performance, single codebase'
+      timeframe: '3-4 weeks to launch',
+      highlight: 'Deterministic, sandboxed agent execution',
     },
     {
       index: '03',
-      title: 'End-to-End Deployment & DevOps',
+      title: 'Cross-Platform Mobile Apps (Flutter)',
       description:
-        'We don\'t just write code — we ship it. Complete infrastructure setup, monitoring, and scaling for your applications.',
+        'High-performance iOS and Android mobile companions with clean architecture, offline-first local synchronization, and secure biometric authentication.',
       features: [
-        'Production environment configuration',
-        'Database optimization & migrations',
-        'SSL certificates & security hardening',
-        'Performance monitoring (Sentry, LogRocket)',
-        'Auto-scaling & load balancing',
-        'Backup & disaster recovery',
-        '24/7 uptime monitoring'
+        'Flutter with clean Riverpod/Provider architecture',
+        'Offline-first SQLite caching & real-time sync',
+        'Biometric auth & secure device storage',
+        'Cross-device state synchronization with web SaaS',
+        'App Store & Google Play Store release pipelines',
+        'Push notifications & analytics instrumentation',
+        '60fps native performance on single codebase',
       ],
-      timeframe: '1-2 weeks setup',
-      highlight: 'Sleep well knowing your app is secure'
+      timeframe: '4-5 weeks to launch',
+      highlight: 'Native performance, single codebase',
     },
   ];
 
@@ -121,8 +121,8 @@ export function Services() {
           </h2>
           
           <p className="text-sm text-white/70 leading-relaxed font-light max-w-2xl">
-            We ship production-ready products, not prototypes. Every project includes proper authentication, 
-            payment processing, Redis caching, rate limiting, and deployment — because real products need real infrastructure.
+            We ship production-ready products, not fragile prototypes. Every project includes proper authentication, 
+            payment processing, Redis caching, per-tenant rate limiting, and deployment. Real products need real infrastructure.
           </p>
         </motion.div>
 
@@ -164,88 +164,36 @@ export function Services() {
                 ))}
               </div>
 
-              {/* Timeframe & highlight */}
-              <div className="pt-6 border-t border-white/[0.06]">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="font-mono text-[8px] text-white/40 tracking-widest mb-1">
-                      TIMEFRAME
-                    </div>
-                    <div className="font-mono text-[10px] text-emerald-400/80">
-                      {service.timeframe}
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="font-mono text-[8px] text-white/40 tracking-widest mb-1">
-                      HIGHLIGHT
-                    </div>
-                    <div className="font-mono text-[10px] text-white/80">
-                      {service.highlight}
-                    </div>
-                  </div>
-                </div>
+              {/* Meta info */}
+              <div className="pt-6 border-t border-white/[0.06] flex items-center justify-between">
+                <span className="font-mono text-[9px] text-emerald-400/80 tracking-wider">
+                  {service.timeframe}
+                </span>
+                <span className="font-mono text-[8px] text-white/40 tracking-wider">
+                  {service.highlight}
+                </span>
               </div>
 
-              {/* Hover effect */}
-              <div className="absolute inset-0 border border-emerald-400/0 group-hover:border-emerald-400/20 transition-all duration-300 pointer-events-none" />
+              {/* Glow effect on hover */}
+              <div className="absolute -inset-px bg-gradient-to-r from-emerald-400/0 via-emerald-400/10 to-emerald-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none" />
             </motion.div>
           ))}
         </div>
 
-        {/* Why Choose Us */}
+        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 pt-12 border-t border-white/8"
-        >
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="font-serif italic text-3xl text-emerald-400/80 mb-2">15+</div>
-              <div className="font-mono text-[8px] text-white/50 tracking-widest">LIVE PRODUCTS</div>
-              <div className="text-xs text-white/70 mt-1">Built & deployed</div>
-            </div>
-            <div className="text-center">
-              <div className="font-serif italic text-3xl text-emerald-400/80 mb-2">3-4</div>
-              <div className="font-mono text-[8px] text-white/50 tracking-widest">WEEKS TO MVP</div>
-              <div className="text-xs text-white/70 mt-1">Average timeline</div>
-            </div>
-            <div className="text-center">
-              <div className="font-serif italic text-3xl text-emerald-400/80 mb-2">100%</div>
-              <div className="font-mono text-[8px] text-white/50 tracking-widest">CLIENT SATISFACTION</div>
-              <div className="text-xs text-white/70 mt-1">Repeat business rate</div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-12 text-center"
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="mt-16 text-center"
         >
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 px-8 py-4 border border-white/10 hover:border-emerald-400/40 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+            className="inline-flex items-center gap-2 font-mono text-[11px] text-white/75 hover:text-emerald-400 border border-white/10 hover:border-emerald-400/40 px-6 py-3 transition-all"
           >
-            <span className="font-mono text-[10px] text-white/70 group-hover:text-emerald-400 tracking-widest">
-              START YOUR PROJECT
-            </span>
-            <svg 
-              className="w-4 h-4 text-white/50 group-hover:text-emerald-400 transition-colors" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+            DISCUSS YOUR ARCHITECTURE →
           </a>
-          <p className="font-mono text-[8px] text-white/40 mt-4 tracking-widest">
-            Free consultation · No commitment · 30-minute call
-          </p>
         </motion.div>
       </div>
     </section>

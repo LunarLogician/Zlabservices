@@ -5,16 +5,16 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'Healthcare AI Case Studies & Shipped Projects | ZLab Services',
+  title: 'Full-Stack AI & Multi-Tenant Systems Case Studies | ZLab Services',
   description:
-    'Explore shipped AI products built for US healthcare founders, clinical education, and HealthTech teams. Production-ready MVPs with HIPAA-aligned architecture, EHR integration, and zero data retention.',
+    'Explore production AI systems, multi-tenant SaaS applications, and autonomous agent workflows engineered by ZLab Services. Shipped with isolated vector memory, Postgres RLS, and clean cloud infrastructure.',
   alternates: {
     canonical: 'https://zlabservices.site/case-studies',
   },
   openGraph: {
-    title: 'Healthcare AI Case Studies & Shipped Projects | ZLab Services',
+    title: 'Full-Stack AI & Multi-Tenant Systems Case Studies | ZLab Services',
     description:
-      'Production AI systems engineered for US healthcare founders and CTOs. Explore shipped architectures, HIPAA-compliant designs, and technical results.',
+      'Production AI systems engineered for B2B founders and engineering leaders. Explore shipped architectures, multi-tenant vector designs, and technical results.',
     url: 'https://zlabservices.site/case-studies',
     type: 'website',
     images: [
@@ -22,15 +22,15 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'ZLab Services Healthcare AI Case Studies',
+        alt: 'ZLab Services Full-Stack AI Case Studies',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Healthcare AI Case Studies & Shipped Projects | ZLab Services',
+    title: 'Full-Stack AI & Multi-Tenant Systems Case Studies | ZLab Services',
     description:
-      'Production AI systems engineered for US healthcare founders and CTOs. Explore shipped architectures and technical results.',
+      'Production AI systems engineered for B2B founders and engineering leaders. Explore shipped architectures and technical results.',
     images: ['/og-image.png'],
   },
 };
@@ -64,9 +64,9 @@ export default function CaseStudiesIndexPage() {
   const collectionJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: 'Healthcare AI Case Studies',
+    name: 'Full-Stack AI & Multi-Tenant Systems Case Studies',
     description:
-      'Production-ready AI applications engineered for healthcare founders and HealthTech leaders by ZLab Services.',
+      'Production-ready AI applications engineered for B2B founders and tech teams by ZLab Services.',
     url: 'https://zlabservices.site/case-studies',
     hasPart: CASE_STUDIES.map((study) => ({
       '@type': 'Article',
@@ -120,11 +120,11 @@ export default function CaseStudiesIndexPage() {
           </div>
 
           <h1 className="font-serif italic text-4xl md:text-6xl text-white leading-tight mb-6">
-            Healthcare AI Case Studies &amp; <span className="text-emerald-400 not-italic">Shipped Systems</span>
+            Full-Stack AI Case Studies &amp; <span className="text-emerald-400 not-italic">Shipped Systems</span>
           </h1>
 
           <p className="text-base text-white/70 max-w-2xl font-light leading-relaxed">
-            Real production systems architected for US healthcare founders, digital health leaders, and enterprise teams. Built with HIPAA compliance safeguards, zero data retention pipelines, and clean cloud infrastructure.
+            Real production systems architected for B2B founders, SaaS innovators, and tech teams. Built with isolated tenant vector memory, PostgreSQL Row-Level Security (RLS), and zero prompt-leakage architecture.
           </p>
         </header>
 
@@ -160,10 +160,10 @@ export default function CaseStudiesIndexPage() {
 
                   <div className="bg-white/[0.02] border border-white/8 p-4 mb-6">
                     <div className="font-mono text-[8px] text-emerald-400/90 uppercase tracking-widest mb-1.5">
-                      Healthcare &amp; HIPAA Alignment
+                      Multi-Tenant Architecture &amp; Data Isolation
                     </div>
                     <p className="text-xs text-white/60 leading-relaxed font-light">
-                      {study.healthcareFraming.hipaaCompliance}
+                      {study.architectureFraming.multiTenancy}
                     </p>
                   </div>
 
@@ -214,29 +214,29 @@ export default function CaseStudiesIndexPage() {
         <section className="mt-20 p-10 border border-emerald-400/30 bg-emerald-400/[0.03] text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 border border-emerald-400/30 rounded-full mb-4">
             <span className="font-mono text-[8px] text-emerald-400 uppercase tracking-widest">
-              Ready to Ship Your Healthcare AI?
+              Ready to Ship Your Multi-Tenant AI System?
             </span>
           </div>
           <h2 className="font-serif italic text-3xl md:text-4xl text-white mb-4">
-            Have a clinical workflow or healthtech MVP to build?
+            From architecture to production in 3 to 4 weeks.
           </h2>
           <p className="text-sm text-white/70 max-w-xl mx-auto font-light leading-relaxed mb-8">
-            We partner with US healthcare founders and CTOs to engineer secure, production-grade AI platforms in 3 to 4 weeks. All consultations include mutual NDA execution upon request.
+            Book a 30-minute technical discovery call directly with Muhammad Zubair, EC-Council Certified Ethical Hacker. Zero sales pressure, just architecture.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="https://cal.com/code-zubair-3fs0gu/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#07110d] transition-all hover:bg-emerald-300"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#07110d] shadow-[0_0_20px_rgba(16,185,129,0.25)] transition-all hover:bg-emerald-300"
             >
-              Book a 30-Min Architecture Strategy Call
+              Book Technical Strategy Call &rarr;
             </a>
             <Link
               href="/#contact"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.04] px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-white/80 transition-all hover:border-emerald-400 hover:text-emerald-400"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.03] px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-white/80 transition-all hover:border-emerald-400 hover:text-emerald-400"
             >
-              Send Project Brief &rarr;
+              Send Project Brief
             </Link>
           </div>
         </section>
