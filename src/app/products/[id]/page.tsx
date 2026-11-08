@@ -1,16 +1,13 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { useParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { ArrowLeft, ExternalLink, Zap, Users, Clock, Code2, Server, Smartphone } from 'lucide-react';
+import { notFound } from 'next/navigation';
+import { ArrowLeft, ExternalLink, Zap, Users, Clock, Code2 } from 'lucide-react';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 
-const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
-};
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
 
 interface ProductDetail {
   id: string;
@@ -24,7 +21,7 @@ interface ProductDetail {
   video?: string;
   features: string[];
   techStack: { category: string; items: string[] }[];
-  metrics: { icon: React.ReactNode; label: string; value: string }[];
+  metrics: { icon: 'users' | 'zap' | 'clock' | 'code'; label: string; value: string }[];
   challenges: string[];
   solutions: string[];
 }
@@ -36,87 +33,89 @@ const PRODUCTS_DETAIL_DATA: Record<string, ProductDetail> = {
     badge: 'LIVE · PRODUCTION',
     live: true,
     description: 'AI Study Tools platform with MCQ Generator, Quiz Maker, and Flashcards',
-    longDescription: 'A comprehensive AI-powered educational platform that helps students generate study materials, practice questions, and flashcards using Claude AI. Features a full-stack web application with Flutter mobile app companion.',
+    longDescription:
+      'A comprehensive AI-powered learning and assessment platform that helps students generate study materials, practice questions, and flashcards using Claude AI. Features a full-stack Next.js web application with a companion Flutter mobile app.',
     link: 'https://everlearnai.live',
-    tags: ['Next.js', 'Flutter', 'Claude API', 'Stripe', 'Redis', 'Firebase', 'Vercel', 'Railway'],
+    tags: ['Next.js 16', 'Flutter', 'Claude API', 'Stripe', 'Redis', 'Supabase', 'Vercel', 'Railway'],
     video: '/projects/everlearnai.mp4',
     features: [
-      'AI-powered MCQ generation from any study material',
-      'Spaced repetition flashcards with smart scheduling',
-      'Quiz maker with customizable difficulty levels',
-      'Progress tracking and performance analytics',
-      'Mobile app with offline study capabilities',
-      'Payment integration for premium features'
+      'AI-powered MCQ generation from any study material or textbook PDF',
+      'Spaced repetition flashcards with smart scheduling algorithms',
+      'Custom quiz maker with adjustable difficulty and citation tracking',
+      'Performance analytics and learning progress telemetry',
+      'Cross-platform Flutter mobile app with offline study capabilities',
+      'Stripe subscription checkout with automated webhook validation',
     ],
     techStack: [
-      { category: 'Frontend', items: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
-      { category: 'Mobile', items: ['Flutter', 'Dart', 'Provider State Management'] },
-      { category: 'Backend', items: ['Node.js', 'Express', 'Redis Caching', 'Firebase Auth'] },
-      { category: 'AI/ML', items: ['Claude API', 'OpenAI GPT-4', 'Custom prompt engineering'] },
-      { category: 'Infrastructure', items: ['Vercel', 'Railway', 'Firebase', 'Stripe Payments'] }
+      { category: 'Frontend', items: ['Next.js 16', 'TypeScript', 'Tailwind CSS'] },
+      { category: 'Mobile', items: ['Flutter', 'Dart', 'Provider Architecture'] },
+      { category: 'Backend', items: ['Node.js', 'Express', 'Redis Caching', 'Supabase Auth'] },
+      { category: 'AI/ML', items: ['Claude 3.5 Sonnet', 'OpenAI GPT-4o', 'Prompt Engineering'] },
+      { category: 'Infrastructure', items: ['Vercel', 'Railway', 'Stripe Payments'] },
     ],
     metrics: [
-      { icon: <Users className="w-4 h-4" />, label: 'Active Users', value: '3,000+' },
-      { icon: <Zap className="w-4 h-4" />, label: 'Quizzes Generated', value: '50,000+' },
-      { icon: <Clock className="w-4 h-4" />, label: 'Development Time', value: '4 Weeks' },
-      { icon: <Code2 className="w-4 h-4" />, label: 'Code Lines', value: '25,000+' }
+      { icon: 'users', label: 'Active Users', value: '3,000+' },
+      { icon: 'zap', label: 'Quizzes Generated', value: '50,000+' },
+      { icon: 'clock', label: 'Development Time', value: '4 Weeks' },
+      { icon: 'code', label: 'Code Lines', value: '25,000+' },
     ],
     challenges: [
-      'Real-time AI response streaming without delays',
-      'Mobile app synchronization with web platform',
-      'Payment webhook handling and subscription management',
-      'Redis caching for frequently accessed study materials'
+      'Real-time streaming for multi-paragraph AI explanations',
+      'Mobile app synchronization with the web platform',
+      'Stripe payment webhook handling and subscription lifecycle management',
+      'Redis cache invalidation for frequently requested study decks',
     ],
     solutions: [
-      'Implemented ReadableStream API for chunked AI responses',
-      'Used Firebase Realtime Database for cross-platform sync',
-      'Built robust webhook handlers with idempotency keys',
-      'Configured Redis with TTL for optimal cache performance'
-    ]
+      'Implemented chunked streaming via Web Streams API for immediate token display',
+      'Built a synchronized relational schema on PostgreSQL with real-time updates',
+      'Implemented robust webhook handlers with idempotency key verification',
+      'Configured Redis with automated TTL rules for sub-millisecond retrieval',
+    ],
   },
   devpostai: {
     id: 'devpostai',
     name: 'DevPost AI',
     badge: 'LIVE · PRODUCTION',
     live: true,
-    description: 'AI-Powered LinkedIn Content Engine',
-    longDescription: 'Professional LinkedIn content generation platform that creates tailored posts, articles, and engagement content using advanced AI models. Features template library, content scheduling, and performance analytics.',
+    description: 'AI-Powered Professional Content & Thought Leadership Engine',
+    longDescription:
+      'Professional LinkedIn and Twitter/X content generation platform that creates tailored posts, technical articles, and engagement content using advanced AI models. Features template libraries, content scheduling, and multi-tenant workspace isolation.',
     link: 'https://devpostfe.vercel.app',
-    tags: ['Next.js', 'OpenAI API', 'MongoDB', 'Authentication', 'Vercel', 'Tailwind'],
+    tags: ['Next.js 16', 'OpenAI API', 'MongoDB', 'NextAuth', 'Vercel', 'Tailwind CSS'],
     video: '/projects/devpostai.mp4',
     features: [
-      'AI-powered LinkedIn post generation with templates',
-      'Content scheduling and calendar management',
-      'Performance analytics for post engagement',
-      'User authentication and saved content library',
-      'Custom tone and style adjustments',
-      'Bulk content generation for campaigns'
+      'AI-powered post generation calibrated for tech founders and leaders',
+      'Content scheduling and calendar management with direct API posting',
+      'Performance analytics and audience engagement tracking',
+      'User authentication with isolated multi-tenant workspaces',
+      'Custom tone presets (Executive, Technical, Consultative)',
+      'Bulk content generation for distribution campaigns',
     ],
     techStack: [
-      { category: 'Frontend', items: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Shadcn UI'] },
-      { category: 'Backend', items: ['Node.js', 'Express', 'MongoDB', 'Mongoose'] },
-      { category: 'AI/ML', items: ['OpenAI GPT-4', 'Anthropic Claude', 'Custom fine-tuning'] },
-      { category: 'Authentication', items: ['NextAuth.js', 'JWT', 'OAuth providers'] },
-      { category: 'Deployment', items: ['Vercel', 'MongoDB Atlas', 'Cloudinary'] }
+      { category: 'Frontend', items: ['Next.js 16', 'TypeScript', 'Tailwind CSS'] },
+      { category: 'Backend', items: ['Node.js', 'Express', 'MongoDB Atlas'] },
+      { category: 'AI/ML', items: ['OpenAI GPT-4o', 'Claude 3.5 Sonnet', 'Prompt Templates'] },
+      { category: 'Authentication', items: ['NextAuth.js', 'JWT', 'OAuth 2.0'] },
+      { category: 'Deployment', items: ['Vercel', 'MongoDB Atlas'] },
     ],
     metrics: [
-      { icon: <Users className="w-4 h-4" />, label: 'Users', value: '2,500+' },
-      { icon: <Zap className="w-4 h-4" />, label: 'Posts Generated', value: '100,000+' },
-      { icon: <Clock className="w-4 h-4" />, label: 'Development Time', value: '3 Weeks' },
-      { icon: <Code2 className="w-4 h-4" />, label: 'API Endpoints', value: '15+' }
+      { icon: 'users', label: 'Active Creators', value: '2,500+' },
+      { icon: 'zap', label: 'Posts Generated', value: '100,000+' },
+      { icon: 'clock', label: 'Development Time', value: '3 Weeks' },
+      { icon: 'code', label: 'API Endpoints', value: '15+' },
     ],
     challenges: [
-      'Handling large context windows for long-form content',
-      'Real-time content generation with streaming',
-      'User authentication and content privacy',
-      'Database optimization for content storage'
+      'Handling large context windows for long-form technical content',
+      'Real-time content streaming without API timeout errors',
+      'User authentication and multi-tenant draft privacy',
+      'Database optimization for high-volume content queries',
     ],
     solutions: [
       'Implemented chunking strategy for long content generation',
-      'Used Server-Sent Events for real-time updates',
-      'Built role-based access control system',
-      'Optimized MongoDB indexes and query patterns'
-    ]
+      'Used Server-Sent Events (SSE) for streaming updates',
+      'Built strict role-based access control (RBAC) and isolated workspaces',
+      'Optimized MongoDB indexes and compound query patterns',
+    ],
   },
   aiproposalmaker: {
     id: 'aiproposalmaker',
@@ -130,12 +129,12 @@ const PRODUCTS_DETAIL_DATA: Record<string, ProductDetail> = {
     tags: ['Next.js 16', 'Claude API', 'OpenAI', 'Stripe', 'Redis', 'Vercel'],
     video: '/projects/aiprop.mp4',
     features: [
-      'Instant job description & RFP parsing',
-      'Dynamic portfolio & skill matching',
+      'Instant job description & RFP parsing with requirement extraction',
+      'Dynamic portfolio & skill matching via vector search',
       'Custom tone presets (Executive, Technical, Consultative)',
-      'Export to PDF, Markdown, and DOCX',
-      'Stripe credit billing and rate limiting',
-      'Sub-30 second end-to-end generation speed',
+      'Export to PDF, Markdown, and DOCX formats',
+      'Stripe credit billing and rate limiting safeguards',
+      'Sub-30 second end-to-end proposal generation speed',
     ],
     techStack: [
       { category: 'Frontend', items: ['Next.js 16', 'TypeScript', 'Tailwind CSS'] },
@@ -144,10 +143,10 @@ const PRODUCTS_DETAIL_DATA: Record<string, ProductDetail> = {
       { category: 'Infrastructure', items: ['Vercel', 'Redis', 'Stripe'] },
     ],
     metrics: [
-      { icon: <Zap className="w-4 h-4" />, label: 'Proposals Generated', value: '10,000+' },
-      { icon: <Clock className="w-4 h-4" />, label: 'Generation Speed', value: '30s' },
-      { icon: <Users className="w-4 h-4" />, label: 'Client Win Rate', value: '85%' },
-      { icon: <Code2 className="w-4 h-4" />, label: 'Delivery Time', value: '3 Weeks' },
+      { icon: 'zap', label: 'Proposals Created', value: '10,000+' },
+      { icon: 'clock', label: 'Generation Speed', value: '30s' },
+      { icon: 'users', label: 'Active Users', value: '1,200+' },
+      { icon: 'code', label: 'Delivery Time', value: '3 Weeks' },
     ],
     challenges: [
       'Extracting unstructured requirements from varied RFP formats',
@@ -161,239 +160,332 @@ const PRODUCTS_DETAIL_DATA: Record<string, ProductDetail> = {
       'Built Redis sliding-window rate limiters per authenticated user',
       'Created custom headless server-side document compilers',
     ],
-  }
+  },
 };
 
-export default function ProductDetailPage() {
-  const params = useParams();
-  const router = useRouter();
-  const [product, setProduct] = useState<ProductDetail | null>(null);
-  const [loading, setLoading] = useState(true);
+export async function generateStaticParams() {
+  return [
+    { id: 'everlearnai' },
+    { id: 'devpostai' },
+    { id: 'aiproposalmaker' },
+  ];
+}
 
-  useEffect(() => {
-    if (params.id) {
-      const productId = Array.isArray(params.id) ? params.id[0] : params.id;
-      const productData = PRODUCTS_DETAIL_DATA[productId];
-      
-      if (productData) {
-        setProduct(productData);
-      } else {
-        router.push('/#products');
-      }
-      setLoading(false);
-    }
-  }, [params.id, router]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#0a0a08] flex items-center justify-center">
-        <div className="text-white">Loading product details...</div>
-      </div>
-    );
-  }
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const product = PRODUCTS_DETAIL_DATA[id];
 
   if (!product) {
-    return (
-      <div className="min-h-screen bg-[#0a0a08] flex items-center justify-center">
-        <div className="text-white">Product not found</div>
-      </div>
-    );
+    return {
+      title: 'Product Not Found | ZLab Services',
+    };
   }
 
+  const title = `${product.name} | Production AI Product Deep Dive`;
+  const description = `${product.description} Engineered by ZLab Services. Shipped in 3-4 weeks.`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://zlabservices.site/products/${product.id}`,
+    },
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+      url: `https://zlabservices.site/products/${product.id}`,
+      images: [
+        {
+          url: '/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: `${product.name} - ZLab Services`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.png'],
+    },
+  };
+}
+
+const GRID_BG = {
+  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`,
+  backgroundSize: '48px 48px',
+};
+
+export default async function ProductDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  const product = PRODUCTS_DETAIL_DATA[id];
+
+  if (!product) {
+    notFound();
+  }
+
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: product.name,
+    description: product.longDescription,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web, iOS, Android',
+    url: `https://zlabservices.site/products/${product.id}`,
+    author: {
+      '@type': 'Organization',
+      name: 'ZLab Services',
+      url: 'https://zlabservices.site',
+    },
+  };
+
+  const breadcrumbsSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://zlabservices.site',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Products',
+        item: 'https://zlabservices.site/#products',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: product.name,
+        item: `https://zlabservices.site/products/${product.id}`,
+      },
+    ],
+  };
+
   return (
-    <main className="min-h-screen bg-[#0a0a08] text-white">
+    <div className="relative min-h-screen bg-[#0a0a08] text-white flex flex-col justify-between">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsSchema) }}
+      />
+
       <div className="fixed inset-0 pointer-events-none" style={GRID_BG} />
-      
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="fixed top-6 left-6 z-50"
-      >
-        <Link
-          href="/#products"
-          className="flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 hover:bg-white/10 transition-colors rounded-lg"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span className="text-sm">Back to Products</span>
-        </Link>
-      </motion.div>
+      <Navbar />
 
-      <section className="relative pt-32 pb-20 px-6 md:px-10">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
+      <main className="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pt-32 pb-24 w-full">
+        {/* Navigation back */}
+        <div className="mb-8">
+          <Link
+            href="/#products"
+            className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 hover:border-emerald-400/40 hover:text-emerald-400 transition-colors rounded-lg text-xs font-mono"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-px bg-emerald-400/60" />
-              <span className="font-mono text-[9px] text-white/60 tracking-widest">CASE_STUDY_</span>
-            </div>
-            
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
-              <div>
-                <h1 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mb-4">
-                  {product.name}
-                </h1>
-                <div className="flex items-center gap-3">
-                  <span className="px-3 py-1 bg-emerald-400/10 border border-emerald-400/30 rounded-full text-xs text-emerald-400">
-                    {product.badge}
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>&larr; Back to All Products</span>
+          </Link>
+        </div>
+
+        {/* Header */}
+        <header className="mb-14 pb-8 border-b border-white/10">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="font-mono text-[9px] text-emerald-400 tracking-widest uppercase">
+              SHIPPED PRODUCT DEEP DIVE_
+            </span>
+            <div className="w-8 h-px bg-emerald-400/60" />
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+            <div>
+              <h1 className="font-serif italic text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-3">
+                {product.name}
+              </h1>
+              <div className="flex items-center gap-3">
+                <span className="px-3 py-1 bg-emerald-400/10 border border-emerald-400/30 rounded-full text-xs font-mono text-emerald-400">
+                  {product.badge}
+                </span>
+                {product.live && (
+                  <span className="flex items-center gap-1.5 font-mono text-xs text-emerald-400/80">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    LIVE PRODUCTION APP
                   </span>
-                  {product.live && (
-                    <span className="flex items-center gap-1">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-xs text-emerald-400/80">LIVE NOW</span>
-                    </span>
-                  )}
-                </div>
+                )}
               </div>
-              
-              <a
-                href={product.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-emerald-400/10 border border-emerald-400/30 hover:border-emerald-400/50 hover:bg-emerald-400/15 transition-all rounded-lg"
-              >
-                <span className="font-mono text-sm">Visit Live Site</span>
-                <ExternalLink className="w-4 h-4" />
-              </a>
             </div>
-            
-            <p className="text-lg text-white/80 leading-relaxed max-w-3xl">
-              {product.longDescription}
-            </p>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12"
-          >
-            {product.metrics.map((metric, i) => (
-              <div
-                key={i}
-                className="bg-white/[0.02] border border-white/10 p-4 rounded-lg"
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="text-emerald-400/80">
-                    {metric.icon}
+            <a
+              href={product.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-6 py-3 bg-emerald-400 text-[#07110d] font-mono text-xs font-semibold uppercase tracking-wider hover:bg-emerald-300 transition-all rounded-full shadow-[0_0_20px_rgba(16,185,129,0.25)]"
+            >
+              <span>Visit Live App</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+
+          <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-3xl font-light">
+            {product.longDescription}
+          </p>
+        </header>
+
+        {/* Metrics Grid */}
+        <section aria-label="Key Product Metrics" className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
+          {product.metrics.map((metric, i) => (
+            <div
+              key={i}
+              className="bg-white/[0.02] border border-white/10 p-5 rounded-lg"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-emerald-400">
+                  {metric.icon === 'users' && <Users className="w-4 h-4" />}
+                  {metric.icon === 'zap' && <Zap className="w-4 h-4" />}
+                  {metric.icon === 'clock' && <Clock className="w-4 h-4" />}
+                  {metric.icon === 'code' && <Code2 className="w-4 h-4" />}
+                </span>
+                <span className="font-mono text-[10px] text-white/60 tracking-wider uppercase">
+                  {metric.label}
+                </span>
+              </div>
+              <div className="font-serif italic text-2xl md:text-3xl text-white">
+                {metric.value}
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {/* Video Demo (if available) */}
+        {product.video && (
+          <section aria-label="Product Demo Video" className="mb-14">
+            <div className="aspect-video bg-black/40 border border-white/10 rounded-xl overflow-hidden">
+              <video
+                src={product.video}
+                preload="metadata"
+                controls
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </section>
+        )}
+
+        {/* Features & Tech Stack */}
+        <div className="grid md:grid-cols-2 gap-12 mb-16">
+          <section className="space-y-6">
+            <h2 className="font-serif italic text-2xl md:text-3xl text-white">
+              Core Capabilities &amp; Features
+            </h2>
+            <ul className="space-y-3">
+              {product.features.map((feature, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
+                  <span className="text-white/80 font-light text-sm leading-relaxed">
+                    {feature}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="space-y-6">
+            <h2 className="font-serif italic text-2xl md:text-3xl text-white">
+              Production Architecture Stack
+            </h2>
+            <div className="space-y-5">
+              {product.techStack.map((stack, i) => (
+                <div key={i}>
+                  <div className="font-mono text-[10px] text-emerald-400/80 uppercase tracking-widest mb-2">
+                    {stack.category}
                   </div>
-                  <div className="font-mono text-[10px] text-white/60 tracking-wider">
-                    {metric.label}
+                  <div className="flex flex-wrap gap-2">
+                    {stack.items.map((item, j) => (
+                      <span
+                        key={j}
+                        className="px-3 py-1 bg-white/[0.03] border border-white/10 text-white/80 font-mono text-xs rounded"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <div className="font-serif italic text-2xl text-white">
-                  {metric.value}
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {/* Challenges & Engineering Solutions */}
+        <section className="border border-white/10 bg-white/[0.02] p-8 md:p-10 mb-16">
+          <h2 className="font-serif italic text-2xl md:text-3xl text-white mb-8">
+            Engineering Challenges &amp; Solutions
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {product.challenges.map((challenge, i) => (
+              <div key={i} className="border-l-2 border-emerald-400/50 pl-4">
+                <div className="font-mono text-[9px] text-white/50 uppercase tracking-wider mb-1">
+                  CHALLENGE 0{i + 1}
+                </div>
+                <div className="text-white/90 text-sm font-medium mb-3">
+                  {challenge}
+                </div>
+                <div className="font-mono text-[9px] text-emerald-400 uppercase tracking-wider mb-1">
+                  ENGINEERING SOLUTION
+                </div>
+                <div className="text-white/70 font-light text-xs leading-relaxed">
+                  {product.solutions[i]}
                 </div>
               </div>
             ))}
-          </motion.div>
-
-          {product.video && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-12"
-            >
-              <div className="aspect-video bg-black/30 border border-white/10 rounded-xl overflow-hidden">
-                <video
-                  src={product.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-          )}
-
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-              >
-                <h2 className="font-serif italic text-3xl text-white mb-6">Features</h2>
-                <ul className="space-y-3">
-                  {product.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" />
-                      <span className="text-white/80">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <h2 className="font-serif italic text-3xl text-white mb-6">Tech Stack</h2>
-                <div className="space-y-6">
-                  {product.techStack.map((stack, i) => (
-                    <div key={i}>
-                      <div className="font-mono text-xs text-white/60 mb-2">{stack.category}</div>
-                      <div className="flex flex-wrap gap-2">
-                        {stack.items.map((item, j) => (
-                          <span
-                            key={j}
-                            className="px-3 py-1.5 bg-white/[0.03] border border-white/10 text-white/80 text-sm rounded-lg"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            <div className="space-y-12">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                <h2 className="font-serif italic text-3xl text-white mb-6">Challenges & Solutions</h2>
-                <div className="space-y-6">
-                  {product.challenges.map((challenge, i) => (
-                    <div key={i} className="border-l-2 border-emerald-400/30 pl-4">
-                      <div className="font-mono text-xs text-white/60 mb-1">CHALLENGE {i + 1}</div>
-                      <div className="text-white/90 mb-2">{challenge}</div>
-                      <div className="font-mono text-xs text-emerald-400/80 mb-1">SOLUTION</div>
-                      <div className="text-white/80">{product.solutions[i]}</div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                <h2 className="font-serif italic text-3xl text-white mb-6">Tags</h2>
-                <div className="flex flex-wrap gap-2">
-                  {product.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1.5 bg-white/[0.02] border border-white/10 text-white/60 text-sm rounded-lg hover:border-emerald-400/30 hover:text-white/80 transition-colors"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
           </div>
+        </section>
+
+        {/* Tags */}
+        <div className="flex flex-wrap items-center gap-2 mb-16">
+          <span className="font-mono text-[10px] text-white/40 uppercase mr-2">Tags:</span>
+          {product.tags.map((tag, i) => (
+            <span
+              key={i}
+              className="px-3 py-1 bg-white/[0.02] border border-white/10 text-white/60 font-mono text-xs rounded hover:border-emerald-400/40 hover:text-emerald-400 transition-colors"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
-      </section>
-    </main>
+
+        {/* CTA */}
+        <section className="p-8 md:p-10 border border-emerald-400/30 bg-emerald-400/[0.04] text-center rounded-xl">
+          <h2 className="font-serif italic text-2xl md:text-3xl text-white mb-3">
+            Want an AI system built with this velocity?
+          </h2>
+          <p className="text-sm text-white/70 max-w-lg mx-auto font-light leading-relaxed mb-6">
+            We build and ship hardened multi-tenant AI products in 3 to 4 weeks. Let&apos;s discuss your roadmap.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="https://cal.com/code-zubair-3fs0gu/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#07110d] transition-all hover:bg-emerald-300"
+            >
+              Book a 30-Min Strategy Call &rarr;
+            </a>
+            <Link
+              href="/#contact"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.03] px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-white/80 transition-all hover:border-emerald-400 hover:text-emerald-400"
+            >
+              Send Project Brief
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
