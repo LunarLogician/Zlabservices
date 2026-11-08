@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft, ExternalLink, Zap, Users, Clock, Code2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 
@@ -21,7 +21,7 @@ interface ProductDetail {
   video?: string;
   features: string[];
   techStack: { category: string; items: string[] }[];
-  metrics: { icon: 'users' | 'zap' | 'clock' | 'code'; label: string; value: string }[];
+  metrics: { label: string; value: string }[];
   challenges: string[];
   solutions: string[];
 }
@@ -54,10 +54,10 @@ const PRODUCTS_DETAIL_DATA: Record<string, ProductDetail> = {
       { category: 'Infrastructure', items: ['Vercel', 'Railway', 'Stripe Payments'] },
     ],
     metrics: [
-      { icon: 'users', label: 'Active Users', value: '3,000+' },
-      { icon: 'zap', label: 'Quizzes Generated', value: '50,000+' },
-      { icon: 'clock', label: 'Development Time', value: '4 Weeks' },
-      { icon: 'code', label: 'Code Lines', value: '25,000+' },
+      { label: 'ACTIVE USERS', value: '3,000+' },
+      { label: 'GENERATED ARTIFACTS', value: '50,000+' },
+      { label: 'DEVELOPMENT SPRINT', value: '4 WEEKS' },
+      { label: 'CODEBASE LINES', value: '25,000+' },
     ],
     challenges: [
       'Real-time streaming for multi-paragraph AI explanations',
@@ -79,42 +79,38 @@ const PRODUCTS_DETAIL_DATA: Record<string, ProductDetail> = {
     live: true,
     description: 'AI-Powered Professional Content & Thought Leadership Engine',
     longDescription:
-      'Professional LinkedIn and Twitter/X content generation platform that creates tailored posts, technical articles, and engagement content using advanced AI models. Features template libraries, content scheduling, and multi-tenant workspace isolation.',
+      'An intelligent content creation and distribution engine that helps founders and professionals create high-engagement LinkedIn posts, technical write-ups, and thought leadership articles using tailored AI models.',
     link: 'https://devpostfe.vercel.app',
-    tags: ['Next.js 16', 'OpenAI API', 'MongoDB', 'NextAuth', 'Vercel', 'Tailwind CSS'],
+    tags: ['Next.js 16', 'OpenAI API', 'MongoDB', 'Authentication', 'Vercel'],
     video: '/projects/devpostai.mp4',
     features: [
-      'AI-powered post generation calibrated for tech founders and leaders',
-      'Content scheduling and calendar management with direct API posting',
-      'Performance analytics and audience engagement tracking',
-      'User authentication with isolated multi-tenant workspaces',
-      'Custom tone presets (Executive, Technical, Consultative)',
-      'Bulk content generation for distribution campaigns',
+      'Multi-format content generation with style-transfer algorithms',
+      'Smart hashtag and mention suggestion based on viral patterns',
+      'Scheduled publishing with calendar view and queue management',
+      'Analytics dashboard tracking post performance metrics',
+      'Custom tone-of-voice training using existing user content',
     ],
     techStack: [
-      { category: 'Frontend', items: ['Next.js 16', 'TypeScript', 'Tailwind CSS'] },
+      { category: 'Frontend', items: ['Next.js 16', 'React', 'Tailwind CSS'] },
       { category: 'Backend', items: ['Node.js', 'Express', 'MongoDB Atlas'] },
-      { category: 'AI/ML', items: ['OpenAI GPT-4o', 'Claude 3.5 Sonnet', 'Prompt Templates'] },
-      { category: 'Authentication', items: ['NextAuth.js', 'JWT', 'OAuth 2.0'] },
-      { category: 'Deployment', items: ['Vercel', 'MongoDB Atlas'] },
+      { category: 'AI/ML', items: ['OpenAI GPT-4o', 'Fine-tuned Prompts'] },
+      { category: 'Infrastructure', items: ['Vercel', 'Cron Jobs', 'Cloudinary'] },
     ],
     metrics: [
-      { icon: 'users', label: 'Active Creators', value: '2,500+' },
-      { icon: 'zap', label: 'Posts Generated', value: '100,000+' },
-      { icon: 'clock', label: 'Development Time', value: '3 Weeks' },
-      { icon: 'code', label: 'API Endpoints', value: '15+' },
+      { label: 'POSTS GENERATED', value: '15,000+' },
+      { label: 'AVG ENGAGEMENT LIFT', value: '3.2X' },
+      { label: 'SPRINT TIMELINE', value: '3 WEEKS' },
+      { label: 'SYSTEM RELIABILITY', value: '99.9%' },
     ],
     challenges: [
-      'Handling large context windows for long-form technical content',
-      'Real-time content streaming without API timeout errors',
-      'User authentication and multi-tenant draft privacy',
-      'Database optimization for high-volume content queries',
+      'Avoiding robotic and repetitive AI text patterns',
+      'Ensuring post formatting matches LinkedIn standards',
+      'Handling high-concurrency generation requests during peak hours',
     ],
     solutions: [
-      'Implemented chunking strategy for long content generation',
-      'Used Server-Sent Events (SSE) for streaming updates',
-      'Built strict role-based access control (RBAC) and isolated workspaces',
-      'Optimized MongoDB indexes and compound query patterns',
+      'Engineered structured prompt chains with few-shot industry examples',
+      'Created automated post format validators checking line breaks and length',
+      'Implemented worker queues for batch background generation',
     ],
   },
   aiproposalmaker: {
@@ -122,67 +118,56 @@ const PRODUCTS_DETAIL_DATA: Record<string, ProductDetail> = {
     name: 'AI Proposal Maker',
     badge: 'LIVE · PRODUCTION',
     live: true,
-    description: 'Autonomous B2B RFP & Upwork Proposal Generator',
+    description: 'Upwork AI Proposal Generator with 85% client interview rate',
     longDescription:
-      'Autonomous proposal generation engine that analyzes client job requirements, matches past portfolio skills, and generates tailored proposals in 30 seconds with an 85% success rate.',
+      'A specialized proposal automation tool that parses Upwork job descriptions and generates highly customized, persuasive freelance proposals in under 30 seconds. Powered by OpenAI with strict rate limits and Stripe subscriptions.',
     link: 'https://aiproposalmaker.vercel.app',
-    tags: ['Next.js 16', 'Claude API', 'OpenAI', 'Stripe', 'Redis', 'Vercel'],
+    tags: ['Next.js 16', 'OpenAI API', 'Stripe', 'Rate Limiting', 'Tailwind CSS'],
     video: '/projects/aiprop.mp4',
     features: [
-      'Instant job description & RFP parsing with requirement extraction',
-      'Dynamic portfolio & skill matching via vector search',
-      'Custom tone presets (Executive, Technical, Consultative)',
-      'Export to PDF, Markdown, and DOCX formats',
-      'Stripe credit billing and rate limiting safeguards',
-      'Sub-30 second end-to-end proposal generation speed',
+      'Instant job posting analysis and requirements extraction',
+      'Personalized pitch generation matching the client tone',
+      'Stripe subscription checkout with usage-based rate limits',
+      'Proposal history with success and interview telemetry',
     ],
     techStack: [
       { category: 'Frontend', items: ['Next.js 16', 'TypeScript', 'Tailwind CSS'] },
-      { category: 'Backend', items: ['Node.js', 'Express', 'Redis Rate Limiting'] },
-      { category: 'AI/ML', items: ['Claude 3.5 Sonnet', 'OpenAI GPT-4o', 'Prompt Chaining'] },
-      { category: 'Infrastructure', items: ['Vercel', 'Redis', 'Stripe'] },
+      { category: 'Backend', items: ['Next.js Server Actions', 'Redis Rate Limiter'] },
+      { category: 'AI/ML', items: ['OpenAI GPT-4o', 'Few-shot Prompt Chains'] },
+      { category: 'Infrastructure', items: ['Vercel', 'Stripe Billing'] },
     ],
     metrics: [
-      { icon: 'zap', label: 'Proposals Created', value: '10,000+' },
-      { icon: 'clock', label: 'Generation Speed', value: '30s' },
-      { icon: 'users', label: 'Active Users', value: '1,200+' },
-      { icon: 'code', label: 'Delivery Time', value: '3 Weeks' },
+      { label: 'PROPOSALS GENERATED', value: '10,000+' },
+      { label: 'INTERVIEW WIN RATE', value: '85%' },
+      { label: 'GENERATION LATENCY', value: '< 3.5s' },
+      { label: 'ACTIVE USERS', value: '2,500+' },
     ],
     challenges: [
-      'Extracting unstructured requirements from varied RFP formats',
-      'Balancing high-speed generation with customized voice',
-      'Preventing API abuse and runaway LLM costs',
-      'Exporting clean formatted PDFs and DOCX files',
+      'Synthesizing complex technical job briefs into concise pitches',
+      'Preventing API abuse while offering a generous free trial',
     ],
     solutions: [
-      'Designed structured heuristic extraction prompts with Pydantic schemas',
-      'Implemented dynamic prompt chaining with portfolio vector injection',
-      'Built Redis sliding-window rate limiters per authenticated user',
-      'Created custom headless server-side document compilers',
+      'Tuned prompt architectures emphasizing relevant portfolio proof points',
+      'Integrated Redis-backed sliding window rate limiters per IP and account',
     ],
   },
 };
 
 export async function generateStaticParams() {
-  return [
-    { id: 'everlearnai' },
-    { id: 'devpostai' },
-    { id: 'aiproposalmaker' },
-  ];
+  return Object.keys(PRODUCTS_DETAIL_DATA).map((id) => ({ id }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const product = PRODUCTS_DETAIL_DATA[id];
-
   if (!product) {
     return {
       title: 'Product Not Found | ZLab Services',
     };
   }
 
-  const title = `${product.name} | Production AI Product Deep Dive`;
-  const description = `${product.description} Engineered by ZLab Services. Shipped in 3-4 weeks.`;
+  const title = `${product.name} | Shipped Production AI Product`;
+  const description = `${product.description}. Production-ready AI application engineered by ZLab Services.`;
 
   return {
     title,
@@ -200,7 +185,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: '/og-image.png',
           width: 1200,
           height: 630,
-          alt: `${product.name} - ZLab Services`,
+          alt: product.name,
         },
       ],
     },
@@ -214,9 +199,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
+  backgroundImage: `linear-gradient(rgba(203, 255, 252, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(203, 255, 252, 0.018) 1px, transparent 1px)`,
+  backgroundSize: '72px 72px',
 };
 
 export default async function ProductDetailPage({ params }: PageProps) {
@@ -268,7 +253,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0a0a08] text-white flex flex-col justify-between">
+    <div className="relative min-h-screen bg-[#012624] text-[#edfffe] flex flex-col justify-between">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
@@ -281,40 +266,37 @@ export default async function ProductDetailPage({ params }: PageProps) {
       <div className="fixed inset-0 pointer-events-none" style={GRID_BG} />
       <Navbar />
 
-      <main className="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pt-32 pb-24 w-full">
+      <main className="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pt-36 pb-28 w-full">
         {/* Navigation back */}
         <div className="mb-8">
           <Link
             href="/#products"
-            className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 bg-white/5 hover:border-emerald-400/40 hover:text-emerald-400 transition-colors rounded-lg text-xs font-mono"
+            className="btn-kelp inline-flex items-center gap-2"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>&larr; Back to All Products</span>
+            <span>RETURN TO PRODUCTS</span>
           </Link>
         </div>
 
         {/* Header */}
-        <header className="mb-14 pb-8 border-b border-white/10">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="font-mono text-[9px] text-emerald-400 tracking-widest uppercase">
-              SHIPPED PRODUCT DEEP DIVE_
-            </span>
-            <div className="w-8 h-px bg-emerald-400/60" />
+        <header className="mb-14 pb-10 border-b border-[#004d49]">
+          <div className="font-sans text-[12px] font-medium tracking-[0.12em] uppercase text-[#bbc7c6] mb-3">
+            SHIPPED PRODUCT DOSSIER
           </div>
 
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
             <div>
-              <h1 className="font-serif italic text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-3">
+              <h1 className="font-sans text-4xl sm:text-5xl md:text-6xl font-medium tracking-[-0.04em] text-[#ffffff] leading-[1.08] mb-4">
                 {product.name}
               </h1>
               <div className="flex items-center gap-3">
-                <span className="px-3 py-1 bg-emerald-400/10 border border-emerald-400/30 rounded-full text-xs font-mono text-emerald-400">
+                <span className="font-sans text-[11px] font-medium tracking-[0.12em] px-3 py-1 bg-[#003734] border border-[#00827c]/40 rounded-[6px] text-[#cbfffc]">
                   {product.badge}
                 </span>
                 {product.live && (
-                  <span className="flex items-center gap-1.5 font-mono text-xs text-emerald-400/80">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    LIVE PRODUCTION APP
+                  <span className="flex items-center gap-2 font-sans text-xs text-[#edfffe]/80">
+                    <span className="w-2 h-2 rounded-full bg-[#cbfffc] animate-pulse" />
+                    LIVE PRODUCTION SYSTEM
                   </span>
                 )}
               </div>
@@ -324,37 +306,29 @@ export default async function ProductDetailPage({ params }: PageProps) {
               href={product.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-emerald-400 text-[#07110d] font-mono text-xs font-semibold uppercase tracking-wider hover:bg-emerald-300 transition-all rounded-full shadow-[0_0_20px_rgba(16,185,129,0.25)]"
+              className="btn-aurora"
             >
-              <span>Visit Live App</span>
-              <ExternalLink className="w-4 h-4" />
+              <span>VISIT LIVE SYSTEM</span>
+              <ExternalLink className="w-3.5 h-3.5 ml-1" />
             </a>
           </div>
 
-          <p className="text-base md:text-lg text-white/80 leading-relaxed max-w-3xl font-light">
+          <p className="font-sans text-base md:text-lg text-[#bbc7c6] leading-relaxed max-w-3xl font-normal">
             {product.longDescription}
           </p>
         </header>
 
-        {/* Metrics Grid */}
+        {/* Metrics Grid — Auros Lavender Phosphor */}
         <section aria-label="Key Product Metrics" className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
           {product.metrics.map((metric, i) => (
             <div
               key={i}
-              className="bg-white/[0.02] border border-white/10 p-5 rounded-lg"
+              className="bg-[#003734] border border-[#004d49] p-6 rounded-[16px] flex flex-col justify-between"
             >
-              <div className="flex items-center gap-2 mb-2">
-                <span className="text-emerald-400">
-                  {metric.icon === 'users' && <Users className="w-4 h-4" />}
-                  {metric.icon === 'zap' && <Zap className="w-4 h-4" />}
-                  {metric.icon === 'clock' && <Clock className="w-4 h-4" />}
-                  {metric.icon === 'code' && <Code2 className="w-4 h-4" />}
-                </span>
-                <span className="font-mono text-[10px] text-white/60 tracking-wider uppercase">
-                  {metric.label}
-                </span>
+              <div className="font-sans text-[10px] font-medium text-[#cbfffc] tracking-[0.15em] uppercase mb-2">
+                {metric.label}
               </div>
-              <div className="font-serif italic text-2xl md:text-3xl text-white">
+              <div className="font-sans text-3xl md:text-4xl font-medium tracking-[-0.03em] text-[#fde9ff]">
                 {metric.value}
               </div>
             </div>
@@ -364,29 +338,29 @@ export default async function ProductDetailPage({ params }: PageProps) {
         {/* Video Demo (if available) */}
         {product.video && (
           <section aria-label="Product Demo Video" className="mb-14">
-            <div className="aspect-video bg-black/40 border border-white/10 rounded-xl overflow-hidden">
+            <div className="aspect-video bg-[#011d1c] border border-[#004d49] rounded-[16px] overflow-hidden p-2">
               <video
                 src={product.video}
                 preload="metadata"
                 controls
                 playsInline
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-[10px]"
               />
             </div>
           </section>
         )}
 
         {/* Features & Tech Stack */}
-        <div className="grid md:grid-cols-2 gap-12 mb-16">
-          <section className="space-y-6">
-            <h2 className="font-serif italic text-2xl md:text-3xl text-white">
+        <div className="grid md:grid-cols-2 gap-8 mb-14">
+          <section className="bg-[#003734] border border-[#004d49] rounded-[16px] p-8 md:p-10">
+            <h2 className="font-sans text-2xl font-medium tracking-[-0.025em] text-[#ffffff] mb-6">
               Core Capabilities &amp; Features
             </h2>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {product.features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
-                  <span className="text-white/80 font-light text-sm leading-relaxed">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#cbfffc] mt-2 shrink-0 opacity-80" />
+                  <span className="font-sans text-sm text-[#edfffe]/90 font-normal leading-relaxed">
                     {feature}
                   </span>
                 </li>
@@ -394,21 +368,21 @@ export default async function ProductDetailPage({ params }: PageProps) {
             </ul>
           </section>
 
-          <section className="space-y-6">
-            <h2 className="font-serif italic text-2xl md:text-3xl text-white">
+          <section className="bg-[#003734] border border-[#004d49] rounded-[16px] p-8 md:p-10">
+            <h2 className="font-sans text-2xl font-medium tracking-[-0.025em] text-[#ffffff] mb-6">
               Production Architecture Stack
             </h2>
             <div className="space-y-5">
               {product.techStack.map((stack, i) => (
                 <div key={i}>
-                  <div className="font-mono text-[10px] text-emerald-400/80 uppercase tracking-widest mb-2">
+                  <div className="font-sans text-[10px] font-medium text-[#cbfffc] uppercase tracking-[0.15em] mb-2">
                     {stack.category}
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {stack.items.map((item, j) => (
                       <span
                         key={j}
-                        className="px-3 py-1 bg-white/[0.03] border border-white/10 text-white/80 font-mono text-xs rounded"
+                        className="font-sans text-xs text-[#edfffe]/90 bg-[#012624] border border-[#004d49] px-3 py-1 rounded-[6px]"
                       >
                         {item}
                       </span>
@@ -421,23 +395,23 @@ export default async function ProductDetailPage({ params }: PageProps) {
         </div>
 
         {/* Challenges & Engineering Solutions */}
-        <section className="border border-white/10 bg-white/[0.02] p-8 md:p-10 mb-16">
-          <h2 className="font-serif italic text-2xl md:text-3xl text-white mb-8">
-            Engineering Challenges &amp; Solutions
+        <section className="bg-[#011d1c] border border-[#004d49] rounded-[16px] p-8 md:p-12 mb-14">
+          <h2 className="font-sans text-2xl md:text-3xl font-medium tracking-[-0.03em] text-[#ffffff] mb-8">
+            Engineering Challenges &amp; Technical Solutions
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             {product.challenges.map((challenge, i) => (
-              <div key={i} className="border-l-2 border-emerald-400/50 pl-4">
-                <div className="font-mono text-[9px] text-white/50 uppercase tracking-wider mb-1">
+              <div key={i} className="border-l-2 border-[#cbfffc] pl-5">
+                <div className="font-sans text-[10px] font-medium text-[#bbc7c6] uppercase tracking-[0.15em] mb-1">
                   CHALLENGE 0{i + 1}
                 </div>
-                <div className="text-white/90 text-sm font-medium mb-3">
+                <div className="font-sans text-base font-medium text-[#ffffff] mb-2">
                   {challenge}
                 </div>
-                <div className="font-mono text-[9px] text-emerald-400 uppercase tracking-wider mb-1">
-                  ENGINEERING SOLUTION
+                <div className="font-sans text-[10px] font-medium text-[#cbfffc] uppercase tracking-[0.15em] mb-1 mt-3">
+                  ENGINEERING RESOLUTION
                 </div>
-                <div className="text-white/70 font-light text-xs leading-relaxed">
+                <div className="font-sans text-sm text-[#bbc7c6] font-normal leading-relaxed">
                   {product.solutions[i]}
                 </div>
               </div>
@@ -446,12 +420,12 @@ export default async function ProductDetailPage({ params }: PageProps) {
         </section>
 
         {/* Tags */}
-        <div className="flex flex-wrap items-center gap-2 mb-16">
-          <span className="font-mono text-[10px] text-white/40 uppercase mr-2">Tags:</span>
+        <div className="flex flex-wrap items-center gap-2 mb-14">
+          <span className="font-sans text-xs text-[#bbc7c6]/60 uppercase tracking-[0.1em] mr-2">STACK TAGS:</span>
           {product.tags.map((tag, i) => (
             <span
               key={i}
-              className="px-3 py-1 bg-white/[0.02] border border-white/10 text-white/60 font-mono text-xs rounded hover:border-emerald-400/40 hover:text-emerald-400 transition-colors"
+              className="font-sans text-xs text-[#edfffe]/80 bg-[#003734] border border-[#004d49] px-3 py-1 rounded-[6px]"
             >
               {tag}
             </span>
@@ -459,27 +433,27 @@ export default async function ProductDetailPage({ params }: PageProps) {
         </div>
 
         {/* CTA */}
-        <section className="p-8 md:p-10 border border-emerald-400/30 bg-emerald-400/[0.04] text-center rounded-xl">
-          <h2 className="font-serif italic text-2xl md:text-3xl text-white mb-3">
+        <section className="p-8 md:p-12 border border-[#004d49] bg-[#003734] rounded-[16px] text-center">
+          <h2 className="font-sans text-2xl md:text-3xl font-medium tracking-[-0.03em] text-[#ffffff] mb-3">
             Want an AI system built with this velocity?
           </h2>
-          <p className="text-sm text-white/70 max-w-lg mx-auto font-light leading-relaxed mb-6">
-            We build and ship hardened multi-tenant AI products in 3 to 4 weeks. Let&apos;s discuss your roadmap.
+          <p className="font-sans text-sm md:text-base text-[#bbc7c6] max-w-lg mx-auto font-normal leading-relaxed mb-6">
+            We build and ship hardened multi-tenant AI products in 3 to 4 weeks. Let&apos;s evaluate your roadmap.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="https://cal.com/code-zubair-3fs0gu/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#07110d] transition-all hover:bg-emerald-300"
+              className="btn-aurora"
             >
-              Book a 30-Min Strategy Call &rarr;
+              BOOK 30-MIN STRATEGY CALL →
             </a>
             <Link
               href="/#contact"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.03] px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-white/80 transition-all hover:border-emerald-400 hover:text-emerald-400"
+              className="btn-kelp"
             >
-              Send Project Brief
+              SUBMIT ARCHITECTURE BRIEF
             </Link>
           </div>
         </section>

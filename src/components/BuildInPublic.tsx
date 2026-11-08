@@ -2,80 +2,76 @@
 
 import { motion } from 'framer-motion';
 
-const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
-};
-
 export function BuildInPublic() {
   const activities = [
     {
       type: 'RELEASE',
       title: 'Released AI Proposal Maker v2.1',
-      description: 'Added Claude API integration for smarter proposal generation',
+      description: 'Integrated deterministic prompt templates and Stripe webhook reconciliation.',
       time: '2 HRS AGO',
     },
     {
       type: 'MILESTONE',
-      title: '4 AI Products Now Live',
-      description: 'Launched 4 production-ready AI SaaS products',
+      title: '3 Hardened Systems Live in Production',
+      description: 'Zero cross-tenant vector leakage verified across multi-tenant deployments.',
       time: '1 DAY AGO',
     },
     {
-      type: 'USERS',
-      title: '10K+ VS Code Extension Installs',
-      description: 'Claude AI extension crossed 10K installations milestone',
+      type: 'SCALE',
+      title: '10K+ Tool Executions & Installs',
+      description: 'Full-stack AI developer utilities crossed 10,000 installations milestone.',
       time: '3 DAYS AGO',
     },
     {
       type: 'UPDATE',
-      title: 'EverlearnAI Mobile v3.0 Released',
-      description: 'New AI-powered quiz generation and flashcard system',
+      title: 'EverlearnAI v3.0 Multi-Tenant RAG Launched',
+      description: 'Postgres Row-Level Security and chunked token streaming across web & Flutter app.',
       time: '1 WEEK AGO',
     },
     {
-      type: 'MILESTONE',
-      title: '10K+ Active Users & Growing',
-      description: 'Global community of product builders and AI enthusiasts',
+      type: 'OBSERVABILITY',
+      title: '99.9% Uptime & Sentry Tracing Verified',
+      description: 'Low-latency Redis caching and per-tenant rate limiters in active production.',
       time: '2 WEEKS AGO',
     },
   ];
 
   return (
-    <section id="build" className="relative py-24 px-6 md:px-10 overflow-hidden border-t border-white/8">
-      <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
-
+    <section id="build" className="relative py-28 px-6 md:px-10 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-20"
-        >
-          <span className="font-mono text-[9px] text-white/60 tracking-widest uppercase">BUILD IN PUBLIC_</span>
-          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-4 mb-6">
-            Shipping
-            <span className="text-emerald-400/80 not-italic"> in real-time</span>
-          </h2>
-          <p className="text-base text-white/70 leading-relaxed font-light max-w-xl">
-            No smoke, no mirrors. Here's what's actually happening. Every milestone, release, and achievement tracked transparently.
-          </p>
-        </motion.div>
-
-        {/* Stats Grid */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-3 gap-6 mb-16"
+          className="mb-16"
+        >
+          <div className="font-sans text-[12px] font-medium tracking-[0.12em] uppercase text-[#bbc7c6] mb-3">
+            VERIFIED TELEMETRY
+          </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 className="font-sans text-4xl md:text-5xl font-medium tracking-[-0.035em] text-[#ffffff] leading-[1.08] max-w-2xl">
+              Shipping in real-time. Verified by production logs.
+            </h2>
+            <p className="font-sans text-sm md:text-base text-[#bbc7c6] font-normal leading-relaxed max-w-md">
+              No vanity metrics or marketing posturing. Transparent updates from our active engineering pipeline and shipped deployments.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Stats Grid — Auros Lavender Phosphor metrics (#fde9ff) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
         >
           {[
-            { num: '4', lbl: 'AI PRODUCTS' },
-            { num: '10K+', lbl: 'VS CODE INSTALLS' },
-            { num: '10K+', lbl: 'ACTIVE USERS' },
+            { num: '3', lbl: 'LIVE PRODUCTION SYSTEMS' },
+            { num: '10K+', lbl: 'DEVELOPER INSTALLS' },
+            { num: '10K+', lbl: 'DOCUMENTS PROCESSED' },
           ].map((s, i) => (
             <motion.div
               key={i}
@@ -83,15 +79,19 @@ export function BuildInPublic() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group border border-white/6 bg-gradient-to-br from-white/2 to-white/1 hover:border-emerald-400/30 hover:bg-emerald-400/5 px-8 py-8 transition-all duration-300"
+              className="bg-[#003734] border border-[#004d49] rounded-[16px] p-8 md:p-10"
             >
-              <div className="font-serif italic text-4xl text-white mb-2 group-hover:text-emerald-300 transition-colors">{s.num}</div>
-              <div className="font-mono text-[9px] text-white/50 group-hover:text-white/70 tracking-widest transition-colors">{s.lbl}</div>
+              <div className="font-sans text-5xl md:text-6xl font-medium tracking-[-0.04em] text-[#fde9ff] mb-2">
+                {s.num}
+              </div>
+              <div className="font-sans text-[11px] font-medium tracking-[0.12em] text-[#edfffe]/80 uppercase">
+                {s.lbl}
+              </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Activity Cards */}
+        {/* Activity Cards — Auros Surface list */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -102,30 +102,28 @@ export function BuildInPublic() {
           {activities.map((a, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -16 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: i * 0.08 }}
-              className="group border border-white/6 bg-gradient-to-r from-white/2 to-white/1 hover:border-emerald-400/30 hover:bg-emerald-400/5 px-8 py-6 transition-all duration-300"
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="bg-[#003734] border border-[#004d49] hover:border-[#00827c]/60 rounded-[16px] px-8 py-5 transition-all duration-300"
             >
-              <div className="grid grid-cols-[auto_1fr_auto] gap-6 items-start">
-                {/* Badge */}
-                <span className="font-mono text-[8px] font-bold text-emerald-400/80 group-hover:text-emerald-400 border border-emerald-400/25 bg-emerald-400/5 px-2.5 py-1.5 tracking-widest transition-all min-w-max">
-                  {a.type}
-                </span>
-
-                {/* Content */}
-                <div className="min-w-0">
-                  <div className="text-white font-medium text-base leading-snug mb-1 group-hover:text-emerald-300 transition-colors">
-                    {a.title}
-                  </div>
-                  <div className="text-xs text-white/60 group-hover:text-white/75 transition-colors font-light leading-relaxed">
-                    {a.description}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <span className="font-sans text-[10px] font-medium tracking-[0.15em] text-[#cbfffc] bg-[#012624] px-2.5 py-1 rounded-[6px] border border-[#00827c]/30 shrink-0">
+                    {a.type}
+                  </span>
+                  <div>
+                    <h4 className="font-sans text-base font-medium text-[#ffffff] leading-snug">
+                      {a.title}
+                    </h4>
+                    <p className="font-sans text-xs text-[#bbc7c6] mt-0.5 leading-relaxed font-normal">
+                      {a.description}
+                    </p>
                   </div>
                 </div>
 
-                {/* Time */}
-                <span className="font-mono text-[9px] text-white/40 group-hover:text-white/60 tracking-widest transition-colors text-right min-w-max">
+                <span className="font-sans text-[10px] font-medium tracking-[0.12em] text-[#bbc7c6]/60 shrink-0 self-start sm:self-center">
                   {a.time}
                 </span>
               </div>

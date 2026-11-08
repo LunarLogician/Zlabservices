@@ -4,42 +4,12 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
-
-const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)`,
-  backgroundSize: '72px 72px',
-};
-
-const StaticOrbs = () => {
-  return (
-    <>
-      <div className="fixed top-20 left-0 w-96 h-96 bg-emerald-400/3 rounded-full blur-3xl pointer-events-none z-0" />
-      <div className="fixed bottom-20 right-0 w-96 h-96 bg-purple-400/3 rounded-full blur-3xl pointer-events-none z-0" />
-    </>
-  );
-};
-
-const StatusIndicator = () => {
-  return (
-    <div className="fixed top-6 right-6 z-20 hidden md:block">
-      <div className="flex items-center gap-2">
-        <div className="relative">
-          <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-          <div className="absolute inset-0 w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping opacity-75" />
-        </div>
-        <span className="font-mono text-[8px] text-white/50 tracking-widest uppercase">
-          SECURE MULTI-TENANT RUNTIME
-        </span>
-      </div>
-    </div>
-  );
-};
+import { BioluminescentSphere } from '@/components/BioluminescentSphere';
 
 export function AIHero() {
   const [input, setInput] = useState('');
   const [answer, setAnswer] = useState(
-    '**Ready.** What multi-tenant AI system, autonomous agent, or full-stack SaaS are you engineering?'
+    '**Ready.** What multi-tenant AI system, autonomous agent, or full-stack architecture are you engineering?'
   );
   const [loading, setLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
@@ -47,7 +17,7 @@ export function AIHero() {
   const suggestions = [
     'How do you isolate vector memory between tenants in RAG?',
     'Build an autonomous agent with sandboxed tool calling',
-    'Develop an offline-ready Flutter app with AI sync',
+    'Develop an offline-ready Flutter app with cloud sync',
     'Prevent prompt injection & data exfiltration in AI SaaS',
   ];
 
@@ -99,59 +69,59 @@ export function AIHero() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col px-6 md:px-10 pt-24 md:pt-36 pb-12 overflow-hidden bg-[#0a0a08]">
-      <div className="absolute inset-0 pointer-events-none z-0" style={GRID_BG} />
-      <StaticOrbs />
-      <StatusIndicator />
+    <section className="relative min-h-screen flex flex-col px-6 md:px-12 pt-28 md:pt-36 pb-16 overflow-hidden bg-[#012624]">
+      {/* Abyssal grid background */}
+      <div className="absolute inset-0 pointer-events-none abyssal-grid opacity-60 z-0" />
 
-      <div className="fixed bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent pointer-events-none z-0" />
+      {/* Bioluminescent floating sphere in background */}
+      <div className="absolute top-16 right-4 lg:right-24 z-0 opacity-40 lg:opacity-75 pointer-events-none">
+        <BioluminescentSphere size={440} />
+      </div>
 
-      <div className="max-w-6xl mx-auto w-full flex flex-col flex-1 relative z-10">
-        {/* Top status bar */}
-        <div className="flex items-center justify-between mb-12 md:mb-16 flex-wrap gap-4">
+      <div className="max-w-[1440px] mx-auto w-full flex flex-col flex-1 relative z-10">
+        {/* Top Eyebrow Status */}
+        <div className="flex items-center justify-between mb-12 flex-wrap gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="font-mono text-[9px] text-white/70 tracking-widest uppercase">
-              ACCEPTING SELECT MULTI-TENANT &amp; AGENTIC AI SPRINTS
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00827c] animate-pulse" />
+            <span className="text-[11px] font-normal uppercase tracking-[0.15em] text-[#bbc7c6]">
+              SECURE AI PRODUCT STUDIO &middot; LED BY CERTIFIED ETHICAL HACKER
             </span>
           </div>
 
-          <div className="hidden md:flex items-center gap-2">
-            <span className="font-mono text-[8px] text-emerald-400/80 tracking-widest uppercase">
-              CEH SECURITY RIGOR
+          <div className="hidden md:flex items-center gap-3">
+            <span className="text-[10px] text-[#edfffe]/60 tracking-[0.15em] uppercase font-normal">
+              SYSTEM LEVEL: HARDENED
             </span>
-            <div className="w-8 h-px bg-gradient-to-r from-emerald-400/40 to-transparent" />
+            <div className="w-6 h-px bg-[#edfffe]/20" />
           </div>
         </div>
 
-        {/* Main content grid */}
-        <div className="grid md:grid-cols-2 gap-12 items-start flex-1 mb-16">
-          {/* Left Column */}
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-emerald-400/30 bg-emerald-400/10 rounded-full mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span className="font-mono text-[8px] text-emerald-400 uppercase tracking-widest font-semibold">
-                SECURE AI PRODUCT STUDIO · CEH CERTIFIED
-              </span>
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start flex-1 mb-16">
+          {/* Left Column (7 cols) */}
+          <div className="lg:col-span-7">
+            <div className="inline-block text-[11px] font-normal uppercase tracking-[0.15em] text-[#edfffe] border-b border-[#00827c] pb-1 mb-6">
+              Full-Stack &middot; Multi-Tenant &middot; Autonomous
             </div>
 
-            {/* Semantic static H1 for 100% SSR visibility, no layout shift */}
-            <h1 className="font-serif italic text-4xl sm:text-5xl md:text-6xl text-white leading-tight mb-6">
-              Hardened Multi-Tenant AI{' '}
-              <span className="text-emerald-400 not-italic block mt-1">
+            {/* Headline: Matter weight 500, line-height 1.05, tight negative tracking */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-medium text-[#ffffff] tracking-[-0.04em] leading-[1.05] mb-6">
+              Hardened Multi-Tenant AI
+              <span className="block text-[#edfffe] opacity-90 mt-2">
                 &amp; Agentic Systems.
               </span>
             </h1>
 
-            {/* AEO Lead Definition (Answers who, what, timeline directly) */}
-            <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-lg mb-8 font-light">
+            {/* Subtext: Silver Mist, 16px, line-height 1.4 */}
+            <p className="text-base text-[#bbc7c6] leading-[1.4] max-w-xl mb-10 font-normal">
               We engineer production-grade Full-Stack AI SaaS with isolated tenant vector memory, sandboxed tool execution, and zero prompt-leakage architecture. Shipped in 3 to 4 weeks by EC-Council Certified Ethical Hackers.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 mb-8">
+            {/* Action Buttons: 6px radius, Auros palette */}
+            <div className="flex flex-wrap items-center gap-4 mb-10">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#07110d] shadow-[0_0_25px_rgba(16,185,129,0.25)] transition-all hover:-translate-y-0.5 hover:bg-emerald-300"
+                className="btn-aurora px-6 py-3.5 text-[13px] tracking-[0.08em] shadow-sm"
               >
                 Start Your Secure MVP &rarr;
               </a>
@@ -159,31 +129,32 @@ export function AIHero() {
                 href="https://cal.com/code-zubair-3fs0gu/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.04] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/80 transition-all hover:border-emerald-400 hover:text-emerald-400"
+                className="btn-kelp px-6 py-3.5 text-[13px] tracking-[0.08em]"
               >
-                Book a Technical Strategy Call
+                Book Technical Discovery
               </a>
             </div>
 
-            {/* Founder trust card with dimensions to prevent CLS */}
-            <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3.5 max-w-md">
+            {/* Founder Trust Card: 16px radius, Liquid Kelp raised surface */}
+            <div className="flex items-center gap-4 surface-card p-4 max-w-md border border-white/5">
               <Image
                 src="/founder-avatar.svg"
                 alt="Muhammad Zubair - Founder & Certified Ethical Hacker"
                 width={48}
                 height={48}
-                className="h-12 w-12 rounded-full border border-emerald-400/40 object-cover shrink-0"
+                className="h-12 w-12 rounded-full border border-[#00827c] object-cover shrink-0"
               />
               <div>
-                <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-emerald-400 font-semibold">
+                <p className="text-[10px] uppercase tracking-[0.15em] text-[#edfffe] font-medium">
                   Founder-Led Delivery
                 </p>
-                <p className="text-xs text-white/70 leading-snug">
+                <p className="text-xs text-[#bbc7c6] leading-snug mt-0.5">
                   Muhammad Zubair, EC-Council Certified Ethical Hacker (CEH, GPA 3.98). Direct architecture from day one.
                 </p>
               </div>
             </div>
 
+            {/* Uppercase Tracked Tags */}
             <div className="flex flex-wrap gap-2 mt-8">
               {[
                 'MULTI-TENANT RAG',
@@ -195,7 +166,7 @@ export function AIHero() {
               ].map((t) => (
                 <span
                   key={t}
-                  className="font-mono text-[8px] text-white/80 border border-white/15 bg-white/[0.04] px-2.5 py-1.5 tracking-wider"
+                  className="text-[10px] uppercase tracking-[0.12em] text-[#bbc7c6] bg-[#003734] px-3 py-1.5 rounded-[6px] border border-white/5"
                 >
                   {t}
                 </span>
@@ -203,43 +174,45 @@ export function AIHero() {
             </div>
           </div>
 
-          {/* Right Column - Terminal Widget */}
-          <div className="group">
-            <div className="relative bg-white/[0.02] border border-white/10 hover:border-emerald-400/30 rounded-lg p-6 transition-all duration-300 flex flex-col h-full min-h-96">
+          {/* Right Column: Abyssal Terminal Instrument (5 cols) */}
+          <div className="lg:col-span-5">
+            <div className="surface-card p-6 md:p-8 border border-white/10 flex flex-col h-full min-h-[460px] relative overflow-hidden backdrop-blur-md">
               {/* Terminal header */}
-              <div className="flex items-center gap-2 mb-5 pb-4 border-b border-white/10">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-                <div className="w-2.5 h-2.5 rounded-full bg-amber-400/70" />
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/70" />
-                <span className="ml-auto font-mono text-[9px] text-white/50 tracking-widest uppercase">
-                  zlab : ai systems architect
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#00827c]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#707777]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#edfffe]/30" />
+                </div>
+                <span className="text-[10px] uppercase tracking-[0.15em] text-[#bbc7c6]">
+                  terminal : ai architect
                 </span>
               </div>
 
               {/* Response area */}
-              <div className="flex-1 overflow-y-auto mb-4 pr-2 max-h-64 custom-scroll">
-                <div className="flex items-start gap-2 mb-3">
-                  <span className="font-mono text-[9px] text-emerald-400/80 shrink-0">$ AI:</span>
-                  <div className="text-white/80 text-xs leading-relaxed prose prose-invert prose-sm max-w-none flex-1">
+              <div className="flex-1 overflow-y-auto mb-5 pr-2 max-h-64 custom-scroll">
+                <div className="flex items-start gap-2.5">
+                  <span className="text-[11px] text-[#cbfffc] font-mono shrink-0">$ AI:</span>
+                  <div className="text-xs text-[#edfffe]/90 leading-relaxed prose prose-invert prose-sm max-w-none flex-1">
                     <ReactMarkdown
                       components={{
-                        p: ({ ...props }) => <p className="mb-2" {...props} />,
+                        p: ({ ...props }) => <p className="mb-2 leading-relaxed" {...props} />,
                         ul: ({ ...props }) => (
                           <ul className="list-disc list-inside mb-2 space-y-1 ml-2" {...props} />
                         ),
-                        li: ({ ...props }) => <li className="text-white/80 ml-1" {...props} />,
+                        li: ({ ...props }) => <li className="text-[#bbc7c6] ml-1" {...props} />,
                         strong: ({ ...props }) => (
-                          <strong className="font-bold text-emerald-400" {...props} />
+                          <strong className="font-medium text-[#cbfffc]" {...props} />
                         ),
                         code: ({ inline, ...props }: any) =>
                           inline ? (
                             <code
-                              className="bg-emerald-400/10 px-1.5 py-0.5 rounded text-emerald-300 font-mono text-[9px]"
+                              className="bg-[#011d1c] px-1.5 py-0.5 rounded-[4px] text-[#cbfffc] font-mono text-[10px]"
                               {...props}
                             />
                           ) : (
                             <code
-                              className="bg-white/5 px-2 py-1 rounded block my-1 text-emerald-300 font-mono text-[9px] overflow-x-auto"
+                              className="bg-[#011d1c] p-2 rounded-[6px] block my-2 text-[#cbfffc] font-mono text-[10px] overflow-x-auto"
                               {...props}
                             />
                           ),
@@ -248,7 +221,7 @@ export function AIHero() {
                       {answer}
                     </ReactMarkdown>
                     {loading && (
-                      <div className="flex items-center gap-1 text-emerald-400/70 italic text-[10px]">
+                      <div className="flex items-center gap-1.5 text-[#cbfffc]/80 text-[11px]">
                         <span>Analyzing system architecture</span>
                         <span className="animate-pulse">...</span>
                       </div>
@@ -259,9 +232,9 @@ export function AIHero() {
 
               {/* Suggestions */}
               {showSuggestions && !loading && (
-                <div className="mb-4 p-3 border border-white/10 bg-white/[0.02]">
-                  <div className="font-mono text-[7px] text-white/50 mb-2 uppercase tracking-wider">
-                    TECHNICAL ARCHITECTURE TOPICS_
+                <div className="mb-5 p-3 rounded-[6px] bg-[#011d1c] border border-white/5">
+                  <div className="text-[9px] uppercase tracking-[0.15em] text-[#bbc7c6] mb-2 font-normal">
+                    TOPICS OF INQUIRY_
                   </div>
                   <div className="flex flex-col gap-1.5">
                     {suggestions.map((s, i) => (
@@ -269,7 +242,7 @@ export function AIHero() {
                         key={i}
                         type="button"
                         onClick={() => handleSuggestionClick(s)}
-                        className="text-left text-[9px] text-white/70 hover:text-emerald-400 hover:border-emerald-400/40 border border-white/5 px-2.5 py-1.5 transition-all rounded bg-white/[0.01]"
+                        className="text-left text-[11px] text-[#bbc7c6] hover:text-[#cbfffc] py-1.5 px-2 rounded-[4px] hover:bg-[#003734] transition-colors"
                       >
                         {s} &rarr;
                       </button>
@@ -279,26 +252,23 @@ export function AIHero() {
               )}
 
               {/* Input area */}
-              <div className="flex gap-2 pt-3 border-t border-white/10">
-                <span className="font-mono text-[9px] text-emerald-400/80 shrink-0 self-center">
-                  $
-                </span>
+              <div className="flex gap-2 pt-4 border-t border-white/10">
+                <span className="text-xs text-[#cbfffc] font-mono self-center">$</span>
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && ask()}
-                  placeholder="Ask about multi-tenant RAG, agent security, or MVP sprint timelines..."
-                  aria-label="Describe your AI architecture, multi-tenant app, or agentic workflow"
+                  placeholder="Ask about multi-tenant RAG, agent security..."
+                  aria-label="Describe your multi-tenant AI architecture query"
                   disabled={loading}
-                  className="flex-1 bg-white/[0.04] border border-white/15 px-3 py-2 font-mono text-xs text-white placeholder:text-white/40 outline-none focus:border-emerald-400 transition-all disabled:opacity-40 rounded"
+                  className="flex-1 bg-[#011d1c] border border-white/10 rounded-[6px] px-3.5 py-2 text-xs text-white placeholder:text-[#bbc7c6]/50 outline-none focus:border-[#00827c] transition-colors disabled:opacity-40"
                 />
                 <button
                   type="button"
                   onClick={ask}
                   disabled={loading}
-                  aria-label="Send query to Claude AI architect"
-                  className="rounded bg-emerald-400 px-4 py-2 font-mono text-xs font-semibold text-[#07110d] shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="btn-aurora px-4 py-2 text-xs uppercase tracking-[0.08em] disabled:opacity-40"
                 >
                   {loading ? '...' : 'Send'}
                 </button>
@@ -307,9 +277,9 @@ export function AIHero() {
           </div>
         </div>
 
-        {/* Bottom metrics */}
-        <div className="border-t border-white/10 pt-10 flex flex-wrap justify-between items-center gap-8">
-          <div className="flex gap-8 sm:gap-12 flex-wrap">
+        {/* Bottom Statistics: Lavender Phosphor Pink on Deep Teal Canvas */}
+        <div className="border-t border-white/10 pt-12 flex flex-wrap justify-between items-end gap-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-14">
             {[
               { num: '15+', lbl: 'SHIPPED PRODUCTS & TOOLS' },
               { num: '10K+', lbl: 'AGENT RUNS & PROPOSALS' },
@@ -317,34 +287,22 @@ export function AIHero() {
               { num: '100%', lbl: 'ZERO-DATA-LEAKAGE RIGOR' },
             ].map((m) => (
               <div key={m.lbl} className="group">
-                <div className="font-serif italic text-2xl text-white group-hover:text-emerald-400 transition-colors">
+                {/* Luminous pink statistics counter */}
+                <div className="text-4xl sm:text-5xl font-medium text-[#fde9ff] tracking-[-0.04em] leading-none mb-2">
                   {m.num}
                 </div>
-                <div className="font-mono text-[8px] text-white/50 tracking-widest uppercase">
+                <div className="text-[11px] uppercase tracking-[0.12em] text-[#edfffe]/75">
                   {m.lbl}
                 </div>
               </div>
             ))}
           </div>
 
-          <span className="font-mono text-[8px] text-white/40 tracking-wider hidden md:block">
-            REMOTE STUDIO &middot; SERVING B2B &amp; TECH FOUNDERS WORLDWIDE
-          </span>
+          <div className="text-[11px] uppercase tracking-[0.15em] text-[#bbc7c6]/60 hidden md:block">
+            REMOTE STUDIO &middot; SERVING TECH FOUNDERS WORLDWIDE
+          </div>
         </div>
       </div>
-
-      <style jsx global>{`
-        .custom-scroll::-webkit-scrollbar {
-          width: 4px;
-        }
-        .custom-scroll::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-        }
-        .custom-scroll::-webkit-scrollbar-thumb {
-          background: rgba(16, 185, 129, 0.3);
-          border-radius: 4px;
-        }
-      `}</style>
     </section>
   );
 }

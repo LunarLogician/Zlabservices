@@ -3,12 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
-};
-
 const FAQ_ITEMS = [
   {
     question: 'How do you isolate vector memory between tenants in multi-tenant AI systems?',
@@ -58,60 +52,52 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="relative py-24 px-6 md:px-10 overflow-hidden border-t border-white/8">
+    <section id="faq" className="relative py-28 px-6 md:px-10 overflow-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
         <div className="mb-14">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="font-mono text-[9px] text-emerald-400 tracking-widest uppercase">
-              TECHNICAL FAQ_
-            </span>
-            <div className="h-px w-12 bg-emerald-400/40" />
+          <div className="font-sans text-[12px] font-medium tracking-[0.12em] uppercase text-[#bbc7c6] mb-3">
+            ARCHITECTURAL FAQ
           </div>
 
-          <h2 className="font-serif italic text-4xl md:text-5xl text-white leading-tight mb-4">
-            Frequently asked <span className="text-emerald-400 not-italic">questions</span>
+          <h2 className="font-sans text-4xl md:text-5xl font-medium tracking-[-0.035em] text-[#ffffff] leading-[1.08] mb-4">
+            Frequently asked questions.
           </h2>
-          <p className="text-sm text-white/70 font-light leading-relaxed max-w-xl">
-            Everything you need to know about our multi-tenant architecture, AI agent security, sprint timelines, and code ownership.
+          <p className="font-sans text-sm md:text-base text-[#bbc7c6] font-normal leading-relaxed max-w-xl">
+            Everything you need to know about our multi-tenant isolation, ethical hacking security verification, sprint delivery, and IP ownership.
           </p>
         </div>
 
-        {/* Accordion */}
-        <div className="space-y-3">
+        {/* Accordion — Auros Surface cards (#003734 & #011d1c with 16px radius) */}
+        <div className="space-y-4">
           {FAQ_ITEMS.map((item, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className={`border transition-all duration-200 ${
+                className={`border rounded-[16px] transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? 'border-emerald-400/40 bg-white/[0.03]'
-                    : 'border-white/10 bg-white/[0.01] hover:border-white/20'
+                    ? 'border-[#00827c] bg-[#003734]'
+                    : 'border-[#004d49] bg-[#011d1c] hover:border-[#00827c]/50'
                 }`}
               >
                 <button
                   type="button"
                   onClick={() => toggle(index)}
-                  className="w-full text-left p-6 flex items-start justify-between gap-4 transition-colors"
+                  className="w-full text-left p-6 md:p-8 flex items-center justify-between gap-6 cursor-pointer"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-serif italic text-lg md:text-xl text-white pr-4">
+                  <span className="font-sans text-lg md:text-xl font-medium text-[#ffffff] tracking-[-0.02em] leading-snug">
                     {item.question}
                   </span>
-                  <span
-                    className={`font-mono text-xs text-emerald-400 transition-transform duration-200 shrink-0 mt-1.5 ${
-                      isOpen ? 'rotate-45' : ''
-                    }`}
-                  >
-                    +
-                  </span>
+                  <div className="w-8 h-8 rounded-[6px] bg-[#012624] border border-[#00827c]/40 flex items-center justify-center text-[#cbfffc] shrink-0 transition-transform duration-200">
+                    <span className="text-base font-light">{isOpen ? '−' : '+'}</span>
+                  </div>
                 </button>
 
                 <AnimatePresence initial={false}>
@@ -120,11 +106,10 @@ export function FAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.25, ease: 'easeInOut' }}
-                      className="overflow-hidden"
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
                     >
-                      <div className="px-6 pb-6 pt-0 border-t border-white/5 mt-2">
-                        <p className="text-sm text-white/75 font-light leading-relaxed">
+                      <div className="px-6 md:px-8 pb-8 pt-0 border-t border-[#004d49]/60">
+                        <p className="font-sans text-sm md:text-base text-[#bbc7c6] leading-relaxed font-normal pt-4">
                           {item.answer}
                         </p>
                       </div>
@@ -139,4 +124,3 @@ export function FAQ() {
     </section>
   );
 }
-

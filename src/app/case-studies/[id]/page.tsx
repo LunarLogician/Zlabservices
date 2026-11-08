@@ -71,9 +71,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
+  backgroundImage: `linear-gradient(rgba(203, 255, 252, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(203, 255, 252, 0.018) 1px, transparent 1px)`,
+  backgroundSize: '72px 72px',
 };
 
 export default async function CaseStudyDetailPage({ params }: PageProps) {
@@ -148,7 +148,7 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0a0a08] text-white">
+    <div className="relative min-h-screen bg-[#012624] text-[#edfffe]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbsJsonLd) }}
@@ -161,23 +161,23 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
       <div className="fixed inset-0 pointer-events-none" style={GRID_BG} />
       <Navbar />
 
-      <main className="relative z-10 max-w-4xl mx-auto px-6 md:px-10 pt-32 pb-24">
+      <main className="relative z-10 max-w-4xl mx-auto px-6 md:px-10 pt-36 pb-28">
         {/* Breadcrumb Navigation */}
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex flex-wrap items-center gap-2 font-mono text-[10px] text-white/50 tracking-widest uppercase">
+          <ol className="flex flex-wrap items-center gap-2 font-sans text-xs text-[#bbc7c6] tracking-[0.1em] uppercase">
             <li>
-              <Link href="/" className="hover:text-emerald-400 transition-colors">
-                Home
+              <Link href="/" className="hover:text-[#cbfffc] transition-colors">
+                HOME
               </Link>
             </li>
-            <li>/</li>
+            <li className="text-[#00827c]">/</li>
             <li>
-              <Link href="/case-studies" className="hover:text-emerald-400 transition-colors">
-                Case Studies
+              <Link href="/case-studies" className="hover:text-[#cbfffc] transition-colors">
+                CASE STUDIES
               </Link>
             </li>
-            <li>/</li>
-            <li className="text-emerald-400 truncate max-w-xs" aria-current="page">
+            <li className="text-[#00827c]">/</li>
+            <li className="text-[#cbfffc] truncate max-w-xs" aria-current="page">
               {study.title}
             </li>
           </ol>
@@ -186,56 +186,56 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         {/* Header Block */}
         <header className="mb-14">
           <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="font-mono text-[9px] uppercase tracking-widest px-2.5 py-1 bg-emerald-400/10 border border-emerald-400/30 text-emerald-400">
+            <span className="font-sans text-[11px] font-medium uppercase tracking-[0.15em] px-3 py-1 bg-[#003734] border border-[#00827c]/40 text-[#cbfffc] rounded-[6px]">
               {study.clientIndustry}
             </span>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-white/50">
-              Timeline: {study.timeline}
+            <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-[#bbc7c6]/70">
+              TIMELINE: {study.timeline}
             </span>
             {study.liveUrl && (
               <a
                 href={study.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[9px] uppercase tracking-widest text-emerald-400/80 hover:text-emerald-300 ml-auto flex items-center gap-1"
+                className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-[#cbfffc] hover:underline ml-auto flex items-center gap-1"
               >
-                Live Product &rarr;
+                LIVE SYSTEM ↗
               </a>
             )}
           </div>
 
-          <h1 className="font-serif italic text-3xl md:text-5xl text-white leading-tight mb-6">
+          <h1 className="font-sans text-3xl md:text-5xl font-medium tracking-[-0.035em] text-[#ffffff] leading-[1.08] mb-6">
             {study.title}
           </h1>
 
-          <p className="text-lg md:text-xl text-emerald-400/90 font-light leading-relaxed mb-6">
+          <p className="font-sans text-lg md:text-xl text-[#cbfffc] font-normal leading-relaxed mb-6">
             {study.header}
           </p>
 
-          <p className="text-base text-white/70 font-light leading-relaxed">
+          <p className="font-sans text-base text-[#bbc7c6] font-normal leading-relaxed">
             {study.overview}
           </p>
         </header>
 
-        {/* Metrics Grid */}
+        {/* Metrics Grid — Auros Lavender Phosphor */}
         <section aria-labelledby="results-heading" className="mb-14">
-          <h2 id="results-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-6">
-            Shipped Metrics &amp; Key Outcomes
+          <h2 id="results-heading" className="font-sans text-[12px] font-medium text-[#bbc7c6] uppercase tracking-[0.12em] mb-6">
+            SHIPPED METRICS &amp; KEY OUTCOMES
           </h2>
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
             {study.results.map((metric, i) => (
               <div
                 key={i}
-                className="bg-white/[0.02] border border-white/10 p-5 rounded-none flex flex-col justify-between"
+                className="bg-[#003734] border border-[#004d49] rounded-[16px] p-6 flex flex-col justify-between"
               >
-                <div className="font-serif text-2xl text-emerald-400 mb-2 font-medium">
+                <div className="font-sans text-3xl font-medium tracking-[-0.03em] text-[#fde9ff] mb-2">
                   {metric.value}
                 </div>
                 <div>
-                  <div className="font-mono text-[9px] uppercase tracking-wider text-white mb-1">
+                  <div className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-[#ffffff] mb-1">
                     {metric.label}
                   </div>
-                  <div className="text-xs text-white/50 font-light leading-snug">
+                  <div className="font-sans text-xs text-[#bbc7c6] font-normal leading-snug">
                     {metric.detail}
                   </div>
                 </div>
@@ -245,55 +245,55 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </section>
 
         {/* Problem & Solution */}
-        <section className="grid md:grid-cols-2 gap-8 mb-14">
-          <div className="bg-white/[0.02] border border-white/10 p-6 md:p-8">
-            <h2 className="font-mono text-[10px] text-red-400/90 uppercase tracking-widest mb-4">
-              The Problem
+        <section className="grid md:grid-cols-2 gap-6 mb-14">
+          <div className="bg-[#003734] border border-[#004d49] rounded-[16px] p-8">
+            <h2 className="font-sans text-[11px] font-medium text-[#cbfffc] uppercase tracking-[0.15em] mb-3">
+              THE ARCHITECTURAL PROBLEM
             </h2>
-            <p className="text-sm text-white/75 font-light leading-relaxed">
+            <p className="font-sans text-sm text-[#bbc7c6] font-normal leading-relaxed">
               {study.problem}
             </p>
           </div>
 
-          <div className="bg-white/[0.02] border border-emerald-400/30 p-6 md:p-8">
-            <h2 className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-4">
-              The Engineered Solution
+          <div className="bg-[#003734] border border-[#00827c]/60 rounded-[16px] p-8">
+            <h2 className="font-sans text-[11px] font-medium text-[#cbfffc] uppercase tracking-[0.15em] mb-3">
+              THE ENGINEERED SOLUTION
             </h2>
-            <p className="text-sm text-white/75 font-light leading-relaxed">
+            <p className="font-sans text-sm text-[#bbc7c6] font-normal leading-relaxed">
               {study.solution}
             </p>
           </div>
         </section>
 
         {/* Multi-Tenant Architecture & Data Governance */}
-        <section aria-labelledby="architecture-framing-heading" className="mb-14 border border-white/10 bg-white/[0.02] p-8">
-          <h2 id="architecture-framing-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-6">
-            Multi-Tenant Architecture &amp; Data Governance
+        <section aria-labelledby="architecture-framing-heading" className="mb-14 bg-[#011d1c] border border-[#004d49] rounded-[16px] p-8 md:p-10">
+          <h2 id="architecture-framing-heading" className="font-sans text-[12px] font-medium text-[#cbfffc] uppercase tracking-[0.12em] mb-6">
+            MULTI-TENANT ARCHITECTURE &amp; DATA GOVERNANCE
           </h2>
           <div className="space-y-6">
-            <div className="border-l-2 border-emerald-400 pl-4">
-              <h3 className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">
+            <div className="border-l-2 border-[#cbfffc] pl-5">
+              <h3 className="font-sans text-sm font-medium text-[#ffffff] uppercase tracking-[0.05em] mb-1.5">
                 Multi-Tenant Isolation Safeguards
               </h3>
-              <p className="text-sm text-white/70 font-light leading-relaxed">
+              <p className="font-sans text-sm text-[#bbc7c6] font-normal leading-relaxed">
                 {study.architectureFraming.multiTenancy}
               </p>
             </div>
 
-            <div className="border-l-2 border-emerald-400/60 pl-4">
-              <h3 className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">
+            <div className="border-l-2 border-[#00827c] pl-5">
+              <h3 className="font-sans text-sm font-medium text-[#ffffff] uppercase tracking-[0.05em] mb-1.5">
                 Data Privacy &amp; Zero Leakage
               </h3>
-              <p className="text-sm text-white/70 font-light leading-relaxed">
+              <p className="font-sans text-sm text-[#bbc7c6] font-normal leading-relaxed">
                 {study.architectureFraming.securityAndIsolation}
               </p>
             </div>
 
-            <div className="border-l-2 border-emerald-400/30 pl-4">
-              <h3 className="font-mono text-[11px] text-white uppercase tracking-wider mb-1">
+            <div className="border-l-2 border-[#004d49] pl-5">
+              <h3 className="font-sans text-sm font-medium text-[#ffffff] uppercase tracking-[0.05em] mb-1.5">
                 System Integrations &amp; Infrastructure
               </h3>
-              <p className="text-sm text-white/70 font-light leading-relaxed">
+              <p className="font-sans text-sm text-[#bbc7c6] font-normal leading-relaxed">
                 {study.architectureFraming.integrations}
               </p>
             </div>
@@ -302,23 +302,23 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
         {/* Engineering Process */}
         <section aria-labelledby="process-heading" className="mb-14">
-          <h2 id="process-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-6">
-            Engineering Process &amp; Milestones
+          <h2 id="process-heading" className="font-sans text-[12px] font-medium text-[#bbc7c6] uppercase tracking-[0.12em] mb-6">
+            ENGINEERING PROCESS &amp; MILESTONES
           </h2>
           <div className="space-y-4">
             {study.process.map((step) => (
               <div
                 key={step.step}
-                className="bg-white/[0.02] border border-white/8 p-6 flex flex-col md:flex-row gap-4 md:items-center"
+                className="bg-[#003734] border border-[#004d49] rounded-[16px] p-6 flex flex-col md:flex-row gap-5 md:items-center"
               >
-                <div className="font-mono text-sm text-emerald-400/80 font-bold tracking-widest shrink-0">
+                <div className="font-sans text-sm text-[#cbfffc] font-medium tracking-[0.15em] shrink-0">
                   {step.step}
                 </div>
                 <div>
-                  <h3 className="font-serif italic text-lg text-white mb-1">
+                  <h3 className="font-sans text-lg font-medium text-[#ffffff] mb-1">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-white/60 font-light leading-relaxed">
+                  <p className="font-sans text-sm text-[#bbc7c6] font-normal leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -329,14 +329,14 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
 
         {/* Technical Stack */}
         <section aria-labelledby="stack-heading" className="mb-14">
-          <h2 id="stack-heading" className="font-mono text-[10px] text-emerald-400 uppercase tracking-widest mb-4">
-            Production Technology Stack
+          <h2 id="stack-heading" className="font-sans text-[12px] font-medium text-[#bbc7c6] uppercase tracking-[0.12em] mb-4">
+            PRODUCTION TECHNOLOGY STACK
           </h2>
           <div className="flex flex-wrap gap-2">
             {study.stack.map((item) => (
               <span
                 key={item}
-                className="font-mono text-xs text-white/80 border border-white/10 bg-white/[0.03] px-3 py-1.5"
+                className="font-sans text-xs text-[#edfffe]/90 border border-[#004d49] bg-[#003734] px-3.5 py-1.5 rounded-[6px]"
               >
                 {item}
               </span>
@@ -345,26 +345,26 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
         </section>
 
         {/* Author Bio & CEH Credentials */}
-        <section className="mb-14 border-t border-white/10 pt-8 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full border border-emerald-400/40 bg-emerald-400/10 flex items-center justify-center font-mono text-xs text-emerald-400 shrink-0">
+        <section className="mb-14 border-t border-[#004d49] pt-8 flex items-center gap-4">
+          <div className="w-12 h-12 rounded-[6px] border border-[#00827c]/40 bg-[#003734] flex items-center justify-center font-sans text-sm font-medium text-[#cbfffc] shrink-0">
             MZ
           </div>
           <div>
-            <div className="font-serif italic text-base text-white">
+            <div className="font-sans text-base font-medium text-[#ffffff]">
               {study.author.name}
             </div>
-            <div className="font-mono text-[9px] text-white/50 tracking-wider">
-              {study.author.role} · Bahria University (GPA 3.98)
+            <div className="font-sans text-xs text-[#bbc7c6] tracking-normal font-normal">
+              {study.author.role} · Bahria University (GPA 3.98) · EC-Council Certified Ethical Hacker
             </div>
           </div>
         </section>
 
         {/* CTA Block */}
-        <section className="p-8 md:p-10 border border-emerald-400/30 bg-emerald-400/[0.04] text-center">
-          <h2 className="font-serif italic text-2xl md:text-3xl text-white mb-3">
+        <section className="p-8 md:p-12 border border-[#004d49] bg-[#003734] rounded-[16px] text-center">
+          <h2 className="font-sans text-2xl md:text-3xl font-medium tracking-[-0.03em] text-[#ffffff] mb-3">
             Build your multi-tenant AI system with production rigor.
           </h2>
-          <p className="text-sm text-white/70 max-w-lg mx-auto font-light leading-relaxed mb-6">
+          <p className="font-sans text-sm md:text-base text-[#bbc7c6] max-w-lg mx-auto font-normal leading-relaxed mb-6">
             We partner with tech founders and engineering leaders to deliver hardened multi-tenant AI applications in 3 to 4 weeks. Let&apos;s evaluate your technical architecture.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -372,15 +372,15 @@ export default async function CaseStudyDetailPage({ params }: PageProps) {
               href="https://cal.com/code-zubair-3fs0gu/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#07110d] transition-all hover:bg-emerald-300"
+              className="btn-aurora"
             >
-              Book a 30-Min Strategy Call
+              BOOK 30-MIN STRATEGY CALL →
             </a>
             <Link
               href="/case-studies"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.03] px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-white/80 transition-all hover:border-emerald-400 hover:text-emerald-400"
+              className="btn-kelp"
             >
-              &larr; View All Case Studies
+              ← VIEW ALL CASE STUDIES
             </Link>
           </div>
         </section>

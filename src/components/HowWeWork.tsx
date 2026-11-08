@@ -2,267 +2,181 @@
 
 import { motion } from 'framer-motion';
 
-const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
-};
-
 export function HowWeWork() {
   const phases = [
     {
       step: '01',
-      title: 'Discovery & Planning',
-      duration: '1-2 days',
-      description: 'We understand your requirements, define scope, and plan the architecture.',
+      title: 'Discovery & Threat Modeling',
+      duration: '1-2 DAYS',
+      description: 'System specifications, multi-tenant database schema, vector isolation strategy, and security threat modeling.',
       deliverables: [
-        'Project requirements document',
-        'Technical architecture plan',
-        'Timeline & milestones',
-        'Tech stack recommendations'
+        'Postgres schema & RLS policy matrix',
+        'LLM orchestration architecture (Claude/OpenAI)',
+        'Tenant data isolation specification',
+        'Milestone-bound fixed delivery timeline',
       ],
-      icon: '🔍'
     },
     {
       step: '02',
-      title: 'Development & AI Integration',
-      duration: '2-3 weeks',
-      description: 'Building the core product with AI integration, authentication, and payments.',
+      title: 'Core Architecture & AI Pipeline',
+      duration: '2 WEEKS',
+      description: 'Engineering the full-stack system, secure vector indexing, background job queues, and payment gateways.',
       deliverables: [
-        'Frontend + backend development',
-        'AI model integration (Claude/OpenAI)',
-        'Payment gateway setup',
-        'Database design & implementation'
+        'Next.js 16 frontend + authenticated API',
+        'Multi-tenant vector namespace isolation',
+        'Stripe Checkout & automated webhook validation',
+        'Redis caching with per-tenant rate limits',
       ],
-      icon: '⚡'
     },
     {
       step: '03',
-      title: 'Testing & Optimization',
-      duration: '3-5 days',
-      description: 'Rigorous testing, performance optimization, and security hardening.',
+      title: 'Hardening & Offensive Auditing',
+      duration: '3-5 DAYS',
+      description: 'Offensive ethical hacking review led by CEH Muhammad Zubair: prompt injection defense, token leak tests, and load stress.',
       deliverables: [
-        'Quality assurance testing',
-        'Performance optimization',
-        'Security audit',
-        'Bug fixes & refinements'
+        'OWASP Top 10 for LLM security audit',
+        'Cross-tenant data leakage penetration testing',
+        'End-to-end token budget limit verification',
+        'Deterministic output validation (Zod/Pydantic)',
       ],
-      icon: '🔧'
     },
     {
       step: '04',
-      title: 'Deployment & Launch',
-      duration: '1-2 days',
-      description: 'Production deployment, monitoring setup, and handover.',
+      title: 'Cloud Deployment & Observability',
+      duration: '1-2 DAYS',
+      description: 'Production cloud rollout (AWS/Vercel/Railway) with Sentry error tracing, automated CI/CD, and complete IP transfer.',
       deliverables: [
-        'Production deployment',
-        'CI/CD pipeline setup',
-        'Monitoring & analytics',
-        'Documentation & training'
+        'Production DNS, SSL & CDN configuration',
+        'Automated CI/CD release pipelines',
+        'Sentry tracing & uptime monitoring',
+        '100% source code & pipeline IP handover',
       ],
-      icon: '🚀'
-    }
+    },
   ];
 
   const guarantees = [
-    { title: 'Fixed Timeline', description: 'Clear deadlines with weekly updates' },
-    { title: 'Transparent Pricing', description: 'No hidden costs, clear breakdown' },
-    { title: 'Weekly Demos', description: 'See progress every Friday' },
-    { title: 'Post-Launch Support', description: '30 days of free support included' }
+    { title: 'Deterministic Timeline', description: 'Strict sprint milestones with direct weekly builds delivered every Friday.' },
+    { title: 'Transparent Pricing', description: 'Fixed-cost milestones with zero billing surprises or licensing royalties.' },
+    { title: 'Offensive Security', description: 'Hardened against prompt leaks and cross-tenant vector contamination from day one.' },
+    { title: 'Full IP Ownership', description: 'Complete source code, database schemas, and AI prompts belong to you 100%.' },
   ];
 
   return (
-    <section id="process" className="relative py-24 px-6 md:px-10 overflow-hidden border-y border-white/8">
-      <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
-      
-      {/* Subtle background effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-0 left-0 w-96 h-96 bg-emerald-400/3 rounded-full blur-3xl"
-          animate={{ x: [0, 50, 0], y: [0, -30, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-0 w-96 h-96 bg-purple-400/3 rounded-full blur-3xl"
-          animate={{ x: [0, -50, 0], y: [0, 30, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        />
-      </div>
-
+    <section id="process" className="relative py-28 px-6 md:px-10 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-16 text-center"
-        >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <span className="font-mono text-[9px] text-white/60 tracking-widest">PROCESS_</span>
-            <motion.div
-              className="h-px w-12 bg-emerald-400/40"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ duration: 0.6 }}
-            />
-          </div>
-          
-          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mb-6">
-            How we
-            <span className="text-emerald-400/80 not-italic"> work</span>
-          </h2>
-          
-          <p className="text-sm text-white/70 leading-relaxed font-light max-w-2xl mx-auto">
-            From idea to production in 3-4 weeks. We follow a structured process that ensures
-            quality, transparency, and on-time delivery.
-          </p>
-        </motion.div>
-
-        {/* Process Timeline */}
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-400/20 via-emerald-400/10 to-transparent hidden md:block" />
-          
-          <div className="space-y-12 md:space-y-24">
-            {phases.map((phase, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.1 }}
-                className={`relative flex flex-col md:flex-row items-start gap-8 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 top-6 -translate-x-1/2 w-3 h-3 bg-emerald-400 rounded-full border-4 border-[#0a0a08] z-10 hidden md:block" />
-                
-                {/* Phase content */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                  <div className="bg-white/[0.02] border border-white/[0.08] p-8 hover:bg-white/[0.04] transition-all duration-300">
-                    {/* Phase header */}
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 border border-emerald-400/30 rounded-full flex items-center justify-center">
-                        <span className="text-lg">{phase.icon}</span>
-                      </div>
-                      <div>
-                        <div className="font-mono text-[8px] text-emerald-400/60 tracking-widest">
-                          PHASE {phase.step}
-                        </div>
-                        <h3 className="font-serif italic text-2xl text-white">
-                          {phase.title}
-                        </h3>
-                      </div>
-                    </div>
-
-                    {/* Duration */}
-                    <div className="mb-4">
-                      <div className="font-mono text-[8px] text-white/40 tracking-widest mb-1">
-                        DURATION
-                      </div>
-                      <div className="font-mono text-[10px] text-emerald-400/80">
-                        {phase.duration}
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-sm text-white/75 leading-relaxed font-light mb-6">
-                      {phase.description}
-                    </p>
-
-                    {/* Deliverables */}
-                    <div>
-                      <div className="font-mono text-[8px] text-white/40 tracking-widest mb-3">
-                        DELIVERABLES
-                      </div>
-                      <div className="space-y-2">
-                        {phase.deliverables.map((item, idx) => (
-                          <div key={idx} className="flex items-start gap-2">
-                            <div className="w-1 h-1 bg-emerald-400/60 rounded-full mt-2 flex-shrink-0" />
-                            <span className="font-mono text-[10px] text-white/60 leading-relaxed">
-                              {item}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Empty spacer for alternating layout */}
-                <div className="flex-1 hidden md:block" />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Guarantees */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-24 pt-12 border-t border-white/8"
+          transition={{ duration: 0.6 }}
+          className="mb-16"
         >
-          <div className="text-center mb-12">
-            <div className="font-mono text-[9px] text-white/60 tracking-widest mb-2">
-              OUR GUARANTEES
-            </div>
-            <h3 className="font-serif italic text-2xl text-white">
-              What you can expect
-            </h3>
+          <div className="font-sans text-[12px] font-medium tracking-[0.12em] uppercase text-[#bbc7c6] mb-3">
+            DELIVERY LIFECYCLE
           </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 className="font-sans text-4xl md:text-5xl font-medium tracking-[-0.035em] text-[#ffffff] leading-[1.08] max-w-2xl">
+              From architecture blueprint to production in 3-4 weeks.
+            </h2>
+            <p className="font-sans text-sm md:text-base text-[#bbc7c6] font-normal leading-relaxed max-w-md">
+              A structured, deterministic engineering process combining offensive security verification with high-velocity product execution.
+            </p>
+          </div>
+        </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {guarantees.map((guarantee, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
-                className="bg-white/[0.02] border border-white/[0.08] p-6 text-center hover:bg-white/[0.04] transition-all duration-300"
-              >
-                <div className="font-serif italic text-lg text-white mb-2">
-                  {guarantee.title}
+        {/* Process Steps Grid — Auros Liquid Kelp Cards (#003734, 16px radius, no shadow) */}
+        <div className="grid md:grid-cols-2 gap-6 mb-16">
+          {phases.map((phase, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="bg-[#003734] border border-[#004d49] hover:border-[#00827c]/60 rounded-[16px] p-8 md:p-10 flex flex-col justify-between transition-all duration-300"
+            >
+              <div>
+                {/* Header row: Step index and duration pill */}
+                <div className="flex items-center justify-between mb-6">
+                  <span className="font-sans text-xl font-medium text-[#cbfffc] tracking-[-0.02em]">
+                    PHASE {phase.step}
+                  </span>
+                  <span className="font-sans text-[10px] font-medium tracking-[0.12em] uppercase px-2.5 py-1 bg-[#012624] text-[#edfffe] border border-[#00827c]/30 rounded-[6px]">
+                    {phase.duration}
+                  </span>
                 </div>
-                <div className="font-mono text-[9px] text-white/60">
-                  {guarantee.description}
+
+                {/* Phase title */}
+                <h3 className="font-sans text-2xl font-medium tracking-[-0.025em] text-[#ffffff] mb-3">
+                  {phase.title}
+                </h3>
+
+                {/* Phase description */}
+                <p className="font-sans text-sm text-[#bbc7c6] leading-relaxed mb-6 font-normal">
+                  {phase.description}
+                </p>
+
+                {/* Deliverables checklist */}
+                <div className="space-y-2 mb-4">
+                  <div className="font-sans text-[10px] font-medium tracking-[0.15em] text-[#edfffe]/70 uppercase mb-2">
+                    TECHNICAL DELIVERABLES
+                  </div>
+                  {phase.deliverables.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#cbfffc] mt-1.5 shrink-0 opacity-80" />
+                      <span className="font-sans text-xs text-[#edfffe]/90 leading-relaxed font-normal">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Guarantees — Auros Liquid Deep recessed panels (#011d1c, 16px radius) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-[#011d1c] border border-[#004d49]/70 rounded-[16px] p-8 md:p-12 mb-16"
+        >
+          <div className="font-sans text-[11px] font-medium tracking-[0.15em] text-[#cbfffc] uppercase mb-2">
+            ENGINEERING COMMITMENTS
+          </div>
+          <h3 className="font-sans text-2xl md:text-3xl font-medium tracking-[-0.03em] text-[#ffffff] mb-8">
+            What you can depend on throughout our engagement.
+          </h3>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {guarantees.map((g, i) => (
+              <div key={i} className="border-t border-[#004d49] pt-4">
+                <div className="font-sans text-base font-medium text-[#ffffff] mb-2">
+                  {g.title}
+                </div>
+                <div className="font-sans text-xs text-[#bbc7c6] leading-relaxed font-normal">
+                  {g.description}
+                </div>
+              </div>
             ))}
           </div>
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
-          className="mt-16 text-center"
-        >
+        {/* Bottom CTA */}
+        <div className="flex flex-col items-center text-center">
           <a
             href="#contact"
-            className="group inline-flex items-center gap-3 px-8 py-4 border border-white/10 hover:border-emerald-400/40 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+            className="btn-aurora"
           >
-            <span className="font-mono text-[10px] text-white/70 group-hover:text-emerald-400 tracking-widest">
-              START YOUR PROJECT
-            </span>
-            <svg 
-              className="w-4 h-4 text-white/50 group-hover:text-emerald-400 transition-colors" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+            START YOUR ARCHITECTURE SPRINT →
           </a>
-          <p className="font-mono text-[8px] text-white/40 mt-4 tracking-widest">
-            Free 30-minute consultation · No commitment required
+          <p className="font-sans text-xs text-[#bbc7c6]/70 mt-4 tracking-normal">
+            Direct founder collaboration · EC-Council CEH verified · 3-4 week MVP target
           </p>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

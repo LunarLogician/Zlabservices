@@ -3,35 +3,28 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 
-const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
-};
-
-// Simple counter without heavy animations
-const SimpleCounter = ({ value, isInView }: { value: string; isInView: boolean }) => {
+// Counter component for numeric metrics
+const Counter = ({ value, isInView }: { value: string; isInView: boolean }) => {
   const [count, setCount] = useState(0);
-  
-  // Parse value with K notation (e.g., "10K+" -> 10000)
+
   const parseValue = (val: string): number => {
     const clean = val.replace('+', '');
     if (clean.includes('K')) {
       return parseFloat(clean.replace('K', '')) * 1000;
     }
-    return parseInt(clean);
+    return parseInt(clean, 10);
   };
-  
+
   const numericValue = parseValue(value);
   const hasPlus = value.includes('+');
-  
+
   useEffect(() => {
     if (!isInView) return;
-    
+
     let start = 0;
-    const duration = 1500;
+    const duration = 1200;
     const increment = numericValue / (duration / 16);
-    
+
     const timer = setInterval(() => {
       start += increment;
       if (start >= numericValue) {
@@ -41,21 +34,21 @@ const SimpleCounter = ({ value, isInView }: { value: string; isInView: boolean }
         setCount(Math.floor(start));
       }
     }, 16);
-    
+
     return () => clearInterval(timer);
   }, [isInView, numericValue]);
-  
+
   return (
-    <span className="relative inline-block">
+    <span className="font-sans font-medium text-[#fde9ff] tracking-[-0.04em]">
       {count.toLocaleString()}
-      {hasPlus && <span className="text-emerald-400/60">+</span>}
+      {hasPlus && <span className="text-[#cbfffc] font-normal">+</span>}
     </span>
   );
 };
 
 export function StatsLight() {
   const [isInView, setIsInView] = useState(false);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -66,59 +59,48 @@ export function StatsLight() {
       },
       { threshold: 0.2 }
     );
-    
+
     const element = document.getElementById('stats');
     if (element) {
       observer.observe(element);
     }
-    
+
     return () => observer.disconnect();
   }, []);
-  
+
   const stats = [
-    { value: '4+', label: 'YEARS EXPERIENCE', sub: 'Building products & leading teams' },
-    { value: '4', label: 'AI PRODUCTS', sub: 'Production-ready SaaS & apps' },
-    { value: '10K+', label: 'VS CODE INSTALLS', sub: 'Claude AI extension' },
-    { value: '10K+', label: 'ACTIVE USERS', sub: 'Global community' },
+    { value: '4+', label: 'YEARS IN SYSTEMS DEV', sub: 'Hardened production architectures' },
+    { value: '3', label: 'SHIPPED AI PRODUCTS', sub: 'Live multi-tenant SaaS & apps' },
+    { value: '10K+', label: 'EXTENSION INSTALLS', sub: 'Developer productivity tools' },
+    { value: '10K+', label: 'PROCESSED WORKFLOWS', sub: 'Automated documents & proposals' },
   ];
 
   return (
-    <section 
-      id="stats" 
-      className="relative py-24 px-6 md:px-10 overflow-hidden border-y border-white/[0.06]"
-    >
-      <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
-      
-      {/* Simple static gradient orbs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-emerald-400/5 rounded-full blur-3xl opacity-30" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl opacity-30" />
-
+    <section id="stats" className="relative py-28 px-6 md:px-10 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-px bg-emerald-400/60" />
-            <span className="font-mono text-[9px] text-white/60 tracking-widest">NUMBERS_</span>
+          <div className="font-sans text-[12px] font-medium tracking-[0.12em] uppercase text-[#bbc7c6] mb-3">
+            PERFORMANCE METRICS
           </div>
-          
-          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight">
-            By the
-            <span className="text-emerald-400/80 not-italic"> numbers</span>
-          </h2>
-          
-          <p className="text-sm text-white/70 leading-relaxed mt-4 font-light max-w-lg">
-            Real metrics from a real builder. No paid followers, no fake reviews — just results.
-          </p>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 className="font-sans text-4xl md:text-5xl font-medium tracking-[-0.035em] text-[#ffffff] leading-[1.08] max-w-2xl">
+              Engineered with quantifiable accountability.
+            </h2>
+            <p className="font-sans text-sm md:text-base text-[#bbc7c6] font-normal leading-relaxed max-w-md">
+              Real telemetry from shipped applications. Tested with real user traffic, subscription checkouts, and active multi-tenant workloads.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Stats grid - simple cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 border border-white/[0.08]">
+        {/* Primary Metric Cards — Auros Surface Card (#003734, 16px radius, Lavender Phosphor numbers) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           {stats.map((s, i) => (
             <motion.div
               key={i}
@@ -126,62 +108,51 @@ export function StatsLight() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative bg-white/[0.02] hover:bg-white/[0.04] p-8 transition-all duration-300
-                border-r border-white/[0.06] last:border-r-0 group"
+              className="bg-[#003734] border border-[#004d49] rounded-[16px] p-8 flex flex-col justify-between"
             >
-              {/* Simple hover effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent" />
+              <div>
+                <div className="text-5xl md:text-[61px] leading-none mb-3">
+                  <Counter value={s.value} isInView={isInView} />
+                </div>
+                <div className="font-sans text-[11px] font-medium tracking-[0.12em] text-[#edfffe] uppercase mb-2">
+                  {s.label}
+                </div>
               </div>
-              
-              <div className="relative z-10">
-                {/* Number */}
-                <div className="font-serif italic text-4xl md:text-5xl text-white mb-2 group-hover:text-emerald-400/90 transition-colors duration-300">
-                  <SimpleCounter value={s.value} isInView={isInView} />
-                </div>
-                
-                {/* Label */}
-                <div className="relative inline-block mb-3">
-                  <div className="font-mono text-[9px] text-white/50 tracking-widest group-hover:text-white/70 transition-colors">
-                    {s.label}
-                  </div>
-                  <div className="absolute bottom-0 left-0 w-0 h-px bg-emerald-400/40 group-hover:w-full transition-all duration-300" />
-                </div>
-                
-                {/* Sub text */}
-                <div className="text-xs text-white/90 font-light opacity-70 group-hover:opacity-100 transition-opacity">
-                  {s.sub}
-                </div>
+              <div className="font-sans text-xs text-[#bbc7c6] font-normal leading-relaxed mt-4 pt-4 border-t border-[#004d49]">
+                {s.sub}
               </div>
             </motion.div>
           ))}
         </div>
-        
-        {/* Simple divider */}
-        <div className="mt-8 h-px bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent" />
-        
-        {/* Additional metrics */}
+
+        {/* Auxiliary Metrics — Auros Liquid Deep recessed panels (#011d1c, 16px radius) */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-8 grid grid-cols-3 gap-4"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
           {[
-            { label: 'Avg. Response Time', value: '< 2hrs', icon: '⚡' },
-            { label: 'Client Retention', value: '94%', icon: '💯' },
-            { label: 'On-Time Delivery', value: '98%', icon: '🎯' },
+            { label: 'AVERAGE RESPONSE TIME', value: '< 2.4 HOURS', detail: 'Direct founder engineering access' },
+            { label: 'CLIENT RETENTION RATE', value: '100% REPEAT CLIENTS', detail: 'UK & US founder engagements' },
+            { label: 'CORE INFRASTRUCTURE UPTIME', value: '99.9% RELIABILITY', detail: 'Sentry observability & automated failover' },
           ].map((metric, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 p-3 border border-white/5 bg-white/[0.01] hover:border-emerald-400/20 transition-colors"
+              className="bg-[#011d1c] border border-[#004d49]/70 rounded-[16px] p-6 flex flex-col justify-between"
             >
-              <span className="text-lg">{metric.icon}</span>
-              <div>
-                <div className="font-serif text-sm text-white">{metric.value}</div>
-                <div className="font-mono text-[7px] text-white/40 tracking-wider">{metric.label}</div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="font-sans text-[10px] font-medium tracking-[0.15em] text-[#bbc7c6]/70 uppercase">
+                  {metric.label}
+                </span>
+                <span className="w-2 h-2 rounded-full bg-[#cbfffc] opacity-80" />
+              </div>
+              <div className="font-sans text-xl font-medium tracking-[-0.02em] text-[#ffffff] mb-1">
+                {metric.value}
+              </div>
+              <div className="font-sans text-xs text-[#bbc7c6]/80 font-normal">
+                {metric.detail}
               </div>
             </div>
           ))}

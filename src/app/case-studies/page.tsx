@@ -36,9 +36,9 @@ export const metadata: Metadata = {
 };
 
 const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
+  backgroundImage: `linear-gradient(rgba(203, 255, 252, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(203, 255, 252, 0.018) 1px, transparent 1px)`,
+  backgroundSize: '72px 72px',
 };
 
 export default function CaseStudiesIndexPage() {
@@ -81,7 +81,7 @@ export default function CaseStudiesIndexPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0a0a08] text-white">
+    <div className="relative min-h-screen bg-[#012624] text-[#edfffe]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
@@ -94,84 +94,83 @@ export default function CaseStudiesIndexPage() {
       <div className="fixed inset-0 pointer-events-none" style={GRID_BG} />
       <Navbar />
 
-      <main className="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pt-32 pb-24">
+      <main className="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pt-36 pb-28">
         {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 font-mono text-[10px] text-white/50 tracking-widest uppercase">
+          <ol className="flex items-center gap-2 font-sans text-xs text-[#bbc7c6] tracking-[0.1em] uppercase">
             <li>
-              <Link href="/" className="hover:text-emerald-400 transition-colors">
-                Home
+              <Link href="/" className="hover:text-[#cbfffc] transition-colors">
+                HOME
               </Link>
             </li>
-            <li>/</li>
-            <li className="text-emerald-400" aria-current="page">
-              Case Studies
+            <li className="text-[#00827c]">/</li>
+            <li className="text-[#cbfffc]" aria-current="page">
+              CASE STUDIES
             </li>
           </ol>
         </nav>
 
         {/* Header */}
         <header className="mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-emerald-400/20 bg-emerald-400/5 rounded-full mb-6">
-            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-            <span className="font-mono text-[8px] text-emerald-400/80 tracking-widest uppercase">
-              Proven Production Work
-            </span>
+          <div className="font-sans text-[12px] font-medium tracking-[0.12em] uppercase text-[#bbc7c6] mb-3">
+            VERIFIED PRODUCTION DOSSIERS
           </div>
 
-          <h1 className="font-serif italic text-4xl md:text-6xl text-white leading-tight mb-6">
-            Full-Stack AI Case Studies &amp; <span className="text-emerald-400 not-italic">Shipped Systems</span>
+          <h1 className="font-sans text-4xl md:text-6xl font-medium tracking-[-0.04em] text-[#ffffff] leading-[1.08] mb-6">
+            Production Case Studies &amp; Shipped Architectures.
           </h1>
 
-          <p className="text-base text-white/70 max-w-2xl font-light leading-relaxed">
+          <p className="font-sans text-base md:text-lg text-[#bbc7c6] max-w-2xl font-normal leading-relaxed">
             Real production systems architected for B2B founders, SaaS innovators, and tech teams. Built with isolated tenant vector memory, PostgreSQL Row-Level Security (RLS), and zero prompt-leakage architecture.
           </p>
         </header>
 
-        {/* Case Studies Grid */}
-        <div className="space-y-12">
+        {/* Case Studies Grid — Auros Liquid Kelp Cards (#003734, 16px radius, no shadow) */}
+        <div className="space-y-8">
           {CASE_STUDIES.map((study, idx) => (
             <article
               key={study.slug}
-              className="group relative bg-white/[0.02] border border-white/10 hover:border-emerald-400/40 p-8 md:p-10 transition-all duration-300"
+              className="bg-[#003734] border border-[#004d49] hover:border-[#00827c]/60 rounded-[16px] p-8 md:p-12 transition-all duration-300"
             >
-              <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-white/10">
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-[#004d49]">
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs text-emerald-400 tracking-widest">
-                    0{idx + 1}
+                  <span className="font-sans text-xs font-medium text-[#cbfffc] tracking-[0.15em]">
+                    DOSSIER 0{idx + 1}
                   </span>
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-white/50">
+                  <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-[#bbc7c6]/70">
                     {study.clientIndustry}
                   </span>
                 </div>
-                <div className="font-mono text-[9px] text-emerald-400/80 uppercase tracking-widest border border-emerald-400/20 px-2.5 py-1 bg-emerald-400/5">
-                  Timeline: {study.timeline}
+                <div className="font-sans text-[11px] font-medium text-[#edfffe] uppercase tracking-[0.12em] px-3 py-1 bg-[#012624] border border-[#00827c]/40 rounded-[6px]">
+                  TIMELINE: {study.timeline}
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8 items-start mb-8">
-                <div className="md:col-span-2">
-                  <h2 className="font-serif italic text-2xl md:text-3xl text-white mb-4 group-hover:text-emerald-300 transition-colors">
-                    <Link href={`/case-studies/${study.slug}`}>{study.title}</Link>
+              <div className="grid md:grid-cols-12 gap-8 items-start">
+                <div className="md:col-span-8">
+                  <h2 className="font-sans text-2xl md:text-3xl font-medium tracking-[-0.03em] text-[#ffffff] mb-4">
+                    <Link href={`/case-studies/${study.slug}`} className="hover:text-[#cbfffc] transition-colors">
+                      {study.title}
+                    </Link>
                   </h2>
-                  <p className="text-sm text-white/70 font-light leading-relaxed mb-6">
+                  <p className="font-sans text-sm md:text-base text-[#bbc7c6] font-normal leading-relaxed mb-6">
                     {study.overview}
                   </p>
 
-                  <div className="bg-white/[0.02] border border-white/8 p-4 mb-6">
-                    <div className="font-mono text-[8px] text-emerald-400/90 uppercase tracking-widest mb-1.5">
-                      Multi-Tenant Architecture &amp; Data Isolation
+                  <div className="bg-[#011d1c] border border-[#004d49] rounded-[10px] p-5 mb-6">
+                    <div className="font-sans text-[10px] font-medium text-[#cbfffc] uppercase tracking-[0.15em] mb-1.5">
+                      TENANT ISOLATION ARCHITECTURE
                     </div>
-                    <p className="text-xs text-white/60 leading-relaxed font-light">
+                    <p className="font-sans text-xs text-[#edfffe]/90 leading-relaxed font-normal">
                       {study.architectureFraming.multiTenancy}
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {study.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="font-mono text-[8px] text-white/60 border border-white/10 px-2 py-1 bg-white/[0.02]"
+                        className="font-sans text-[11px] text-[#edfffe]/80 bg-[#012624] border border-[#004d49] px-2.5 py-1 rounded-[6px]"
                       >
                         {tech}
                       </span>
@@ -179,18 +178,18 @@ export default function CaseStudiesIndexPage() {
                   </div>
                 </div>
 
-                <div className="bg-white/[0.02] border border-white/10 p-6 flex flex-col justify-between h-full">
+                <div className="md:col-span-4 bg-[#011d1c] border border-[#004d49] rounded-[12px] p-6 flex flex-col justify-between h-full">
                   <div>
-                    <div className="font-mono text-[9px] text-white/50 uppercase tracking-widest mb-4">
-                      Key Results
+                    <div className="font-sans text-[10px] font-medium text-[#bbc7c6] uppercase tracking-[0.15em] mb-4">
+                      VERIFIED OUTCOMES
                     </div>
                     <div className="space-y-4 mb-6">
                       {study.results.slice(0, 2).map((res, rIdx) => (
                         <div key={rIdx}>
-                          <div className="font-serif text-lg text-emerald-400 mb-0.5">
+                          <div className="font-sans text-2xl font-medium tracking-[-0.03em] text-[#fde9ff] mb-0.5">
                             {res.value}
                           </div>
-                          <div className="font-mono text-[9px] text-white/50 tracking-wider">
+                          <div className="font-sans text-xs text-[#bbc7c6] tracking-normal font-normal">
                             {res.label}
                           </div>
                         </div>
@@ -200,9 +199,9 @@ export default function CaseStudiesIndexPage() {
 
                   <Link
                     href={`/case-studies/${study.slug}`}
-                    className="inline-flex items-center justify-center gap-2 rounded bg-emerald-400 px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#07110d] transition-all hover:bg-emerald-300"
+                    className="btn-aurora text-center block w-full justify-center"
                   >
-                    Read Full Case Study &rarr;
+                    READ CASE STUDY →
                   </Link>
                 </div>
               </div>
@@ -210,17 +209,15 @@ export default function CaseStudiesIndexPage() {
           ))}
         </div>
 
-        {/* Global Case Study CTA */}
-        <section className="mt-20 p-10 border border-emerald-400/30 bg-emerald-400/[0.03] text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 border border-emerald-400/30 rounded-full mb-4">
-            <span className="font-mono text-[8px] text-emerald-400 uppercase tracking-widest">
-              Ready to Ship Your Multi-Tenant AI System?
-            </span>
+        {/* Global Case Study Callout */}
+        <section className="mt-20 bg-[#003734] border border-[#004d49] rounded-[16px] p-10 md:p-14 text-center">
+          <div className="font-sans text-[11px] font-medium tracking-[0.15em] uppercase text-[#cbfffc] mb-3">
+            TECHNICAL ENGAGEMENT
           </div>
-          <h2 className="font-serif italic text-3xl md:text-4xl text-white mb-4">
-            From architecture to production in 3 to 4 weeks.
+          <h2 className="font-sans text-3xl md:text-4xl font-medium tracking-[-0.03em] text-[#ffffff] mb-4">
+            From architecture schema to production in 3 to 4 weeks.
           </h2>
-          <p className="text-sm text-white/70 max-w-xl mx-auto font-light leading-relaxed mb-8">
+          <p className="font-sans text-sm md:text-base text-[#bbc7c6] max-w-xl mx-auto font-normal leading-relaxed mb-8">
             Book a 30-minute technical discovery call directly with Muhammad Zubair, EC-Council Certified Ethical Hacker. Zero sales pressure, just architecture.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
@@ -228,15 +225,15 @@ export default function CaseStudiesIndexPage() {
               href="https://cal.com/code-zubair-3fs0gu/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full bg-emerald-400 px-6 py-3 font-mono text-[10px] font-semibold uppercase tracking-widest text-[#07110d] shadow-[0_0_20px_rgba(16,185,129,0.25)] transition-all hover:bg-emerald-300"
+              className="btn-aurora"
             >
-              Book Technical Strategy Call &rarr;
+              BOOK TECHNICAL STRATEGY CALL →
             </a>
             <Link
               href="/#contact"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/[0.03] px-6 py-3 font-mono text-[10px] uppercase tracking-widest text-white/80 transition-all hover:border-emerald-400 hover:text-emerald-400"
+              className="btn-kelp"
             >
-              Send Project Brief
+              SUBMIT ARCHITECTURE BRIEF
             </Link>
           </div>
         </section>

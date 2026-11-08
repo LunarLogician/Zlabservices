@@ -3,14 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
-
-const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
-};
 
 interface Product {
   id: string;
@@ -31,11 +24,11 @@ const PRODUCTS_DATA: Product[] = [
     badge: 'LIVE · PRODUCTION',
     live: true,
     description:
-      'AI Study Tools platform with MCQ Generator, Quiz Maker, and Flashcards. Helps students generate study materials using Claude AI. Full-stack web + Flutter mobile app.',
+      'AI Study Tools platform with MCQ Generator, Quiz Maker, and Flashcards. Multi-tenant document RAG with Claude 3.5 Sonnet. Full-stack Next.js web application + Flutter mobile app.',
     link: 'https://everlearnai.live',
-    tags: ['Next.js', 'Flutter', 'Claude API', 'Stripe', 'Redis', 'Firebase'],
+    tags: ['Next.js 16', 'Flutter', 'Claude 3.5', 'Stripe', 'Redis', 'Postgres RLS'],
     image: '/projects/everlearnai.png',
-    video : '/projects/everlearnai.mp4',
+    video: '/projects/everlearnai.mp4',
   },
   {
     id: 'devpostai',
@@ -43,12 +36,11 @@ const PRODUCTS_DATA: Product[] = [
     badge: 'LIVE · PRODUCTION',
     live: true,
     description:
-      'AI-Powered LinkedIn Content Engine. Creates professional posts tailored for LinkedIn with templates, AI generation, and content scheduling.',
+      'AI-Powered Professional Content & Thought Leadership Engine. Autonomous multi-step draft generation with scoped tone calibration and scheduled social publishing.',
     link: 'https://devpostfe.vercel.app',
-    tags: ['Next.js', 'OpenAI API', 'MongoDB', 'Authentication', 'Vercel'],
+    tags: ['Next.js 16', 'OpenAI GPT-4o', 'MongoDB', 'Workspaces', 'Vercel'],
     image: '/projects/devpostai.png',
-    video : '/projects/devpostai.mp4',
-
+    video: '/projects/devpostai.mp4',
   },
   {
     id: 'aiproposalmaker',
@@ -56,236 +48,205 @@ const PRODUCTS_DATA: Product[] = [
     badge: 'LIVE · PRODUCTION',
     live: true,
     description:
-      'Upwork AI Proposal Generator. Creates personalized, professional proposals in 30 seconds with 85% success rate. 10,000+ proposals generated.',
+      'High-conversion Upwork proposal generator engineered with deterministic prompt templates, strict token budgets, and automated Stripe billing. Over 10,000 proposals generated.',
     link: 'https://aiproposalmaker.vercel.app',
-    tags: ['Next.js', 'OpenAI API', 'Stripe', 'Rate Limiting', 'Tailwind CSS'],
+    tags: ['Next.js 16', 'OpenAI API', 'Stripe Subscriptions', 'Rate Limiting', 'Tailwind'],
     image: '/projects/aiproposalmaker.png',
-    video : '/projects/aiprop.mp4',
+    video: '/projects/aiprop.mp4',
   },
 ];
 
 export function Products() {
-  const router = useRouter();
   const [modalOpen, setModalOpen] = useState<number | null>(null);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   return (
-    <section id="products" className="relative py-32 px-6 md:px-10 overflow-hidden border-t border-white/8">
-      <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
-
+    <section id="products" className="relative py-28 px-6 md:px-10 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Header */}
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-20"
+          transition={{ duration: 0.6 }}
+          className="mb-16"
         >
-          <span className="font-mono text-[9px] text-white/60 tracking-widest uppercase">
-            PRODUCTS_
-          </span>
-          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mt-4 mb-6">
-            Products already <span className="text-emerald-400/80">delivered</span>
-            <br></br>
-            <span className="text-white/40 not-italic">Live & production-ready</span>
-          </h2>
-          <p className="text-base text-white/70 leading-relaxed font-light max-w-lg">
-            Live products you can use right now. Full-stack, deployed, production-grade.
-          </p>
+          <div className="font-sans text-[12px] font-medium tracking-[0.12em] uppercase text-[#bbc7c6] mb-3">
+            SHIPPED PRODUCTS
+          </div>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 className="font-sans text-4xl md:text-5xl font-medium tracking-[-0.035em] text-[#ffffff] leading-[1.08] max-w-2xl">
+              Live in production. Used by real customers.
+            </h2>
+            <p className="font-sans text-sm md:text-base text-[#bbc7c6] font-normal leading-relaxed max-w-md">
+              Explore deployed applications engineered from architectural design to multi-tenant deployment, payment processing, and ongoing scale.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Products — card grid */}
-        <div className="grid md:grid-cols-2 gap-6 border border-white/6">
+        {/* Product Cards Grid — Auros Liquid Kelp Cards (#003734, 16px radius, no shadow) */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PRODUCTS_DATA.map((p, i) => (
-            <div
+            <motion.div
               key={p.id}
-              className="group relative"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: i * 0.1 }}
+              className="bg-[#003734] border border-[#004d49] hover:border-[#00827c]/60 rounded-[16px] overflow-hidden flex flex-col justify-between transition-all duration-300"
             >
-              <motion.div
-                className="bg-[#0a0a08] hover:bg-white/5 transition-all duration-300 flex flex-col border border-white/6 overflow-hidden h-full"
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.1 }}
-              >
-                {/* Media — Video or Image / Placeholder */}
+              {/* Media Preview container */}
+              <div>
                 {p.video ? (
-                  <div 
-                    className="relative h-64 md:h-80 bg-white/3 border-b border-white/6 overflow-hidden cursor-pointer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      e.preventDefault();
-                      setModalOpen(i);
-                    }}
+                  <div
+                    className="relative h-56 bg-[#011d1c] overflow-hidden cursor-pointer group"
+                    onClick={() => setModalOpen(i)}
                   >
                     <video
                       src={p.video}
                       preload="none"
                       loop
                       muted
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
                     />
-                    {/* Play button overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-16 h-16 rounded-full bg-emerald-400/20 border border-emerald-400/50 flex items-center justify-center group-hover:bg-emerald-400/40 transition-colors">
-                        <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <div className="absolute inset-0 flex items-center justify-center bg-[#011d1c]/40 group-hover:bg-[#011d1c]/20 transition-all">
+                      <div className="w-12 h-12 rounded-[6px] bg-[#003734] border border-[#cbfffc]/40 flex items-center justify-center text-[#ffffff] shadow-none group-hover:bg-[#00827c] transition-colors">
+                        <svg className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </div>
                     </div>
-                    {/* Mute button */}
-                    <button
-                      type="button"
-                      aria-label={isMuted ? "Unmute video" : "Mute video"}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                        setIsMuted(!isMuted);
-                      }}
-                      className="absolute top-4 right-4 z-10 p-2 rounded bg-black/50 hover:bg-black/70 transition-colors border border-white/20"
-                    >
-                      {isMuted ? (
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                        </svg>
-                      ) : (
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16257448 C3.34915502,0.9054770743 2.40734225,1.01158275 1.77946707,1.4829749 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99701575 L3.03521743,10.4380088 C3.03521743,10.5950961 3.19218622,10.7521935 3.50612381,10.7521935 L16.6915026,11.5376804 C16.6915026,11.5376804 17.1624089,11.5376804 17.1624089,12.0089725 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" />
-                        </svg>
-                      )}
-                    </button>
+                    <div className="absolute top-3 right-3 font-sans text-[10px] tracking-[0.12em] uppercase px-2.5 py-1 bg-[#012624]/90 text-[#cbfffc] border border-[#00827c]/40 rounded-[6px]">
+                      PLAY DEMO
+                    </div>
                   </div>
                 ) : p.image ? (
-                  <div className="relative h-64 md:h-80 bg-white/3 border-b border-white/6 overflow-hidden">
+                  <div className="relative h-56 bg-[#011d1c] overflow-hidden">
                     <Image
                       src={p.image}
                       alt={p.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover"
                     />
                   </div>
                 ) : (
-                  <div className="h-64 md:h-80 bg-gradient-to-br from-emerald-400/10 to-transparent border-b border-white/6 flex items-center justify-center">
-                    <span className="text-white/30 font-mono text-sm">SCREENSHOT</span>
+                  <div className="h-56 bg-[#011d1c] flex items-center justify-center text-[#bbc7c6]/40 font-mono text-xs tracking-wider">
+                    SYSTEM SCHEMATIC
                   </div>
                 )}
 
-                {/* Content */}
-                <div className="p-10 md:p-14 flex flex-col flex-1">
-                  {/* Badge */}
-                  <div className="mb-6">
-                    <span className="font-mono text-[8px] px-3 py-1.5 tracking-widest border text-emerald-400/80 border-emerald-400/25 bg-emerald-400/5 rounded-full inline-block">
+                {/* Content body */}
+                <div className="p-8">
+                  {/* Status badge */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="font-sans text-[10px] font-medium tracking-[0.12em] px-2.5 py-1 bg-[#012624] text-[#cbfffc] border border-[#00827c]/30 rounded-[6px]">
                       {p.badge}
+                    </span>
+                    <span className="font-sans text-[11px] text-[#bbc7c6]/60 tracking-[0.1em]">
+                      0{i + 1}
                     </span>
                   </div>
 
-                  {/* Product name */}
-                  <h3 className="font-serif italic text-3xl md:text-4xl text-white leading-tight mb-4 transition-colors">
-                    <Link href={`/products/${p.id}`} className="hover:text-emerald-300 transition-colors">
+                  {/* Title */}
+                  <h3 className="font-sans text-2xl font-medium tracking-[-0.025em] text-[#ffffff] mb-3">
+                    <Link href={`/products/${p.id}`} className="hover:text-[#cbfffc] transition-colors">
                       {p.name}
                     </Link>
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-white/70 leading-relaxed mb-8 flex-1 font-light">
+                  <p className="font-sans text-sm text-[#bbc7c6] leading-relaxed mb-6 font-normal">
                     {p.description}
                   </p>
 
-                  {/* Footer — tags + link */}
-                  <div className="border-t border-white/10 pt-6 flex justify-between items-end gap-4">
-                    <div className="flex flex-wrap gap-2">
-                      {p.tags.map((t) => (
-                        <span
-                          key={t}
-                          className="font-mono text-[8px] text-white/60 border border-white/15 px-2.5 py-1 tracking-wider hover:border-emerald-400/30 hover:text-white/80 transition-colors"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-3 shrink-0">
-                      <Link
-                        href={`/products/${p.id}`}
-                        className="font-mono text-[10px] text-emerald-400 hover:text-emerald-300 transition-colors tracking-wider whitespace-nowrap"
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {p.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="font-sans text-[11px] text-[#edfffe]/80 bg-[#012624]/80 border border-[#004d49] px-2 py-0.5 rounded-[4px]"
                       >
-                        DEEP DIVE &rarr;
-                      </Link>
-                      <a
-                        href={p.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-[10px] text-white/75 hover:text-white transition-all tracking-wider inline-flex items-center gap-1 whitespace-nowrap"
-                      >
-                        LIVE &rarr;
-                      </a>
-                    </div>
+                        {t}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </motion.div>
-            </div>
+              </div>
+
+              {/* Action Buttons Footer */}
+              <div className="px-8 pb-8 pt-4 border-t border-[#004d49] flex items-center justify-between gap-3">
+                <Link
+                  href={`/products/${p.id}`}
+                  className="font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-[#edfffe] hover:text-[#cbfffc] transition-colors"
+                >
+                  DEEP DIVE →
+                </Link>
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-[6px] bg-[#012624]/60 border border-[#00827c]/40 flex items-center justify-center text-[#ffffff] hover:bg-[#00827c] hover:text-[#011d1c] transition-all"
+                  aria-label={`Open ${p.name} live in new tab`}
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </a>
+              </div>
+            </motion.div>
           ))}
         </div>
 
-        {/* Full-screen Modal */}
+        {/* Video Modal with Auros styling */}
         {modalOpen !== null && PRODUCTS_DATA[modalOpen]?.video && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+          <div
             onClick={() => setModalOpen(null)}
-            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4 cursor-pointer"
+            className="fixed inset-0 z-50 bg-[#011d1c]/90 backdrop-blur-md flex items-center justify-center p-4 cursor-pointer"
           >
-            <motion.div
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
+            <div
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-4xl cursor-default"
+              className="relative w-full max-w-4xl bg-[#003734] border border-[#00827c]/50 rounded-[16px] p-4 cursor-default"
             >
-              {/* Close button */}
-              <button
-                onClick={() => setModalOpen(null)}
-                className="absolute -top-12 right-0 text-white hover:text-emerald-400 transition-colors z-10"
-              >
-                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+              {/* Controls bar */}
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#004d49]">
+                <span className="font-sans text-xs tracking-[0.12em] uppercase text-[#cbfffc]">
+                  {PRODUCTS_DATA[modalOpen].name} · Architecture Walkthrough
+                </span>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => {
+                      setIsMuted(!isMuted);
+                      if (videoRef.current) {
+                        videoRef.current.muted = !isMuted;
+                      }
+                    }}
+                    className="font-sans text-[11px] uppercase tracking-[0.12em] text-[#edfffe] bg-[#012624] px-3 py-1.5 rounded-[6px] border border-[#00827c]/40 hover:border-[#cbfffc]"
+                  >
+                    {isMuted ? 'UNMUTE AUDIO' : 'MUTE AUDIO'}
+                  </button>
+                  <button
+                    onClick={() => setModalOpen(null)}
+                    aria-label="Close walkthrough"
+                    className="w-8 h-8 rounded-[6px] bg-[#012624] border border-[#00827c]/40 text-[#ffffff] flex items-center justify-center hover:bg-[#00827c] hover:text-[#011d1c]"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
 
-              {/* Modal mute button */}
-              <button
-                onClick={() => {
-                  setIsMuted(!isMuted);
-                  if (videoRef.current) {
-                    videoRef.current.muted = !isMuted;
-                  }
-                }}
-                className="absolute top-4 right-4 z-20 p-3 rounded bg-black/60 hover:bg-black/80 transition-colors border border-white/30"
-              >
-                {isMuted ? (
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.26 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16257448 C3.34915502,0.9054770743 2.40734225,1.01158275 1.77946707,1.4829749 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99701575 L3.03521743,10.4380088 C3.03521743,10.5950961 3.19218622,10.7521935 3.50612381,10.7521935 L16.6915026,11.5376804 C16.6915026,11.5376804 17.1624089,11.5376804 17.1624089,12.0089725 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" />
-                  </svg>
-                )}
-              </button>
-
-              {/* Modal video */}
+              {/* Video Element */}
               <video
                 ref={videoRef}
-                src={PRODUCTS_DATA[modalOpen]?.video}
+                src={PRODUCTS_DATA[modalOpen].video}
                 autoPlay
                 controls
                 muted={isMuted}
-                className="w-full rounded-lg"
+                className="w-full rounded-[10px] aspect-video object-cover"
               />
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         )}
       </div>
     </section>

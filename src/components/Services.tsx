@@ -2,12 +2,6 @@
 
 import { motion } from 'framer-motion';
 
-const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.02) 1px, transparent 1px)`,
-  backgroundSize: '48px 48px',
-};
-
 export function Services() {
   const services = [
     {
@@ -24,8 +18,8 @@ export function Services() {
         'Hardened cloud deployment (Vercel/Railway/AWS)',
         'CI/CD pipelines, Sentry & uptime monitoring',
       ],
-      timeframe: '3-4 weeks to MVP',
-      highlight: 'Secure, production-ready multi-tenancy',
+      timeframe: '3-4 WEEKS TO MVP',
+      highlight: 'SECURE MULTI-TENANCY',
     },
     {
       index: '02',
@@ -41,8 +35,8 @@ export function Services() {
         'Structured outputs with Pydantic & Zod validation',
         'Complete audit trails & observability tracing',
       ],
-      timeframe: '3-4 weeks to launch',
-      highlight: 'Deterministic, sandboxed agent execution',
+      timeframe: '3-4 WEEKS TO LAUNCH',
+      highlight: 'SANDBOXED AGENT EXECUTION',
     },
     {
       index: '03',
@@ -58,75 +52,37 @@ export function Services() {
         'Push notifications & analytics instrumentation',
         '60fps native performance on single codebase',
       ],
-      timeframe: '4-5 weeks to launch',
-      highlight: 'Native performance, single codebase',
+      timeframe: '4-5 WEEKS TO LAUNCH',
+      highlight: 'NATIVE 60FPS PERFORMANCE',
     },
   ];
 
   return (
-    <section id="services" className="relative py-24 px-6 md:px-10 overflow-hidden border-y border-white/8">
-      <div className="absolute inset-0 pointer-events-none" style={GRID_BG} />
-      
-      {/* Subtle gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 -left-20 w-72 h-72 bg-emerald-400/3 rounded-full blur-3xl"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 -right-20 w-96 h-96 bg-purple-400/3 rounded-full blur-3xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 2,
-          }}
-        />
-      </div>
-
+    <section id="services" className="relative py-28 px-6 md:px-10 overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Header */}
+        {/* Eyebrow & Section Heading in Matter 500 */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="font-mono text-[9px] text-white/60 tracking-widest">SERVICES_</span>
-            <motion.div
-              className="h-px w-12 bg-emerald-400/40"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              transition={{ duration: 0.6 }}
-            />
+          <div className="font-sans text-[12px] font-medium tracking-[0.12em] uppercase text-[#bbc7c6] mb-3">
+            CAPABILITIES & SYSTEMS
           </div>
-          
-          <h2 className="font-serif italic text-5xl md:text-6xl text-white leading-tight mb-6">
-            What we
-            <span className="text-emerald-400/80 not-italic"> build</span>
-          </h2>
-          
-          <p className="text-sm text-white/70 leading-relaxed font-light max-w-2xl">
-            We ship production-ready products, not fragile prototypes. Every project includes proper authentication, 
-            payment processing, Redis caching, per-tenant rate limiting, and deployment. Real products need real infrastructure.
-          </p>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <h2 className="font-sans text-4xl md:text-5xl font-medium tracking-[-0.035em] text-[#ffffff] leading-[1.08] max-w-2xl">
+              Engineered for production. Built to withstand real load.
+            </h2>
+            <p className="font-sans text-sm md:text-base text-[#bbc7c6] font-normal leading-relaxed max-w-md">
+              We ship hardened systems with strict tenant isolation, automated subscription billing, and sandboxed AI orchestration — not fragile prototypes.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Services grid */}
+        {/* Services grid — Auros Surface Cards (16px radius, Liquid Kelp #003734, no shadows) */}
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
@@ -134,63 +90,74 @@ export function Services() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
-              className="group relative bg-white/[0.02] hover:bg-white/[0.04] border border-white/[0.08] p-8 transition-all duration-300"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="bg-[#003734] border border-[#004d49] rounded-[16px] p-8 md:p-10 flex flex-col justify-between transition-all duration-300 hover:border-[#00827c]/60"
             >
-              {/* Service index */}
-              <div className="font-mono text-[10px] text-emerald-400/60 tracking-widest mb-6">
-                {service.index}
+              <div>
+                {/* Header row: Index & Auros Arrow Icon Button (32x32, 6px radius) */}
+                <div className="flex items-center justify-between mb-8">
+                  <span className="font-sans text-[11px] font-medium tracking-[0.15em] text-[#edfffe]/70 uppercase">
+                    SYSTEM {service.index}
+                  </span>
+                  <a
+                    href="#contact"
+                    aria-label={`Inquire about ${service.title}`}
+                    className="w-8 h-8 rounded-[6px] bg-[#012624]/60 border border-[#00827c]/40 flex items-center justify-center text-[#ffffff] hover:bg-[#00827c] hover:text-[#011d1c] transition-all"
+                  >
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </a>
+                </div>
+
+                {/* Card Title — Matter 500 */}
+                <h3 className="font-sans text-2xl font-medium tracking-[-0.025em] text-[#ffffff] mb-4 leading-snug">
+                  {service.title}
+                </h3>
+
+                {/* Description — Silver Mist */}
+                <p className="font-sans text-sm text-[#bbc7c6] leading-relaxed mb-8">
+                  {service.description}
+                </p>
+
+                {/* Technical Specifications */}
+                <div className="space-y-2.5 mb-8">
+                  {service.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#cbfffc] mt-1.5 shrink-0 opacity-80" />
+                      <span className="font-sans text-xs text-[#edfffe]/90 leading-relaxed">
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              {/* Title */}
-              <h3 className="font-serif italic text-2xl text-white mb-4 leading-snug">
-                {service.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-sm text-white/75 leading-relaxed font-light mb-6">
-                {service.description}
-              </p>
-
-              {/* Features list */}
-              <div className="space-y-2 mb-6">
-                {service.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-start gap-2">
-                    <div className="w-1 h-1 bg-emerald-400/60 rounded-full mt-2 flex-shrink-0" />
-                    <span className="font-mono text-[10px] text-white/60 leading-relaxed">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Meta info */}
-              <div className="pt-6 border-t border-white/[0.06] flex items-center justify-between">
-                <span className="font-mono text-[9px] text-emerald-400/80 tracking-wider">
+              {/* Meta footer row */}
+              <div className="pt-6 border-t border-[#004d49] flex items-center justify-between font-sans text-[11px] tracking-[0.1em]">
+                <span className="text-[#cbfffc] font-medium">
                   {service.timeframe}
                 </span>
-                <span className="font-mono text-[8px] text-white/40 tracking-wider">
+                <span className="text-[#bbc7c6]/60">
                   {service.highlight}
                 </span>
               </div>
-
-              {/* Glow effect on hover */}
-              <div className="absolute -inset-px bg-gradient-to-r from-emerald-400/0 via-emerald-400/10 to-emerald-400/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl pointer-events-none" />
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA Button */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-16 text-center"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-16 flex justify-center"
         >
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 font-mono text-[11px] text-white/75 hover:text-emerald-400 border border-white/10 hover:border-emerald-400/40 px-6 py-3 transition-all"
+            className="btn-aurora"
           >
             DISCUSS YOUR ARCHITECTURE →
           </a>

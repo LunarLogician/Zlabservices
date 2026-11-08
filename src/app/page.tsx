@@ -17,33 +17,33 @@ import { Footer } from '@/components/Footer';
 
 // Global grid background style (consistent across all sections)
 const GRID_BG = {
-  backgroundImage: `linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px)`,
+  backgroundImage: `linear-gradient(rgba(203, 255, 252, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(203, 255, 252, 0.018) 1px, transparent 1px)`,
   backgroundSize: '72px 72px',
 };
 
-// Lightweight static background
+// Abyssal bioluminescent ambient background
 const StaticBackground = () => {
   return (
     <>
-      {/* Base grid */}
       <div className="fixed inset-0 pointer-events-none" style={GRID_BG} />
-      
-      {/* Simple static gradient orbs */}
-      <div className="fixed top-1/4 -left-48 w-96 h-96 bg-emerald-400/3 rounded-full blur-3xl pointer-events-none opacity-30" />
-      <div className="fixed bottom-1/4 -right-48 w-96 h-96 bg-purple-400/3 rounded-full blur-3xl pointer-events-none opacity-30" />
+      <div className="fixed top-1/4 -left-48 w-96 h-96 bg-[#00827c]/15 rounded-full blur-3xl pointer-events-none opacity-40" />
+      <div className="fixed bottom-1/4 -right-48 w-96 h-96 bg-[#cbfffc]/8 rounded-full blur-3xl pointer-events-none opacity-30" />
     </>
   );
 };
 
-// Progress scroll indicator
+// Progress scroll indicator with aurora sweep
 const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
   
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-400 origin-left z-50"
-      style={{ scaleX: scrollYProgress }}
+      className="fixed top-0 left-0 right-0 h-0.5 origin-left z-50"
+      style={{
+        scaleX: scrollYProgress,
+        background: 'linear-gradient(90deg, rgb(203, 255, 252) 0%, rgb(237, 255, 254) 50%, rgb(250, 209, 255) 100%)',
+      }}
     />
   );
 };
@@ -70,14 +70,14 @@ export default function Home() {
   }, []);
   
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden bg-[#0a0a08] text-white">
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-[#012624] text-[#edfffe]">
       {/* Global theme backgrounds */}
       <StaticBackground />
       <ScrollProgress />
       
       {/* Loading indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 bottom-0 z-50 pointer-events-none bg-[#0a0a08]"
+        className="fixed top-0 left-0 right-0 bottom-0 z-50 pointer-events-none bg-[#012624]"
         animate={{ opacity: isLoaded ? 0 : 1 }}
         transition={{ duration: 0.8, delay: 0.5 }}
       />
@@ -90,96 +90,45 @@ export default function Home() {
           <AIHero />
         </PageTransition>
         
-        {/* Section dividers with animated gradients */}
+        {/* Section dividers */}
         <div className="relative">
           <Services />
-          <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          />
-        </div>
-        
-        <div className="relative">
-          <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          />
+          <div className="h-px w-full max-w-6xl mx-auto bg-gradient-to-r from-transparent via-[#00827c]/25 to-transparent" />
         </div>
         
         <div className="relative">
           <Products />
-          <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          />
+          <div className="h-px w-full max-w-6xl mx-auto bg-gradient-to-r from-transparent via-[#00827c]/25 to-transparent" />
         </div>
         
         <div className="relative">
           <BuildInPublic />
-          <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          />
+          <div className="h-px w-full max-w-6xl mx-auto bg-gradient-to-r from-transparent via-[#00827c]/25 to-transparent" />
         </div>
         
         <div className="relative">
           <StatsLight />
-          <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          />
+          <div className="h-px w-full max-w-6xl mx-auto bg-gradient-to-r from-transparent via-[#00827c]/25 to-transparent" />
         </div>
         
         <div className="relative">
           <HowWeWork />
-          <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-emerald-400/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          />
+          <div className="h-px w-full max-w-6xl mx-auto bg-gradient-to-r from-transparent via-[#00827c]/25 to-transparent" />
         </div>
         
         <div className="relative">
           <About />
-          <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          />
+          <div className="h-px w-full max-w-6xl mx-auto bg-gradient-to-r from-transparent via-[#00827c]/25 to-transparent" />
         </div>
         
         <div className="relative">
           <Testimonials />
-          <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-purple-400/20 to-transparent"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          />
+          <div className="h-px w-full max-w-6xl mx-auto bg-gradient-to-r from-transparent via-[#00827c]/25 to-transparent" />
         </div>
         
         <div className="relative">
           <FAQ />
+          <div className="h-px w-full max-w-6xl mx-auto bg-gradient-to-r from-transparent via-[#00827c]/25 to-transparent" />
         </div>
 
         <div className="relative">
@@ -191,65 +140,30 @@ export default function Home() {
       
       {/* Global styles for theme consistency */}
       <style jsx global>{`
-        @keyframes glitch {
-          0% { transform: translate(0); text-shadow: -1px 0 red, 1px 0 blue; }
-          20% { transform: translate(-1px, 0.5px); text-shadow: 1px 0 red, -1px 0 blue; }
-          40% { transform: translate(-0.5px, -0.5px); text-shadow: -1px 0 blue, 1px 0 red; }
-          60% { transform: translate(0.5px, 0.5px); text-shadow: 1px 0 blue, -1px 0 red; }
-          80% { transform: translate(0.5px, -0.5px); text-shadow: -1px 0 red, 1px 0 blue; }
-          100% { transform: translate(0); text-shadow: 1px 0 blue, -1px 0 red; }
-        }
-        
-        @keyframes scan {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100%); }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes pulse-ring {
-          0% { transform: scale(0.8); opacity: 0.5; }
-          100% { transform: scale(1.2); opacity: 0; }
-        }
-        
-        .animate-glitch {
-          animation: glitch 0.15s ease-in-out;
-        }
-        
-        .animate-scan {
-          animation: scan 3s linear infinite;
-        }
-        
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-        
         /* Custom scrollbar */
         ::-webkit-scrollbar {
-          width: 6px;
-          height: 6px;
+          width: 8px;
+          height: 8px;
         }
         
         ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.03);
+          background: #011d1c;
         }
         
         ::-webkit-scrollbar-thumb {
-          background: rgba(16, 185, 129, 0.3);
-          border-radius: 3px;
+          background: #003734;
+          border-radius: 4px;
+          border: 1px solid rgba(203, 255, 252, 0.1);
         }
         
         ::-webkit-scrollbar-thumb:hover {
-          background: rgba(16, 185, 129, 0.5);
+          background: #00827c;
         }
         
         /* Selection color */
         ::selection {
-          background: rgba(16, 185, 129, 0.2);
-          color: rgba(16, 185, 129, 0.9);
+          background: rgba(0, 130, 124, 0.4);
+          color: #cbfffc;
         }
         
         /* Smooth scrolling */
@@ -259,7 +173,7 @@ export default function Home() {
         
         /* Focus styles for accessibility */
         *:focus-visible {
-          outline: 2px solid rgba(16, 185, 129, 0.5);
+          outline: 2px solid #cbfffc;
           outline-offset: 2px;
         }
       `}</style>
