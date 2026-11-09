@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       async start(controller) {
         try {
           const response = await client.messages.stream({
-            model: 'claude-3-5-haiku-20241022',
+            model: 'claude-haiku-5-5',
             max_tokens: 300,
             system: `You are the Lead AI Systems Architect at ZLab Services (zlabservices.site), founded by Muhammad Zubair (EC-Council Certified Ethical Hacker, CEH, GPA 3.98).
 ZLab Services specializes in engineering hardened multi-tenant AI SaaS, autonomous agent workflows (LangGraph/tool calling), and cross-platform Flutter mobile companions in 3-4 week production sprints.
